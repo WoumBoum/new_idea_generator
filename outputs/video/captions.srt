@@ -1,0 +1,139 @@
+1
+00:00:00,400 --> 00:00:03,361
+Someone said A.I. can't come up with a brand new idea.
+
+2
+00:00:03,561 --> 00:00:10,081
+Someone replied: sure it can. Put every Steam game on a map, find the empty spots, and turn them back into ideas.
+
+3
+00:00:10,281 --> 00:00:13,128
+So I tested it. It worked, just not the way they said.
+
+4
+00:00:13,548 --> 00:00:20,925
+First, I downloaded every game's page from Steam, the biggest P.C. game store. All one hundred and ninety-five thousand.
+
+5
+00:00:21,346 --> 00:00:27,515
+Then an A.I. turned each game's description into a point on a map, so similar games land close together.
+
+6
+00:00:27,715 --> 00:00:28,876
+That's called an embedding.
+
+7
+00:00:29,076 --> 00:00:32,267
+Two zombie shooters? Neighbors. A farming game? Far away.
+
+8
+00:00:32,687 --> 00:00:37,044
+Here's the map. Every dot is a real Steam game, and genres form neighborhoods.
+
+9
+00:00:37,464 --> 00:00:41,236
+To score an idea, I put it on the map and look at its ten closest games.
+
+10
+00:00:41,436 --> 00:00:44,165
+The farther away they are, the more unusual the idea.
+
+11
+00:00:44,585 --> 00:00:46,100
+Can new wording fake a high score?
+
+12
+00:00:46,300 --> 00:00:51,936
+No. When the A.I. rewrote real games in totally new words, most landed near the originals.
+
+13
+00:00:52,356 --> 00:00:55,444
+Then I found empty spots on the map, far from every game.
+
+14
+00:00:55,644 --> 00:01:00,062
+For each one, an A.I. wrote a game idea and kept rewriting it to land there.
+
+15
+00:01:00,482 --> 00:01:05,762
+For comparison, I also just asked the same A.I.: give me game ideas nobody has made.
+
+16
+00:01:06,182 --> 00:01:08,107
+Surprise: the empty spots lost.
+
+17
+00:01:08,307 --> 00:01:17,289
+For a typical idea from just asking, about sixteen thousand Steam games were more unusual. For the empty spots, fifty-three thousand. Fewer is better.
+
+18
+00:01:17,489 --> 00:01:21,298
+Why? I'd searched a simplified map that mostly knows genre and style.
+
+19
+00:01:21,498 --> 00:01:24,612
+On the full map, empty spots only tied with just asking.
+
+20
+00:01:25,032 --> 00:01:26,963
+What won? Using the map as a compass.
+
+21
+00:01:27,163 --> 00:01:32,035
+The A.I. writes an idea, the map says which games it's too close to, and it moves away.
+
+22
+00:01:32,235 --> 00:01:34,838
+Now only about eighty Steam games were more unusual.
+
+23
+00:01:35,038 --> 00:01:36,959
+And a second map it never saw agreed.
+
+24
+00:01:37,379 --> 00:01:38,349
+Here's what came out.
+
+25
+00:01:38,549 --> 00:01:41,225
+Captain a village's church bell ringers in eighteen twenty.
+
+26
+00:01:41,425 --> 00:01:44,746
+Be the hidden prompter, whispering lines to actors who forgot them.
+
+27
+00:01:44,946 --> 00:01:47,319
+Perform a silent film's sound effects live.
+
+28
+00:01:47,519 --> 00:01:50,871
+Write the first great English dictionary before the money runs out.
+
+29
+00:01:51,291 --> 00:01:56,665
+But unusual isn't never made, so another A.I. searched the web for all sixteen ideas.
+
+30
+00:01:56,865 --> 00:01:59,533
+Ten turned up nothing similar, though most checks were quick.
+
+31
+00:01:59,733 --> 00:02:01,005
+Five had something close.
+
+32
+00:02:01,205 --> 00:02:05,367
+And one already existed: a Viking rowing rhythm game called Ragnarock.
+
+33
+00:02:05,787 --> 00:02:07,919
+So, can A.I. come up with a new idea?
+
+34
+00:02:08,119 --> 00:02:14,151
+With the map as its compass, its typical idea was more unusual than ninety-nine point nine percent of Steam.
+
+35
+00:02:14,351 --> 00:02:17,609
+The map didn't invent them. It just kept saying: that's been done.

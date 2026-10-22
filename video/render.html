@@ -1,0 +1,449 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:ital,wght@0,600;1,500;1,600&display=swap">
+<style>html,body{margin:0;background:#0c121c}canvas{display:block}</style>
+</head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+/* Explainer video renderer. Every frame is a pure function of time: renderAt(t) draws it.
+   Data: window.VIZ (vizdata.json) and window.TL (timeline.json from the narration). */
+const W = 1920, H = 1080;
+const C = {
+  bg: "#0c121c", panel: "#131c29", ink: "#eef2f7", ink2: "#b3bdca", muted: "#7f8a9c", rule: "#263243",
+  dot: "rgba(214,224,240,0.17)", acc: "#e0559a", accSoft: "rgba(224,85,154,0.16)", blue: "#3987e5",
+  good: "#4fbf86", warn: "#d9a530", bad: "#ef6b62",
+};
+const F = { disp: "Spectral", body: "IBM Plex Sans", mono: "IBM Plex Mono" };
+const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+
+/* ---------- helpers ---------- */
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = x => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const easeOut = x => 1 - Math.pow(1 - clamp(x), 3);
+const ramp = (u, a, d = 0.5) => ease((u - a) / d);          // 0 before a, 1 after a+d
+const lerp = (a, b, k) => a + (b - a) * k;
+function font(size, fam = F.body, weight = 400, italic = false) { ctx.font = `${italic ? "italic " : ""}${weight} ${size}px "${fam}"`; }
+function txt(s, x, y, size, color, opts = {}) {
+  font(size, opts.fam || F.body, opts.weight || 400, opts.italic);
+  ctx.fillStyle = color; ctx.textAlign = opts.align || "left"; ctx.textBaseline = opts.base || "alphabetic";
+  ctx.globalAlpha = opts.alpha ?? 1;
+  if (opts.spacing) { ctx.letterSpacing = opts.spacing + "px"; }
+  ctx.fillText(s, x, y);
+  ctx.letterSpacing = "0px"; ctx.globalAlpha = 1;
+}
+function wrap(s, maxW, size, fam = F.body, weight = 400, italic = false) {
+  font(size, fam, weight, italic);
+  const words = s.split(" "), lines = []; let cur = "";
+  for (const w of words) { const t = cur ? cur + " " + w : w; if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; }
+  if (cur) lines.push(cur); return lines;
+}
+function para(s, x, y, maxW, size, color, opts = {}) {
+  const lh = opts.lh || size * 1.3;
+  const lines = wrap(s, maxW, size, opts.fam || F.body, opts.weight || 400, opts.italic);
+  lines.forEach((l, i) => txt(l, x, y + i * lh, size, color, opts));
+  return lines.length * lh;
+}
+function rr(x, y, w, h, r, fill, stroke, lw = 2) {
+  ctx.beginPath(); ctx.roundRect(x, y, w, h, r);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
+}
+function circle(x, y, r, fill, stroke, lw = 2) {
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
+}
+function eyebrow(s, alpha = 1) { txt(s, 120, 118, 26, C.muted, { fam: F.mono, weight: 500, spacing: 4, alpha }); }
+function headline(s, alpha = 1, y = 190, size = 68) { txt(s, 120, y, size, C.ink, { fam: F.disp, weight: 600, alpha }); }
+const fmtN = n => Math.round(n).toLocaleString("en-US");
+
+/* ---------- data ---------- */
+let MAP, CAPS, SCENES, LAYERS = {};
+function initData() {
+  const V = window.VIZ, M = V.map;
+  const bin = atob(M.xy_b64), n = M.n, xy = new Uint16Array(n * 2);
+  for (let i = 0; i < n * 2; i++) xy[i] = bin.charCodeAt(2 * i) | (bin.charCodeAt(2 * i + 1) << 8);
+  const gb = atob(M.genre_b64), genre = new Uint8Array(n);
+  for (let i = 0; i < n; i++) genre[i] = gb.charCodeAt(i);
+  const xs = [], ys = []; for (let i = 0; i < n; i += 5) { xs.push(xy[2 * i]); ys.push(xy[2 * i + 1]); }
+  xs.sort((a, b) => a - b); ys.sort((a, b) => a - b);
+  const q = (a, p) => a[Math.floor(p * (a.length - 1))];
+  MAP = { n, xy, genre, genres: M.genres, ext: { x0: q(xs, .003), x1: q(xs, .997), y0: q(ys, .003), y1: q(ys, .997) } };
+  CAPS = window.TL.captions; SCENES = window.TL.scenes;
+}
+/* map projection into a target box */
+function proj(box) {
+  const E = MAP.ext, ew = E.x1 - E.x0, eh = E.y1 - E.y0;
+  const s = Math.min(box.w / ew, box.h / eh), ox = box.x + (box.w - ew * s) / 2, oy = box.y + (box.h - eh * s) / 2;
+  return (x, y) => [ox + (clamp(x, E.x0, E.x1) - E.x0) * s, oy + (E.y1 - clamp(y, E.y0, E.y1)) * s];
+}
+const MAPBOX = { x: 560, y: 130, w: 1240, h: 730 };
+function buildLayers() {
+  const P = proj(MAPBOX);
+  const mk = () => { const c = document.createElement("canvas"); c.width = W; c.height = H; return c; };
+  const base = mk(), b = base.getContext("2d");
+  b.fillStyle = C.dot;
+  for (let i = 0; i < MAP.n; i++) { const [x, y] = P(MAP.xy[2 * i], MAP.xy[2 * i + 1]); b.fillRect(x, y, 1.6, 1.6); }
+  LAYERS.base = base;
+  LAYERS.genre = {}; LAYERS.centroid = {};
+  for (const name of ["Horror", "Visual Novel", "Racing & Sports", "Puzzle", "Strategy"]) {
+    const gi = MAP.genres.indexOf(name); const c = mk(), g = c.getContext("2d");
+    g.fillStyle = "rgba(57,135,229,0.55)"; let sx = 0, sy = 0, k = 0; const pts = [];
+    for (let i = 0; i < MAP.n; i++) if (MAP.genre[i] === gi) { const [x, y] = P(MAP.xy[2 * i], MAP.xy[2 * i + 1]); g.fillRect(x, y, 1.8, 1.8); pts.push([x, y]); }
+    // label at the densest cell
+    const cell = 40, cnt = new Map(); pts.forEach(([x, y]) => { const key = `${Math.floor(x / cell)},${Math.floor(y / cell)}`; cnt.set(key, (cnt.get(key) || 0) + 1); });
+    let best = null, bv = 0; cnt.forEach((v, key) => { if (v > bv) { bv = v; best = key; } });
+    const [cx, cy] = best.split(",").map(Number);
+    LAYERS.genre[name] = c; LAYERS.centroid[name] = [cx * cell + cell / 2, cy * cell + cell / 2];
+  }
+  LAYERS.P = P;
+}
+
+/* caption k of a scene, local timing */
+function sceneCaps(name) { return CAPS.filter(c => c.scene === name); }
+
+/* ---------- scenes: each gets (u = seconds since scene start, D = duration, caps = caption start times local) ---------- */
+const SC = {};
+
+SC.hook = (u, D, cs) => {
+  const card = (x, y, w, handle, body, a, typed) => {
+    ctx.globalAlpha = a;
+    rr(x, y, w, 0, 0); // noop to keep path clean
+    const lines = wrap(body, w - 80, 40, F.body, 400);
+    const h = 120 + lines.length * 54;
+    rr(x, y, w, h, 22, C.panel, C.rule, 2);
+    circle(x + 60, y + 58, 26, C.rule);
+    txt(handle, x + 102, y + 68, 30, C.ink2, { fam: F.body, weight: 600, alpha: a });
+    let shown = Math.floor(typed * body.length), acc = 0;
+    lines.forEach((l, i) => { const part = l.slice(0, clamp(shown - acc, 0, l.length)); acc += l.length + 1; txt(part, x + 40, y + 140 + i * 54, 40, C.ink, { alpha: a }); });
+    ctx.globalAlpha = 1; return h;
+  };
+  const dim = 1 - 0.8 * ramp(u, cs[2], 0.5);
+  const h1 = card(260, 170, 1400, "a post", "“One thing AI can't do is create a brand new idea.”", ramp(u, 0, 0.4) * dim, clamp(u / 1.6));
+  card(260, 170 + h1 + 36, 1400, "a reply", "“Of course it can. Take all 100,000+ games on Steam, plot them in vector space using embeddings, choose a location far away from neighbors, convert that back to a description… boom, brand new ideas.”",
+    ramp(u, cs[1] - 0.2, 0.4) * dim, clamp((u - cs[1]) / 3.2));
+  const k = ramp(u, cs[2], 0.45);
+  if (k > 0) { ctx.globalAlpha = 0.9 * k; ctx.fillStyle = C.bg; ctx.fillRect(0, 700, W, 170); ctx.globalAlpha = 1; }
+  if (k > 0) txt("So I tested it.", W / 2, 820 + (1 - k) * 30, 112, C.acc, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: k });
+};
+
+SC.download = (u, D) => {
+  const T = window.VIZ.titles;
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 140, W, 780); ctx.clip();
+  for (let col = 0; col < 6; col++) {
+    const x = 100 + col * 300, speed = 70 + (col % 3) * 18;
+    for (let r = 0; r < 26; r++) {
+      const idx = (col * 70 + r) % T.length;
+      const y = 1000 - ((u * speed + r * 44 + col * 37) % (26 * 44));
+      txt(T[idx], x, y, 24, C.ink2, { fam: F.mono, alpha: 0.22 });
+    }
+  }
+  ctx.restore();
+  const g = ctx.createRadialGradient(W / 2, 520, 50, W / 2, 520, 620); g.addColorStop(0, "rgba(12,18,28,0.96)"); g.addColorStop(1, "rgba(12,18,28,0.2)");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  eyebrow("STEP 1 · DOWNLOAD", ramp(u, 0, .4));
+  const n = 195015 * easeOut(u / Math.max(1.5, D * 0.6));
+  txt(fmtN(n), W / 2, 560, 190, C.ink, { fam: F.mono, weight: 500, align: "center", alpha: ramp(u, 0, .3) });
+  txt("game pages from Steam: descriptions, tags, player modes", W / 2, 640, 40, C.ink2, { align: "center", alpha: ramp(u, .4, .5) });
+};
+
+SC.embedding = (u, D, cs) => {
+  eyebrow("STEP 2 · PUT EVERY GAME ON A MAP", ramp(u, 0, .4));
+  headline("Text in, coordinates out", ramp(u, 0, .5));
+  // definition box
+  const dk = ramp(u, cs[1] - 0.2, .5);
+  if (dk > 0) {
+    rr(120, 240, 1680, 120, 18, C.accSoft, C.acc, 2); ctx.globalAlpha = 1;
+    txt("EMBEDDING", 160, 312, 30, C.acc, { fam: F.mono, weight: 500, spacing: 3, alpha: dk });
+    txt("an AI reads a description and gives it a position, so similar games land close together", 400, 312, 34, C.ink, { alpha: dk });
+  }
+  const cards = [
+    ["Survive the zombie horde with your squad.", "zombie shooter", 460],
+    ["Fight off the undead in online co-op.", "zombie shooter", 610],
+    ["Grow crops and raise chickens on your farm.", "farming game", 760],
+  ];
+  const targets = [[1440, 520], [1500, 560], [1180, 800]];
+  rr(1060, 400, 740, 470, 20, C.panel, C.rule, 2);
+  txt("the map", 1090, 446, 26, C.muted, { fam: F.mono });
+  cards.forEach(([s, kind, y], i) => {
+    const a = ramp(u, 0.6 + i * 0.5, .5);
+    rr(120, y - 50, 780, 110, 16, C.panel, C.rule, 2); ctx.globalAlpha = 1;
+    txt(s, 150, y - 2, 32, C.ink, { alpha: a }); txt(kind, 150, y + 40, 24, C.muted, { fam: F.mono, alpha: a });
+    const land = ramp(u, cs[2] - 0.3 + i * 0.35, 0.8);
+    if (land > 0) {
+      const sx = 905, sy = y, [tx, ty] = targets[i];
+      ctx.strokeStyle = C.rule; ctx.setLineDash([6, 8]); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(lerp(sx, tx, land), lerp(sy, ty, land)); ctx.stroke(); ctx.setLineDash([]);
+      circle(lerp(sx, tx, land), lerp(sy, ty, land), 14, i < 2 ? C.acc : C.blue);
+    }
+  });
+  const nb = ramp(u, cs[2] + 1.4, .5);
+  if (nb > 0) {
+    ctx.globalAlpha = nb; ctx.strokeStyle = C.acc; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(1470, 540, 90, 70, 0, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1;
+    txt("neighbors", 1470, 640, 28, C.acc, { align: "center", fam: F.mono, alpha: nb });
+    txt("far away", 1180, 860, 28, C.blue, { align: "center", fam: F.mono, alpha: ramp(u, cs[2] + 2.2, .5) });
+  }
+};
+
+SC.map = (u, D) => {
+  ctx.globalAlpha = ramp(u, 0, 1.0); ctx.drawImage(LAYERS.base, 0, 0); ctx.globalAlpha = 1;
+  eyebrow("THE MAP", ramp(u, 0, .4));
+  txt("195,015 dots.", 120, 240, 64, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, .2, .5) });
+  txt("Each one is a", 120, 310, 40, C.ink2, { alpha: ramp(u, .4, .5) });
+  txt("real Steam game.", 120, 360, 40, C.ink2, { alpha: ramp(u, .4, .5) });
+  txt("(flattened to 2-D for the picture)", 120, 840, 24, C.muted, { fam: F.mono, alpha: ramp(u, .6, .5) });
+  const names = ["Horror", "Visual Novel", "Racing & Sports"];
+  const step = Math.max(1.0, (D - 1.6) / names.length);
+  names.forEach((nm, i) => {
+    const a = ramp(u, 1.2 + i * step, .35) * (1 - ramp(u, 1.2 + (i + 1) * step, .35) * (i < names.length - 1 ? 1 : 0));
+    if (a <= 0) return;
+    ctx.globalAlpha = a; ctx.drawImage(LAYERS.genre[nm], 0, 0); ctx.globalAlpha = 1;
+    const [cx, cy] = LAYERS.centroid[nm];
+    rr(cx + 18, cy - 30, ctx.measureText(nm).width + 60, 50, 10, "rgba(12,18,28,0.85)", C.blue, 2);
+    txt(nm, cx + 40, cy + 6, 30, C.ink, { weight: 600, alpha: a });
+    txt("genres form", 120, 470, 34, C.blue, { alpha: a }); txt("neighborhoods", 120, 512, 34, C.blue, { alpha: a });
+  });
+};
+
+SC.score = (u, D, cs) => {
+  eyebrow("HOW NEW IS AN IDEA?", ramp(u, 0, .4));
+  headline("Look at its 10 closest games", ramp(u, 0, .5));
+  const draw = (cx, cy, spread, label, color, a, seed) => {
+    if (a <= 0) return;
+    ctx.globalAlpha = a;
+    for (let i = 0; i < 10; i++) {
+      const ang = i * 2.399 + seed, r = spread * (0.75 + 0.5 * ((i * 37 + seed * 11) % 10) / 10);
+      const x = cx + Math.cos(ang) * r, y = cy + Math.sin(ang) * r * 0.8;
+      ctx.strokeStyle = C.rule; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y); ctx.stroke();
+      circle(x, y, 9, C.ink2);
+    }
+    circle(cx, cy, 16, color, C.bg, 4);
+    ctx.globalAlpha = 1;
+    txt(label, cx, cy + Math.max(spread, 120) + 70, 34, color, { align: "center", weight: 600, alpha: a });
+  };
+  draw(560, 430, 70, "closest games nearby: ordinary", C.ink2, ramp(u, .5, .6), 1);
+  draw(1360, 430, 170, "closest games far away: unusual", C.acc, ramp(u, cs[1] - 0.2, .6), 2);
+  const k = ramp(u, cs[1] + 1.0, .6);
+  if (k > 0) {
+    const h = window.VIZ.hist.counts, mx = Math.max(...h), x0 = 360, x1 = 1560, y0 = 800, hh = 80;
+    h.forEach((c, i) => { const x = lerp(x0, x1, i / h.length), bw = (x1 - x0) / h.length - 2; ctx.fillStyle = C.rule; ctx.globalAlpha = k; ctx.fillRect(x, y0 - hh * c / mx, bw, hh * c / mx); });
+    ctx.globalAlpha = 1;
+    txt("all 195k Steam games", x0 - 20, y0 - 20, 24, C.muted, { fam: F.mono, align: "right", alpha: k });
+    txt("← ordinary", x0, y0 + 34, 24, C.muted, { fam: F.mono, alpha: k });
+    txt("unusual →", x1, y0 + 34, 24, C.acc, { fam: F.mono, align: "right", alpha: k });
+  }
+};
+
+SC.sanity = (u, D, cs) => {
+  eyebrow("SANITY CHECK", ramp(u, 0, .4));
+  headline("Can new wording fake a high score?", ramp(u, 0, .5));
+  rr(120, 270, 760, 170, 18, C.panel, C.rule, 2);
+  txt("REAL GAME", 150, 320, 24, C.muted, { fam: F.mono, spacing: 2 });
+  txt("Tasty Planet: Back for Seconds", 150, 375, 38, C.ink, { weight: 600 });
+  txt("eat everything, grow bigger, travel through time", 150, 418, 26, C.ink2);
+  const a2 = ramp(u, .8, .5);
+  rr(120, 480, 760, 170, 18, C.panel, C.acc, 2); ctx.globalAlpha = 1;
+  txt("REWRITTEN BY THE AI, NEW TITLE, NEW WORDS", 150, 530, 24, C.acc, { fam: F.mono, spacing: 2, alpha: a2 });
+  txt("Gobble Blob Through Time", 150, 585, 38, C.ink, { weight: 600, alpha: a2 });
+  txt("a hungry blob that keeps getting bigger, across history", 150, 628, 26, C.ink2, { alpha: a2 });
+  // mini map
+  rr(1000, 270, 800, 560, 20, C.panel, C.rule, 2);
+  for (let i = 0; i < 140; i++) { const x = 1040 + ((i * 97) % 720), y = 300 + ((i * 53) % 500); circle(x, y, 4, "rgba(214,224,240,0.18)"); }
+  circle(1420, 560, 16, C.ink2, C.bg, 4); txt("original", 1450, 566, 28, C.ink2, { fam: F.mono });
+  const land = ramp(u, 1.4, 1.4), sx = 1100, sy = 330, tx = 1392, ty = 590;
+  if (land > 0) circle(lerp(sx, tx, land), lerp(sy, ty, land), 16, C.acc, C.bg, 4);
+  txt("rewrite", 1260, 640, 28, C.acc, { fam: F.mono, alpha: ramp(u, 2.6, .4) });
+  const k = ramp(u, cs[1] - 0.3, .5);
+  txt("For 17 of 24 rewrites, the original was among the 8 closest games.", 120, 760, 36, C.ink, { alpha: k });
+  txt("Rewording doesn't fool the score.", 120, 812, 36, C.acc, { weight: 600, alpha: k });
+};
+
+SC.voids = (u, D, cs) => {
+  ctx.globalAlpha = 0.75; ctx.drawImage(LAYERS.base, 0, 0); ctx.globalAlpha = 1;
+  eyebrow("STEP 3 · FIND THE EMPTY SPOTS", ramp(u, 0, .4));
+  txt("Empty spots:", 120, 240, 54, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, .2, .5) });
+  txt("far from", 120, 300, 40, C.ink2, { alpha: ramp(u, .3, .5) }); txt("every game", 120, 348, 40, C.ink2, { alpha: ramp(u, .3, .5) });
+  const vs = window.VIZ.map.voids;
+  ctx.setLineDash([7, 7]); ctx.lineWidth = 3;
+  vs.forEach((v, i) => {
+    const a = ramp(u, 0.6 + i * 0.05, .3); if (a <= 0) return;
+    const [x, y] = LAYERS.P(v.xy[0], v.xy[1]); ctx.globalAlpha = a; circle(x, y, 13, null, C.acc, 3);
+  });
+  ctx.setLineDash([]); ctx.globalAlpha = 1;
+  // one AI writing toward a spot
+  const k = ramp(u, cs[1] - 0.2, .4);
+  if (k > 0) {
+    const [tx, ty] = LAYERS.P(vs[33].xy[0], vs[33].xy[1]);
+    rr(120, 520, 400, 300, 18, C.panel, C.acc, 2); ctx.globalAlpha = 1;
+    txt("AI WRITES A GAME", 150, 570, 24, C.acc, { fam: F.mono, spacing: 2, alpha: k });
+    const draft = 1 + Math.min(7, Math.floor(clamp((u - cs[1]) / Math.max(1, D - cs[1] - 1)) * 8));
+    txt(`draft ${draft}`, 150, 650, 64, C.ink, { fam: F.mono, weight: 500, alpha: k });
+    txt("embed it, check where", 150, 710, 28, C.ink2, { alpha: k }); txt("it landed, rewrite", 150, 748, 28, C.ink2, { alpha: k });
+    const p = clamp((u - cs[1]) / Math.max(1, D - cs[1] - 0.8));
+    for (let j = 0; j < draft; j++) {
+      const r = 260 * Math.pow(0.62, j), ang = 2.2 + j * 1.3, x = tx + Math.cos(ang) * r, y = ty + Math.sin(ang) * r;
+      circle(x, y, 9, j === draft - 1 ? C.acc : "rgba(224,85,154,0.35)");
+    }
+    circle(tx, ty, 26, null, C.acc, 3);
+  }
+};
+
+SC.baseline = (u, D) => {
+  eyebrow("THE FAIR TEST", ramp(u, 0, .4));
+  headline("Same AI, no map", ramp(u, 0, .5));
+  const a = ramp(u, .4, .5);
+  rr(360, 380, 1200, 220, 110, C.panel, C.rule, 2); ctx.globalAlpha = 1;
+  txt("“Give me game ideas nobody has made.”", W / 2, 510, 58, C.ink, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: a });
+  txt("16 ideas, scored the exact same way", W / 2, 700, 36, C.ink2, { align: "center", alpha: ramp(u, 1.2, .5) });
+};
+
+function drawBars(u, rows, reveal, opts = {}) {
+  // rows: [label, value, color]; reveal[i] = local time when bar i appears
+  const x0 = 760, x1 = 1760, max = 140000, y0 = opts.y0 || 330, gap = opts.gap || 112;
+  txt("How many Steam games are MORE unusual", 120, 200, 46, C.ink, { fam: F.disp, weight: 600 });
+  txt("than a typical idea? (fewer = more original)", 120, 252, 34, C.ink2);
+  rows.forEach(([label, val, color], i) => {
+    const a = ramp(u, reveal[i], .5); if (a <= 0) return;
+    const y = y0 + i * gap, w = Math.max(6, (x1 - x0) * (val / max) * easeOut((u - reveal[i]) / 0.9));
+    txt(label, x0 - 30, y + 40, 34, C.ink, { align: "right", alpha: a, weight: i === opts.hi ? 600 : 400 });
+    ctx.globalAlpha = a; rr(x0, y + 8, w, 46, 6, color); ctx.globalAlpha = 1;
+    txt(fmtN(val * clamp((u - reveal[i]) / 0.9)), x0 + w + 20, y + 42, 36, C.ink, { fam: F.mono, weight: 500, alpha: a });
+  });
+}
+SC.results = (u, D, cs) => {
+  eyebrow("RESULTS", ramp(u, 0, .4));
+  const R = window.VIZ.results;
+  const rows = [[R[0][0] + " (reference)", R[0][1], C.rule], [R[2][0], R[2][1], C.ink2], [R[1][0], R[1][1], C.acc], [R[3][0], R[3][1], C.acc]];
+  const second = cs[1] + (cs[2] - cs[1]) * 0.5;
+  drawBars(u, rows, [0.3, cs[1] + 0.6, second, (cs[3] ?? cs[2] + 3) + 0.4], { hi: 2 });
+  const nk = ramp(u, cs[2] - 0.1, .5) * (1 - ramp(u, (cs[3] ?? 99) - 0.2, .3));
+  if (nk > 0) { rr(120, 790, 1680, 80, 14, C.accSoft, C.acc, 2); ctx.globalAlpha = 1;
+    txt("Simplified map = a squeezed version of the map that mostly captures genre, art style and mood", 150, 842, 30, C.ink, { alpha: nk }); }
+  const k = ramp(u, 0.2, .4) * (1 - ramp(u, cs[1] - 0.3, .3));
+  txt("Surprise: the empty spots lost.", W / 2, 960, 52, C.acc, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: k });
+};
+
+SC.compass = (u, D, cs) => {
+  eyebrow("WHAT WORKED: THE MAP AS A COMPASS", ramp(u, 0, .4));
+  const steps = window.VIZ.compass;
+  const labels = ["A football referee game", "An auctioneer game", "A theatre prompter, whispering lines", "… for a touring theatre company, 1890"];
+  if (u < cs[2] - 0.3) {
+    headline("Write, check, move away", ramp(u, 0, .5));
+    const t0 = cs[1] - 0.4, span = Math.max(3, (cs[2] - 0.6) - t0);
+    steps.forEach((s, i) => {
+      const at = t0 + i * span / steps.length, a = ramp(u, at, .45); if (a <= 0) return;
+      const y = 300 + i * 150;
+      rr(120, y, 1680, 124, 16, C.panel, i === steps.length - 1 ? C.acc : C.rule, 2); ctx.globalAlpha = 1;
+      txt(`draft`, 150, y + 52, 22, C.muted, { fam: F.mono, alpha: a });
+      txt(labels[i], 150, y + 92, 36, C.ink, { weight: 600, alpha: a });
+      txt(`closest game: ${s.nearest}`, 980, y + 52, 26, C.ink2, { alpha: a });
+      txt(`${fmtN(s.weirder)} games more unusual`, 980, y + 96, 32, i === steps.length - 1 ? C.acc : C.ink, { fam: F.mono, weight: 500, alpha: a });
+    });
+  } else {
+    const R = window.VIZ.results;
+    const rows = [[R[2][0], R[2][1], C.ink2], [R[1][0], R[1][1], C.rule], [R[3][0], R[3][1], C.rule], [R[4][0], R[4][1], C.acc]];
+    const uu = u - (cs[2] - 0.3);
+    drawBars(uu, rows, [0, 0, 0, 0.5], { hi: 3 });
+    const k = ramp(uu, 1.4, .5);
+    txt("out of 195,015 games", 860, 708, 34, C.ink2, { alpha: k });
+    const k2 = ramp(u, (cs[3] ?? 99) - 0.1, .5);
+    if (k2 > 0) { rr(120, 800, 1680, 76, 14, "rgba(79,191,134,0.12)", C.good, 2); ctx.globalAlpha = 1;
+      txt("A second map the AI never saw agreed: all 16 ideas in its top 5%", 150, 850, 32, C.ink, { alpha: k2 }); }
+  }
+};
+
+SC.ideas = (u, D, cs) => {
+  eyebrow("SOME OF THE IDEAS", ramp(u, 0, .4));
+  const S = window.VIZ.showcase, find = t => S.find(s => s.title === t);
+  const items = [
+    ["The Ringers of Saxby Green", "Captain a village's church bell ringers in 1820. Call the changes; keep eight amateurs in time."],
+    ["The Prompter's Trapdoor", "Hide under the stage and whisper lines to actors who forgot them, at the right moment and volume."],
+    ["Saturday Night Noisemaker", "Perform a silent film's sound effects live, behind the screen, with whatever props you have."],
+    ["Forty Thousand Words", "Write the first great English dictionary, in 1747, before the money runs out."],
+  ];
+  items.forEach(([title, line], i) => {
+    const a = ramp(u, (cs[i + 1] ?? (0.5 + i)) - 0.15, .45); if (a <= 0) return;
+    const x = 120 + (i % 2) * 860, y = 170 + Math.floor(i / 2) * 340;
+    rr(x, y, 820, 305, 20, C.panel, C.rule, 2); ctx.globalAlpha = 1;
+    txt(title, x + 40, y + 76, 44, C.ink, { fam: F.disp, weight: 600, alpha: a });
+    ctx.globalAlpha = a; para(line, x + 40, y + 140, 740, 32, C.ink2, { alpha: a }); ctx.globalAlpha = 1;
+    const w = find(title).weirder;
+    txt(`only ${w} Steam game${w === 1 ? "" : "s"} more unusual`, x + 40, y + 270, 28, C.acc, { fam: F.mono, weight: 500, alpha: a });
+  });
+};
+
+SC.check = (u, D, cs) => {
+  eyebrow("THE HONESTY CHECK", ramp(u, 0, .4));
+  headline("Has anyone made it already?", ramp(u, 0, .5));
+  const chk = window.VIZ.checks, col = { none_found: C.good, close: C.warn, exists: C.bad };
+  const reveal = cs[1] - 0.2;
+  chk.forEach((c, i) => {
+    const x = 120 + (i % 4) * 425, y = 250 + Math.floor(i / 4) * 108, a = ramp(u, 0.3 + i * 0.06, .3);
+    const on = ramp(u, reveal + i * 0.12, .3);
+    const color = on > 0.5 ? col[c.verdict] : C.rule;
+    rr(x, y, 400, 96, 14, C.panel, color, 3); ctx.globalAlpha = 1;
+    const lines = wrap(c.title, 360, 28, F.body, 600);
+    lines.slice(0, 2).forEach((l, k) => txt(l, x + 22, y + 40 + k * 32, 28, C.ink, { weight: 600, alpha: a }));
+  });
+  const k = ramp(u, (cs[2] ?? reveal + 2) - 0.2, .5);
+  txt("■ nothing similar found: 10", 120, 730, 32, C.good, { weight: 600, alpha: k });
+  txt("■ something close: 5", 700, 730, 32, C.warn, { weight: 600, alpha: k });
+  txt("■ already exists: 1", 1180, 730, 32, C.bad, { weight: 600, alpha: k });
+  txt("Many checks were quick: the web-search budget ran out partway.", 120, 778, 28, C.muted, { alpha: k });
+  const r = ramp(u, (cs[3] ?? cs[2]) - 0.1, .5);
+  if (r > 0) { rr(120, 806, 900, 62, 12, "rgba(239,107,98,0.14)", C.bad, 2); ctx.globalAlpha = 1; txt("Heave and Sing ≈ Ragnarock, a Viking rowing rhythm game", 145, 846, 28, C.ink, { alpha: r }); }
+};
+
+SC.outro = (u, D, cs) => {
+  ctx.globalAlpha = 0.45; ctx.drawImage(LAYERS.base, 0, 0); ctx.globalAlpha = 1;
+  window.VIZ.ideas_xy.filter(d => d.rank <= 16).forEach((d, i) => {
+    const a = ramp(u, 0.4 + i * 0.06, .3); const [x, y] = LAYERS.P(d.xy[0], d.xy[1]);
+    ctx.globalAlpha = a; circle(x, y, 10, C.acc, C.bg, 3); ctx.globalAlpha = 1;
+  });
+  const g = ctx.createLinearGradient(0, 0, 1100, 0); g.addColorStop(0, "rgba(12,18,28,0.97)"); g.addColorStop(1, "rgba(12,18,28,0)");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 1300, H);
+  txt("Can AI come up", 120, 260, 78, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, 0, .5) });
+  txt("with a new idea?", 120, 350, 78, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, 0, .5) });
+  const k = ramp(u, cs[1] - 0.1, .5);
+  txt("Typical idea: more unusual than", 120, 480, 44, C.ink2, { alpha: k });
+  txt("99.9% of Steam", 120, 570, 96, C.acc, { fam: F.mono, weight: 500, alpha: k });
+  const k2 = ramp(u, cs[2] - 0.1, .5);
+  txt("The map didn't invent them.", 120, 700, 46, C.ink, { fam: F.disp, weight: 600, italic: true, alpha: k2 });
+  txt("It just kept saying: that's been done.", 120, 760, 46, C.ink, { fam: F.disp, weight: 600, italic: true, alpha: k2 });
+  const k3 = ramp(u, D - 2.0, .5);
+  txt("Code + all 76 ideas: github.com/WoumBoum/new_idea_generator", 120, 860, 28, C.muted, { fam: F.mono, alpha: k3 });
+};
+
+/* ---------- frame ---------- */
+function captionAt(t) {
+  const c = CAPS.find(c => t >= c.start - 0.05 && t <= c.end + 0.25); if (!c) return;
+  const a = clamp(Math.min((t - c.start + 0.05) / 0.12, (c.end + 0.25 - t) / 0.12));
+  const lines = wrap(c.text, 1560, 40, F.body, 500);
+  const lh = 52, h = lines.length * lh + 34, y = H - 40 - h;
+  ctx.globalAlpha = a * 0.88; rr((W - 1640) / 2, y, 1640, h, 14, "#05080d"); ctx.globalAlpha = 1;
+  lines.forEach((l, i) => txt(l, W / 2, y + 50 + i * lh, 40, "#ffffff", { align: "center", weight: 500, alpha: a }));
+}
+window.renderAt = function (t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+  const s = SCENES.find(s => t >= s.start && t < s.end) || (t < SCENES[0].start ? SCENES[0] : SCENES[SCENES.length - 1]);
+  const u = t - s.start, D = s.end - s.start;
+  const cs = sceneCaps(s.scene).map(c => c.start - s.start);
+  const fadeIn = clamp(u / 0.35), fadeOut = clamp((s.end - t) / 0.3);
+  ctx.save(); ctx.globalAlpha = 1;
+  SC[s.scene](u, D, cs);
+  ctx.restore();
+  // scene transition veil
+  const veil = 1 - Math.min(fadeIn, s === SCENES[SCENES.length - 1] ? 1 : fadeOut);
+  if (veil > 0) { ctx.globalAlpha = veil; ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
+  captionAt(t);
+  // progress bar
+  ctx.fillStyle = C.rule; ctx.fillRect(0, H - 8, W, 8);
+  ctx.fillStyle = C.acc; ctx.fillRect(0, H - 8, W * clamp(t / window.TL.total), 8);
+};
+window.setup = async function () {
+  await Promise.all([[F.disp, 600, false], [F.disp, 600, true], [F.disp, 500, true], [F.body, 400], [F.body, 500], [F.body, 600], [F.mono, 400], [F.mono, 500]]
+    .map(([f, w, it]) => document.fonts.load(`${it ? "italic " : ""}${w} 40px "${f}"`)));
+  initData(); buildLayers(); return true;
+};
+</script>
+</body></html>
