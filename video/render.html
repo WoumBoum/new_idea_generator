@@ -7,14 +7,16 @@
 <script>
 /* Explainer video renderer. Every frame is a pure function of time: renderAt(t) draws it.
    Data: window.VIZ (vizdata.json) and window.TL (timeline.json from the narration). */
-const W = 1920, H = 1080;
+const PORTRAIT = window.ORIENT === "portrait";
+const W = PORTRAIT ? 1080 : 1920, H = PORTRAIT ? 1920 : 1080;
 const C = {
   bg: "#0c121c", panel: "#131c29", ink: "#eef2f7", ink2: "#b3bdca", muted: "#7f8a9c", rule: "#263243",
   dot: "rgba(214,224,240,0.17)", acc: "#e0559a", accSoft: "rgba(224,85,154,0.16)", blue: "#3987e5",
   good: "#4fbf86", warn: "#d9a530", bad: "#ef6b62",
 };
 const F = { disp: "Spectral", body: "IBM Plex Sans", mono: "IBM Plex Mono" };
-const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+const cv = document.getElementById("c"); cv.width = W; cv.height = H;
+const ctx = cv.getContext("2d");
 
 /* ---------- helpers ---------- */
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
@@ -53,8 +55,12 @@ function circle(x, y, r, fill, stroke, lw = 2) {
   if (fill) { ctx.fillStyle = fill; ctx.fill(); }
   if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
 }
-function eyebrow(s, alpha = 1) { txt(s, 120, 118, 26, C.muted, { fam: F.mono, weight: 500, spacing: 4, alpha }); }
-function headline(s, alpha = 1, y = 190, size = 68) { txt(s, 120, y, size, C.ink, { fam: F.disp, weight: 600, alpha }); }
+const MX = PORTRAIT ? 80 : 120;
+function eyebrow(s, alpha = 1) { txt(s, MX, PORTRAIT ? 250 : 118, 26, C.muted, { fam: F.mono, weight: 500, spacing: PORTRAIT ? 3 : 4, alpha }); }
+function headline(s, alpha = 1, y = 190, size = 68) {
+  if (!PORTRAIT) { txt(s, 120, y, size, C.ink, { fam: F.disp, weight: 600, alpha }); return 0; }
+  return para(s, MX, 330, W - 2 * MX, 62, C.ink, { fam: F.disp, weight: 600, alpha, lh: 72 });
+}
 const fmtN = n => Math.round(n).toLocaleString("en-US");
 
 /* ---------- data ---------- */
@@ -77,7 +83,7 @@ function proj(box) {
   const s = Math.min(box.w / ew, box.h / eh), ox = box.x + (box.w - ew * s) / 2, oy = box.y + (box.h - eh * s) / 2;
   return (x, y) => [ox + (clamp(x, E.x0, E.x1) - E.x0) * s, oy + (E.y1 - clamp(y, E.y0, E.y1)) * s];
 }
-const MAPBOX = { x: 560, y: 130, w: 1240, h: 730 };
+const MAPBOX = PORTRAIT ? { x: 40, y: 430, w: 1000, h: 900 } : { x: 560, y: 130, w: 1240, h: 730 };
 function buildLayers() {
   const P = proj(MAPBOX);
   const mk = () => { const c = document.createElement("canvas"); c.width = W; c.height = H; return c; };
@@ -205,7 +211,7 @@ SC.map = (u, D) => {
 };
 
 SC.score = (u, D, cs) => {
-  eyebrow("HOW NEW IS AN IDEA?", ramp(u, 0, .4));
+  eyebrow("HOW UNUSUAL IS AN IDEA?", ramp(u, 0, .4));
   headline("Look at its 10 closest games", ramp(u, 0, .5));
   const draw = (cx, cy, spread, label, color, a, seed) => {
     if (a <= 0) return;
@@ -413,14 +419,319 @@ SC.outro = (u, D, cs) => {
   txt("Code + all 76 ideas: github.com/WoumBoum/new_idea_generator", 120, 860, 28, C.muted, { fam: F.mono, alpha: k3 });
 };
 
+
+/* ---------- portrait (9:16) scenes: content lives between y=200 and y=1400; captions sit above the app's bottom UI ---------- */
+const SCP = {};
+const CW = 1080 - 2 * 80;  // content width
+
+SCP.hook = (u, D, cs) => {
+  const card = (y, handle, body, a, typed) => {
+    const lines = wrap(body, CW - 70, 40, F.body, 400);
+    const h = 110 + lines.length * 54;
+    ctx.globalAlpha = a; rr(80, y, CW, h, 22, C.panel, C.rule, 2); circle(135, y + 55, 24, C.rule); ctx.globalAlpha = 1;
+    txt(handle, 175, y + 65, 30, C.ink2, { weight: 600, alpha: a });
+    let shown = Math.floor(typed * body.length), acc = 0;
+    lines.forEach((l, i) => { const part = l.slice(0, clamp(shown - acc, 0, l.length)); acc += l.length + 1; txt(part, 115, y + 130 + i * 54, 40, C.ink, { alpha: a }); });
+    return h;
+  };
+  const dim = 1 - 0.8 * ramp(u, cs[2], 0.5);
+  const h1 = card(260, "a post", "“One thing AI can't do is create a brand new idea.”", ramp(u, 0, 0.4) * dim, clamp(u / 1.6));
+  card(260 + h1 + 30, "a reply", "“Of course it can. Take all 100,000+ games on Steam, plot them in vector space using embeddings, choose a location far away from neighbors, convert that back to a description… boom, brand new ideas.”",
+    ramp(u, cs[1] - 0.2, 0.4) * dim, clamp((u - cs[1]) / 3.2));
+  const k = ramp(u, cs[2], 0.45);
+  if (k > 0) { ctx.globalAlpha = 0.9 * k; ctx.fillStyle = C.bg; ctx.fillRect(0, 1130, W, 200); ctx.globalAlpha = 1;
+    txt("So I tested it.", W / 2, 1265 + (1 - k) * 30, 104, C.acc, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: k }); }
+};
+
+SCP.download = (u, D) => {
+  const T = window.VIZ.titles;
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 300, W, 1120); ctx.clip();
+  for (let col = 0; col < 3; col++) {
+    const x = 60 + col * 340, speed = 80 + col * 20;
+    for (let r = 0; r < 34; r++) {
+      const idx = (col * 90 + r) % T.length;
+      const y = 1440 - ((u * speed + r * 44 + col * 37) % (34 * 44));
+      txt(T[idx], x, y, 24, C.ink2, { fam: F.mono, alpha: 0.2 });
+    }
+  }
+  ctx.restore();
+  const g = ctx.createRadialGradient(W / 2, 880, 40, W / 2, 880, 560); g.addColorStop(0, "rgba(12,18,28,0.97)"); g.addColorStop(1, "rgba(12,18,28,0.15)");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  eyebrow("STEP 1 · DOWNLOAD", ramp(u, 0, .4));
+  const n = 195015 * easeOut(u / Math.max(1.5, D * 0.6));
+  txt(fmtN(n), W / 2, 900, 150, C.ink, { fam: F.mono, weight: 500, align: "center", alpha: ramp(u, 0, .3) });
+  txt("game pages from Steam:", W / 2, 990, 42, C.ink2, { align: "center", alpha: ramp(u, .4, .5) });
+  txt("descriptions, tags, player modes", W / 2, 1045, 42, C.ink2, { align: "center", alpha: ramp(u, .4, .5) });
+};
+
+SCP.embedding = (u, D, cs) => {
+  eyebrow("STEP 2 · PUT EVERY GAME ON A MAP", ramp(u, 0, .4));
+  headline("Text in, coordinates out", ramp(u, 0, .5));
+  const dk = ramp(u, cs[1] - 0.2, .5);
+  if (dk > 0) {
+    rr(80, 400, CW, 170, 18, C.accSoft, C.acc, 2);
+    txt("EMBEDDING", 115, 450, 28, C.acc, { fam: F.mono, weight: 500, spacing: 3, alpha: dk });
+    ctx.globalAlpha = dk; para("an AI reads a description and gives it a position, so similar games land close together", 115, 500, CW - 70, 32, C.ink, { alpha: dk, lh: 40 }); ctx.globalAlpha = 1;
+  }
+  const cards = [["Survive the zombie horde with your squad.", "zombie shooter"], ["Fight off the undead in online co-op.", "zombie shooter"], ["Grow crops and raise chickens on your farm.", "farming game"]];
+  const targets = [[640, 1130], [705, 1170], [250, 1330]];
+  rr(80, 990, CW, 400, 20, C.panel, C.rule, 2);
+  txt("the map", 110, 1035, 26, C.muted, { fam: F.mono });
+  cards.forEach(([t, kind], i) => {
+    const y = 610 + i * 122, a = ramp(u, 0.6 + i * 0.5, .5);
+    ctx.globalAlpha = a; rr(80, y, CW, 104, 16, C.panel, C.rule, 2); ctx.globalAlpha = 1;
+    txt(t, 110, y + 46, 32, C.ink, { alpha: a }); txt(kind, 110, y + 84, 24, C.muted, { fam: F.mono, alpha: a });
+    const land = ramp(u, cs[2] - 0.3 + i * 0.35, 0.8);
+    if (land > 0) {
+      const sx = 960, sy = y + 52, [tx, ty] = targets[i];
+      ctx.strokeStyle = C.rule; ctx.setLineDash([6, 8]); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(lerp(sx, tx, land), lerp(sy, ty, land)); ctx.stroke(); ctx.setLineDash([]);
+      circle(lerp(sx, tx, land), lerp(sy, ty, land), 14, i < 2 ? C.acc : C.blue);
+    }
+  });
+  const nb = ramp(u, cs[2] + 1.4, .5);
+  if (nb > 0) {
+    ctx.globalAlpha = nb; ctx.strokeStyle = C.acc; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(672, 1150, 90, 66, 0, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1;
+    txt("neighbors", 672, 1250, 28, C.acc, { align: "center", fam: F.mono, alpha: nb });
+    txt("far away", 250, 1290, 28, C.blue, { align: "center", fam: F.mono, alpha: ramp(u, cs[2] + 2.2, .5) });
+  }
+};
+
+SCP.map = (u, D) => {
+  ctx.globalAlpha = ramp(u, 0, 1.0); ctx.drawImage(LAYERS.base, 0, 0); ctx.globalAlpha = 1;
+  eyebrow("THE MAP", ramp(u, 0, .4));
+  txt("195,015 dots.", MX, 330, 62, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, .2, .5) });
+  txt("Each one is a real Steam game.", MX, 395, 40, C.ink2, { alpha: ramp(u, .4, .5) });
+  const names = ["Horror", "Visual Novel", "Racing & Sports"];
+  const step = Math.max(1.0, (D - 1.6) / names.length);
+  names.forEach((nm, i) => {
+    const a = ramp(u, 1.2 + i * step, .35) * (1 - ramp(u, 1.2 + (i + 1) * step, .35) * (i < names.length - 1 ? 1 : 0));
+    if (a <= 0) return;
+    ctx.globalAlpha = a; ctx.drawImage(LAYERS.genre[nm], 0, 0); ctx.globalAlpha = 1;
+    let [cx, cy] = LAYERS.centroid[nm];
+    font(32, F.body, 600); const tw = ctx.measureText(nm).width + 44;
+    cx = Math.min(cx + 18, W - 40 - tw);
+    rr(cx, cy - 32, tw, 52, 10, "rgba(12,18,28,0.88)", C.blue, 2);
+    txt(nm, cx + 22, cy + 5, 32, C.ink, { weight: 600, alpha: a });
+    txt("genres form neighborhoods", MX, 1385, 34, C.blue, { alpha: a });
+  });
+  txt("(flattened to 2-D for the picture)", W - MX, 1385, 22, C.muted, { fam: F.mono, align: "right", alpha: ramp(u, .6, .5) });
+};
+
+SCP.score = (u, D, cs) => {
+  eyebrow("HOW UNUSUAL IS AN IDEA?", ramp(u, 0, .4));
+  headline("Look at its 10 closest games", ramp(u, 0, .5));
+  const draw = (cx, cy, spread, l1, l2, color, a, seed) => {
+    if (a <= 0) return;
+    ctx.globalAlpha = a;
+    for (let i = 0; i < 10; i++) {
+      const ang = i * 2.399 + seed, r = spread * (0.75 + 0.5 * ((i * 37 + seed * 11) % 10) / 10);
+      const x = cx + Math.cos(ang) * r, y = cy + Math.sin(ang) * r;
+      ctx.strokeStyle = C.rule; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y); ctx.stroke();
+      circle(x, y, 9, C.ink2);
+    }
+    circle(cx, cy, 16, color, C.bg, 4); ctx.globalAlpha = 1;
+    txt(l1, cx, 970, 32, color, { align: "center", weight: 600, alpha: a });
+    txt(l2, cx, 1012, 32, color, { align: "center", weight: 600, alpha: a });
+  };
+  draw(290, 720, 60, "closest games", "nearby: ordinary", C.ink2, ramp(u, .5, .6), 1);
+  draw(780, 720, 175, "closest games", "far away: unusual", C.acc, ramp(u, cs[1] - 0.2, .6), 2);
+  const k = ramp(u, cs[1] + 1.0, .6);
+  if (k > 0) {
+    const h = window.VIZ.hist.counts, mx = Math.max(...h), x0 = 110, x1 = 970, y0 = 1270, hh = 110;
+    h.forEach((c, i) => { const x = lerp(x0, x1, i / h.length), bw = (x1 - x0) / h.length - 1.5; ctx.fillStyle = C.rule; ctx.globalAlpha = k; ctx.fillRect(x, y0 - hh * c / mx, bw, hh * c / mx); });
+    ctx.globalAlpha = 1;
+    txt("all 195k Steam games", x0, y0 - hh - 26, 24, C.muted, { fam: F.mono, alpha: k });
+    txt("← ordinary", x0, y0 + 40, 26, C.muted, { fam: F.mono, alpha: k });
+    txt("unusual →", x1, y0 + 40, 26, C.acc, { fam: F.mono, align: "right", alpha: k });
+  }
+};
+
+SCP.sanity = (u, D, cs) => {
+  eyebrow("SANITY CHECK", ramp(u, 0, .4));
+  headline("Can new wording fake a high score?", ramp(u, 0, .5));
+  rr(80, 500, CW, 170, 18, C.panel, C.rule, 2);
+  txt("REAL GAME", 110, 548, 24, C.muted, { fam: F.mono, spacing: 2 });
+  txt("Tasty Planet: Back for Seconds", 110, 600, 38, C.ink, { weight: 600 });
+  txt("eat everything, grow bigger, travel through time", 110, 643, 26, C.ink2);
+  const a2 = ramp(u, .8, .5);
+  ctx.globalAlpha = a2; rr(80, 695, CW, 170, 18, C.panel, C.acc, 2); ctx.globalAlpha = 1;
+  txt("REWRITTEN BY THE AI, NEW WORDS", 110, 743, 24, C.acc, { fam: F.mono, spacing: 2, alpha: a2 });
+  txt("Gobble Blob Through Time", 110, 795, 38, C.ink, { weight: 600, alpha: a2 });
+  txt("a hungry blob that keeps getting bigger, across history", 110, 838, 26, C.ink2, { alpha: a2 });
+  rr(80, 895, CW, 300, 20, C.panel, C.rule, 2);
+  for (let i = 0; i < 90; i++) { const x = 110 + ((i * 97) % 860), y = 920 + ((i * 53) % 250); circle(x, y, 4, "rgba(214,224,240,0.18)"); }
+  circle(640, 1050, 16, C.ink2, C.bg, 4); txt("original", 670, 1058, 28, C.ink2, { fam: F.mono });
+  const land = ramp(u, 1.4, 1.4), sx = 180, sy = 930, tx = 612, ty = 1078;
+  if (land > 0) circle(lerp(sx, tx, land), lerp(sy, ty, land), 16, C.acc, C.bg, 4);
+  txt("rewrite", 480, 1130, 28, C.acc, { fam: F.mono, alpha: ramp(u, 2.6, .4) });
+  const k = ramp(u, cs[1] - 0.3, .5);
+  ctx.globalAlpha = k; para("For 17 of 24 rewrites, the original was among the 8 closest games.", MX, 1260, CW, 34, C.ink, { alpha: k, lh: 44 }); ctx.globalAlpha = 1;
+  txt("Rewording doesn't fool the score.", MX, 1360, 34, C.acc, { weight: 600, alpha: k });
+};
+
+SCP.voids = (u, D, cs) => {
+  ctx.globalAlpha = 0.8; ctx.drawImage(LAYERS.base, 0, 0); ctx.globalAlpha = 1;
+  eyebrow("STEP 3 · FIND THE EMPTY SPOTS", ramp(u, 0, .4));
+  txt("Empty spots:", MX, 330, 58, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, .2, .5) });
+  txt("far from every game", MX, 392, 40, C.ink2, { alpha: ramp(u, .3, .5) });
+  const vs = window.VIZ.map.voids;
+  ctx.setLineDash([7, 7]);
+  vs.forEach((v, i) => {
+    const a = ramp(u, 0.6 + i * 0.05, .3); if (a <= 0) return;
+    const [x, y] = LAYERS.P(v.xy[0], v.xy[1]); ctx.globalAlpha = a; circle(x, y, 13, null, C.acc, 3);
+  });
+  ctx.setLineDash([]); ctx.globalAlpha = 1;
+  const k = ramp(u, cs[1] - 0.2, .4);
+  if (k > 0) {
+    const [tx, ty] = LAYERS.P(vs[33].xy[0], vs[33].xy[1]);
+    const draft = 1 + Math.min(7, Math.floor(clamp((u - cs[1]) / Math.max(1, D - cs[1] - 1)) * 8));
+    for (let j = 0; j < draft; j++) {
+      const r = 220 * Math.pow(0.62, j), ang = 2.2 + j * 1.3, x = tx + Math.cos(ang) * r, y = ty + Math.sin(ang) * r;
+      circle(x, y, 9, j === draft - 1 ? C.acc : "rgba(224,85,154,0.35)");
+    }
+    circle(tx, ty, 26, null, C.acc, 3);
+    ctx.globalAlpha = k; rr(80, 1210, 560, 190, 18, "rgba(19,28,41,0.95)", C.acc, 2); ctx.globalAlpha = 1;
+    txt("AI WRITES A GAME IDEA", 110, 1256, 24, C.acc, { fam: F.mono, spacing: 2, alpha: k });
+    txt(`draft ${draft}`, 110, 1326, 56, C.ink, { fam: F.mono, weight: 500, alpha: k });
+    txt("embed, check where it landed, rewrite", 110, 1375, 24, C.ink2, { alpha: k });
+  }
+};
+
+SCP.baseline = (u, D) => {
+  eyebrow("THE FAIR TEST", ramp(u, 0, .4));
+  headline("Same AI, no map", ramp(u, 0, .5));
+  const a = ramp(u, .4, .5);
+  ctx.globalAlpha = a; rr(80, 660, CW, 300, 60, C.panel, C.rule, 2); ctx.globalAlpha = 1;
+  txt("“Give me game ideas", W / 2, 790, 56, C.ink, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: a });
+  txt("nobody has made.”", W / 2, 865, 56, C.ink, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: a });
+  txt("16 ideas, scored the exact same way", W / 2, 1060, 36, C.ink2, { align: "center", alpha: ramp(u, 1.2, .5) });
+};
+
+function drawBarsP(u, rows, reveal, opts = {}) {
+  const x0 = 80, xmax = 760, max = 140000, y0 = opts.y0 || 560, gap = opts.gap || 150;
+  para("How many Steam games are MORE unusual than a typical idea?", MX, 330, CW, 48, C.ink, { fam: F.disp, weight: 600, lh: 58 });
+  txt("fewer = more original", MX, 470, 34, C.ink2);
+  rows.forEach(([label, val, color], i) => {
+    const a = ramp(u, reveal[i], .5); if (a <= 0) return;
+    const y = y0 + i * gap, w = Math.max(6, (xmax - x0) * (val / max) * easeOut((u - reveal[i]) / 0.9));
+    txt(label, x0, y, 34, C.ink, { alpha: a, weight: i === opts.hi ? 600 : 400 });
+    ctx.globalAlpha = a; rr(x0, y + 22, w, 48, 6, color); ctx.globalAlpha = 1;
+    txt(fmtN(val * clamp((u - reveal[i]) / 0.9)), x0 + w + 18, y + 60, 36, C.ink, { fam: F.mono, weight: 500, alpha: a });
+  });
+}
+SCP.results = (u, D, cs) => {
+  eyebrow("RESULTS", ramp(u, 0, .4));
+  const R = window.VIZ.results;
+  const rows = [[R[0][0] + " (reference)", R[0][1], C.rule], [R[2][0], R[2][1], C.ink2], [R[1][0], R[1][1], C.acc], [R[3][0], R[3][1], C.acc]];
+  const second = cs[1] + (cs[2] - cs[1]) * 0.5;
+  drawBarsP(u, rows, [0.3, cs[1] + 0.6, second, (cs[3] ?? cs[2] + 3) + 0.4], { hi: 2 });
+  const nk = ramp(u, cs[2] - 0.1, .5) * (1 - ramp(u, (cs[3] ?? 99) - 0.2, .3));
+  if (nk > 0) { ctx.globalAlpha = nk; rr(80, 1180, CW, 150, 14, C.accSoft, C.acc, 2); ctx.globalAlpha = 1;
+    ctx.globalAlpha = nk; para("Simplified map = a squeezed version of the map that mostly captures genre, art style and mood", 110, 1232, CW - 60, 30, C.ink, { alpha: nk, lh: 40 }); ctx.globalAlpha = 1; }
+  const k = ramp(u, 0.2, .4) * (1 - ramp(u, cs[1] - 0.3, .3));
+  if (k > 0) txt("Surprise: the empty spots lost.", W / 2, 1280, 52, C.acc, { fam: F.disp, weight: 600, italic: true, align: "center", alpha: k });
+};
+
+SCP.compass = (u, D, cs) => {
+  eyebrow("WHAT WORKED: THE MAP AS A COMPASS", ramp(u, 0, .4));
+  const steps = window.VIZ.compass;
+  const labels = ["A football referee game", "An auctioneer game", "A theatre prompter, whispering lines", "… for a touring theatre, 1890"];
+  if (u < cs[2] - 0.3) {
+    headline("Write, check, move away", ramp(u, 0, .5));
+    const t0 = cs[1] - 0.4, span = Math.max(3, (cs[2] - 0.6) - t0);
+    steps.forEach((s, i) => {
+      const at = t0 + i * span / steps.length, a = ramp(u, at, .45); if (a <= 0) return;
+      const y = 430 + i * 235, last = i === steps.length - 1;
+      ctx.globalAlpha = a; rr(80, y, CW, 210, 16, C.panel, last ? C.acc : C.rule, 2); ctx.globalAlpha = 1;
+      txt(`draft`, 110, y + 44, 22, C.muted, { fam: F.mono, alpha: a });
+      txt(labels[i], 110, y + 92, 36, C.ink, { weight: 600, alpha: a });
+      txt(`closest game: ${s.nearest}`, 110, y + 140, 28, C.ink2, { alpha: a });
+      txt(`${fmtN(s.weirder)} games more unusual`, 110, y + 185, 32, last ? C.acc : C.ink, { fam: F.mono, weight: 500, alpha: a });
+    });
+  } else {
+    const R = window.VIZ.results;
+    const rows = [[R[2][0], R[2][1], C.ink2], [R[1][0], R[1][1], C.rule], [R[3][0], R[3][1], C.rule], [R[4][0], R[4][1], C.acc]];
+    const uu = u - (cs[2] - 0.3);
+    drawBarsP(uu, rows, [0, 0, 0, 0.5], { hi: 3 });
+    txt("out of 195,015 games", 210, 1070, 34, C.ink2, { alpha: ramp(uu, 1.4, .5) });
+    const k2 = ramp(u, (cs[3] ?? 99) - 0.1, .5);
+    if (k2 > 0) { ctx.globalAlpha = k2; rr(80, 1180, CW, 150, 14, "rgba(79,191,134,0.12)", C.good, 2); ctx.globalAlpha = 1;
+      ctx.globalAlpha = k2; para("A second map the AI never saw agreed: all 16 ideas in its top 5%", 110, 1238, CW - 60, 32, C.ink, { alpha: k2, lh: 42 }); ctx.globalAlpha = 1; }
+  }
+};
+
+SCP.ideas = (u, D, cs) => {
+  eyebrow("SOME OF THE IDEAS", ramp(u, 0, .4));
+  const S = window.VIZ.showcase, find = t => S.find(s => s.title === t);
+  const items = [
+    ["The Ringers of Saxby Green", "Captain a village's church bell ringers in 1820. Keep eight amateurs in time."],
+    ["The Prompter's Trapdoor", "Hide under the stage and whisper lines to actors who forgot them."],
+    ["Saturday Night Noisemaker", "Perform a silent film's sound effects live, behind the screen."],
+    ["Forty Thousand Words", "Write the first great English dictionary, in 1747, before the money runs out."],
+  ];
+  items.forEach(([title, line], i) => {
+    const a = ramp(u, (cs[i + 1] ?? (0.5 + i)) - 0.15, .45); if (a <= 0) return;
+    const y = 300 + i * 272;
+    ctx.globalAlpha = a; rr(80, y, CW, 250, 20, C.panel, C.rule, 2); ctx.globalAlpha = 1;
+    txt(title, 115, y + 64, 42, C.ink, { fam: F.disp, weight: 600, alpha: a });
+    ctx.globalAlpha = a; para(line, 115, y + 116, CW - 70, 30, C.ink2, { alpha: a, lh: 38 }); ctx.globalAlpha = 1;
+    const w = find(title).weirder;
+    txt(`only ${w} Steam game${w === 1 ? "" : "s"} more unusual`, 115, y + 220, 26, C.acc, { fam: F.mono, weight: 500, alpha: a });
+  });
+};
+
+SCP.check = (u, D, cs) => {
+  eyebrow("THE HONESTY CHECK", ramp(u, 0, .4));
+  headline("Has anyone made it already?", ramp(u, 0, .5));
+  const chk = window.VIZ.checks, col = { none_found: C.good, close: C.warn, exists: C.bad };
+  const reveal = cs[1] - 0.2;
+  chk.forEach((c, i) => {
+    const x = 80 + (i % 2) * 470, y = 410 + Math.floor(i / 2) * 84, a = ramp(u, 0.3 + i * 0.06, .3);
+    const on = ramp(u, reveal + i * 0.12, .3), color = on > 0.5 ? col[c.verdict] : C.rule;
+    ctx.globalAlpha = a; rr(x, y, 450, 72, 12, C.panel, color, 3); ctx.globalAlpha = 1;
+    const lines = wrap(c.title, 410, 26, F.body, 600);
+    if (lines.length === 1) txt(lines[0], x + 20, y + 45, 26, C.ink, { weight: 600, alpha: a });
+    else lines.slice(0, 2).forEach((l, k) => txt(l, x + 20, y + 31 + k * 28, 24, C.ink, { weight: 600, alpha: a }));
+  });
+  const k = ramp(u, (cs[2] ?? reveal + 2) - 0.2, .5);
+  txt("■ nothing similar found: 10", MX, 1135, 34, C.good, { weight: 600, alpha: k });
+  txt("■ something close: 5", MX, 1185, 34, C.warn, { weight: 600, alpha: k });
+  txt("■ already exists: 1", MX, 1235, 34, C.bad, { weight: 600, alpha: k });
+  txt("Many checks were quick: the search budget ran out.", MX, 1282, 26, C.muted, { alpha: k });
+  const r = ramp(u, (cs[3] ?? cs[2]) - 0.1, .5);
+  if (r > 0) { ctx.globalAlpha = r; rr(80, 1310, CW, 80, 12, "rgba(239,107,98,0.14)", C.bad, 2); ctx.globalAlpha = 1;
+    txt("Heave and Sing ≈ Ragnarock (Viking rowing game)", 110, 1362, 28, C.ink, { alpha: r }); }
+};
+
+SCP.outro = (u, D, cs) => {
+  ctx.globalAlpha = 0.5; ctx.drawImage(LAYERS.base, 0, 160); ctx.globalAlpha = 1;
+  window.VIZ.ideas_xy.filter(d => d.rank <= 16).forEach((d, i) => {
+    const a = ramp(u, 0.4 + i * 0.06, .3); const [x, y] = LAYERS.P(d.xy[0], d.xy[1]);
+    ctx.globalAlpha = a; circle(x, y + 160, 10, C.acc, C.bg, 3); ctx.globalAlpha = 1;
+  });
+  const g = ctx.createLinearGradient(0, 0, 0, 900); g.addColorStop(0, "rgba(12,18,28,0.98)"); g.addColorStop(0.75, "rgba(12,18,28,0.9)"); g.addColorStop(1, "rgba(12,18,28,0)");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, 900);
+  txt("Can AI come up", MX, 330, 76, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, 0, .5) });
+  txt("with a new idea?", MX, 418, 76, C.ink, { fam: F.disp, weight: 600, alpha: ramp(u, 0, .5) });
+  const k = ramp(u, cs[1] - 0.1, .5);
+  txt("Typical idea: more unusual than", MX, 540, 40, C.ink2, { alpha: k });
+  txt("99.9% of Steam", MX, 640, 92, C.acc, { fam: F.mono, weight: 500, alpha: k });
+  const k2 = ramp(u, cs[2] - 0.1, .5);
+  if (k2 > 0) { ctx.globalAlpha = 0.9 * k2; ctx.fillStyle = C.bg; ctx.fillRect(0, 1180, W, 170); ctx.globalAlpha = 1; }
+  txt("The map didn't invent them.", MX, 1245, 46, C.ink, { fam: F.disp, weight: 600, italic: true, alpha: k2 });
+  txt("It just kept saying: that's been done.", MX, 1305, 46, C.ink, { fam: F.disp, weight: 600, italic: true, alpha: k2 });
+  txt("github.com/WoumBoum/new_idea_generator", MX, 1380, 26, C.muted, { fam: F.mono, alpha: ramp(u, D - 2.0, .5) });
+};
+
 /* ---------- frame ---------- */
 function captionAt(t) {
   const c = CAPS.find(c => t >= c.start - 0.05 && t <= c.end + 0.25); if (!c) return;
   const a = clamp(Math.min((t - c.start + 0.05) / 0.12, (c.end + 0.25 - t) / 0.12));
-  const lines = wrap(c.text, 1560, 40, F.body, 500);
-  const lh = 52, h = lines.length * lh + 34, y = H - 40 - h;
-  ctx.globalAlpha = a * 0.88; rr((W - 1640) / 2, y, 1640, h, 14, "#05080d"); ctx.globalAlpha = 1;
-  lines.forEach((l, i) => txt(l, W / 2, y + 50 + i * lh, 40, "#ffffff", { align: "center", weight: 500, alpha: a }));
+  const fs = PORTRAIT ? 44 : 40, boxW = PORTRAIT ? 1000 : 1640, lh = PORTRAIT ? 58 : 52;
+  const lines = wrap(c.text, boxW - 80, fs, F.body, 500);
+  const h = lines.length * lh + 34, y = PORTRAIT ? 1600 - h : H - 40 - h;  // portrait: stay above the app's bottom UI
+  ctx.globalAlpha = a * 0.88; rr((W - boxW) / 2, y, boxW, h, 14, "#05080d"); ctx.globalAlpha = 1;
+  lines.forEach((l, i) => txt(l, W / 2, y + (PORTRAIT ? 17 + lh * 0.72 : 50) + i * lh, fs, "#ffffff", { align: "center", weight: 500, alpha: a }));
 }
 window.renderAt = function (t) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -430,7 +741,7 @@ window.renderAt = function (t) {
   const cs = sceneCaps(s.scene).map(c => c.start - s.start);
   const fadeIn = clamp(u / 0.35), fadeOut = clamp((s.end - t) / 0.3);
   ctx.save(); ctx.globalAlpha = 1;
-  SC[s.scene](u, D, cs);
+  (PORTRAIT ? SCP : SC)[s.scene](u, D, cs);
   ctx.restore();
   // scene transition veil
   const veil = 1 - Math.min(fadeIn, s === SCENES[SCENES.length - 1] ? 1 : fadeOut);
