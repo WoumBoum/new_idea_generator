@@ -5,7 +5,9 @@ Runs on http://127.0.0.1:8765 . Decoder agents call it in a loop: write -> score
 GET  /void/<id>        the void's target info: decoded tags, player modes, the 15 nearest real games
 GET  /tags             Steam's tag vocabulary (only these tags are accepted)
 POST /score            {"void_id": "V07" | null, "tags": [...], "short_description": "...", "description": "..."}
-                       -> target_sim     cosine between the draft and the void point (how well it landed)
+                       -> target_sim     cosine between the draft and the void, in the semantic coordinates
+                                         the voids were found in (how well it landed)
+                          novelty_sem    the draft's emptiness in those same coordinates (comparable to the void's)
                           novelty_bge    1 - mean cosine to the 10 nearest of 195k Steam games (primary model)
                           novelty_minilm same, under a second, independently trained embedding model
                           *_percentile   share of real Steam games that are LESS isolated than this draft
@@ -15,6 +17,7 @@ POST /nearest          {"text": "..."}  -> nearest real games to free text (a "d
 Every /score call is appended to data/score_log.jsonl (the audit trail of each idea's iterations).
 """
 import json
+import os
 import sys
 import threading
 import time
@@ -28,32 +31,51 @@ from sentence_transformers import SentenceTransformer
 
 sys.path.insert(0, str(Path(__file__).parent))
 from common import compose_doc, concept_tags_of  # noqa: E402
+from importlib import import_module  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
-PORT = 8765
+PORT = int(os.environ.get("PORT", 8765))
 torch.set_num_threads(4)
 
 games = pd.read_parquet(DATA / "games.parquet")
 keep = games.embeddable.values
 g = games[keep].reset_index(drop=True)
 space = pd.read_parquet(DATA / "space.parquet")
-REAL_NOV = {k: np.sort(space.loc[space.embeddable, f"novelty_{k}"].values) for k in ("bge", "minilm")}
-EMB = {k: torch.from_numpy(np.load(DATA / f"emb_{k}.npy")[keep].astype(np.float32)) for k in ("bge", "minilm")}
-MODELS = {"bge": SentenceTransformer("BAAI/bge-small-en-v1.5", device="cpu"),
-          "minilm": SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device="cpu")}
+# MiniLM is optional at serve time (the final ranking always re-scores with both models).
+KEYS = [k for k in ("bge", "minilm") if (DATA / f"emb_{k}.npy").exists() and f"novelty_{k}" in space]
+# SCORE_MODELS=bge keeps MiniLM out of the agents' feedback, so it stays a held-out check for the final ranking.
+KEYS = [k for k in KEYS if k in os.environ.get("SCORE_MODELS", "bge,minilm").split(",")]
+REAL_NOV = {k: np.sort(space.loc[space.embeddable, f"novelty_{k}"].values) for k in KEYS}
+EMB = {k: torch.from_numpy(np.load(DATA / f"emb_{k}.npy")[keep].astype(np.float32)) for k in KEYS}
+MODEL_NAMES = {"bge": "BAAI/bge-small-en-v1.5", "minilm": "sentence-transformers/all-MiniLM-L6-v2"}
+MODELS = {k: SentenceTransformer(MODEL_NAMES[k], device="cpu") for k in KEYS}
 for m in MODELS.values():
     m.max_seq_length = 256
+PCA = np.load(DATA / "pca_bge.npz")
+D_SEM = int(PCA["d_sem"])
+MU = torch.from_numpy(PCA["mean"])
+VSEM = torch.from_numpy(PCA["components"][:D_SEM])
+ZN = torch.nn.functional.normalize((EMB["bge"] - MU) @ VSEM.T, dim=1)
+REAL_SEM = np.sort(space.loc[space.embeddable, "novelty_sem"].values)
 dec = torch.load(DATA / "decoder_bge.pt")
-LIN = torch.nn.Linear(384, len(dec["labels"]))
-LIN.load_state_dict(dec["state_dict"])
+DECODER = import_module("04_space").Decoder(D_SEM, len(dec["labels"]))
+DECODER.load_state_dict(dec["state_dict"])
 LABELS = dec["labels"]
-VOIDS = {v["void_id"]: v for v in json.loads((DATA / "voids.json").read_text())} if (DATA / "voids.json").exists() else {}
-VOID_VEC = torch.from_numpy(np.load(DATA / "void_vectors.npy")) if (DATA / "void_vectors.npy").exists() else None
+VOIDS = {v["void_id"]: v for v in json.loads((DATA / "voids.json").read_text())}
+VOID_DIR = torch.from_numpy(np.load(DATA / "void_dirs.npy"))       # v1: unit directions in semantic coords
+VOID_IDX = {vid: k for k, vid in enumerate(VOIDS)}
+# v2 voids (05b_voids_full.py) live in the full space; landing is measured as centred full-space cosine.
+VOIDS_FULL, VOID_FULL_DIR, VOID_FULL_IDX = {}, None, {}
+if (DATA / "voids_full.json").exists():
+    VOIDS_FULL = {v["void_id"]: v for v in json.loads((DATA / "voids_full.json").read_text())}
+    VOID_FULL_DIR = torch.nn.functional.normalize(torch.from_numpy(np.load(DATA / "void_full_vecs.npy")) - MU, dim=1)
+    VOID_FULL_IDX = {vid: k for k, vid in enumerate(VOIDS_FULL)}
+    VOIDS.update(VOIDS_FULL)
 VOCAB = sorted({t for ts in games.tags for t in ts})
 VOCAB_LOWER = {t.lower(): t for t in VOCAB}
 LOCK = threading.Lock()
-LOG = open(DATA / "score_log.jsonl", "a")
+LOG = open(DATA / ("score_log.jsonl" if PORT == 8765 else f"score_log_{PORT}.jsonl"), "a")
 
 
 def embed(key, text):
@@ -81,12 +103,19 @@ def score(req):
     ctags = concept_tags_of(tags)
     doc = compose_doc(ctags, short, desc)
     e_bge = embed("bge", doc)
-    e_min = embed("minilm", doc)
     nb, pb, v, i = novelty("bge", e_bge)
-    nm, pm, _, _ = novelty("minilm", e_min)
+    nm = pm = None
+    if "minilm" in KEYS:
+        nm, pm, _, _ = novelty("minilm", embed("minilm", doc))
+    z = (e_bge - MU) @ VSEM.T
+    zn = torch.nn.functional.normalize(z, dim=0)
+    ns = 1 - float(torch.topk(ZN @ zn, 10).values.mean())
     out = {
+        "novelty_sem": round(ns, 4),
+        "novelty_sem_percentile": round(float(np.searchsorted(REAL_SEM, ns) / len(REAL_SEM) * 100), 3),
         "novelty_bge": round(nb, 4), "novelty_bge_percentile": round(pb, 3),
-        "novelty_minilm": round(nm, 4), "novelty_minilm_percentile": round(pm, 3),
+        "novelty_minilm": None if nm is None else round(nm, 4),
+        "novelty_minilm_percentile": None if pm is None else round(pm, 3),
         "nearest": [{"name": g.name.iloc[int(j)], "appid": int(g.appid.iloc[int(j)]), "sim": round(float(s), 4),
                      "tags": list(g.concept_tags.iloc[int(j)][:6])} for s, j in zip(v[:8], i[:8])],
         "unknown_tags_dropped": unknown,
@@ -94,7 +123,7 @@ def score(req):
         "warnings": [],
     }
     with torch.no_grad():
-        p = torch.sigmoid(LIN(e_bge)).numpy()
+        p = torch.sigmoid(DECODER(z)).numpy()
     out["decoded_tags"] = [(LABELS[c][4:], round(float(p[c]), 2)) for c in np.argsort(-p)
                            if LABELS[c].startswith("tag:")][:10]
     vid = req.get("void_id")
@@ -102,10 +131,13 @@ def score(req):
         if vid not in VOIDS:
             out["warnings"].append(f"unknown void_id {vid}")
         else:
-            idx = list(VOIDS).index(vid)
             out["void_id"] = vid
-            out["target_sim"] = round(float(VOID_VEC[idx] @ e_bge), 4)
-            out["void_nearest_game_sim"] = VOIDS[vid]["nearest_game_sim"]
+            if vid in VOID_FULL_IDX:
+                ec = torch.nn.functional.normalize(e_bge - MU, dim=0)
+                out["target_sim"] = round(float(VOID_FULL_DIR[VOID_FULL_IDX[vid]] @ ec), 4)
+            else:
+                out["target_sim"] = round(float(VOID_DIR[VOID_IDX[vid]] @ zn), 4)
+            out["void_emptiness"] = VOIDS[vid]["emptiness"]
     if len(short) > 320:
         out["warnings"].append("short_description over 320 chars (Steam caps ~300)")
     if len(desc.split()) < 60:
@@ -158,5 +190,5 @@ class H(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print(f"serving {len(g)} games, {len(VOIDS)} voids on :{PORT}", flush=True)
+    print(f"serving {len(g)} games, {len(VOIDS)} voids, models {KEYS} on :{PORT}", flush=True)
     ThreadingHTTPServer(("127.0.0.1", PORT), H).serve_forever()

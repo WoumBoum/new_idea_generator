@@ -114,7 +114,9 @@ def main():
     keys = sys.argv[1:] or ["bge", "minilm"]
     games = pd.read_parquet(DATA / "games.parquet")
     mask = torch.from_numpy(games.embeddable.values.copy())
-    space = pd.DataFrame({"appid": games.appid})
+    sp_path = DATA / "space.parquet"
+    space = pd.read_parquet(sp_path) if sp_path.exists() else pd.DataFrame({"appid": games.appid})
+    assert (space.appid.values == games.appid.values).all()
 
     for key in keys:
         print(f"[{key}] kNN", flush=True)

@@ -1,0 +1,355 @@
+[
+ {
+  "void_id": "B01",
+  "title": "Black Door Holdings",
+  "tags": [
+   "Management",
+   "Adventure",
+   "Economy",
+   "Story Rich",
+   "Point & Click",
+   "Lovecraftian",
+   "Simulation",
+   "Choices Matter",
+   "Pixel Graphics",
+   "Psychological Horror",
+   "Resource Management",
+   "Multiple Endings"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "When his wealthiest patient vanishes, a Victorian psychiatrist is left in charge of the man's oil enterprise. Grow the business of black gold from a few wells into a global empire, while the search drags you deeper into a conspiracy of darkness and madness.",
+  "description": "England, 1891. Dr. Edmund Hale's most troubled patient, the oil baron Silas Crane, disappears the night after describing a black door at the bottom of his deepest well. His will names Hale as the trustee of everything he owns.\n\nBy day you run the oil enterprise: buy new fields, hire crews and engineers, sign contracts with railway barons, invest in refineries and ride the rise and fall of crude prices to keep the shareholders loyal. By night you search for your patient in pixel-art point-and-click scenes, questioning frightened workers, reading his session notes and examining strange core samples brought up from below.\n\nProfit and dread are bound together. The richest wells reach the deepest places, and every barrel sold buys a little more knowledge and a little less sanity. Choose which fields to open and which to seal, whom to pay and whom to silence.\n\nRise from reluctant trustee to oil magnate, or follow Crane into the madness waiting beneath his empire. Several endings await.",
+  "pitch": "An oil-tycoon management sim and a Lovecraftian point-and-click mystery are one loop: the psychiatrist hunting his missing patient has to run the patient's oil empire, and every profitable well drills closer to the horror.",
+  "interpretation": "The parents are The Last Door S2 (a psychiatrist searching for a missing client, Victorian pixel-art horror) and Oil Enterprise (growing from one oilfield to an oil magnate). The decoded tags put Management, Economy and Story Rich on top, so I made the psychiatrist the trustee of his patient's oil company. My first draft, an inherited 1920s company, scored lower (0.38), and an asylum-business version drifted toward sanatorium sims.",
+  "drafts_scored": 15,
+  "first_target_sim": 0.3795,
+  "final_target_sim": 0.5719,
+  "final_novelty_bge_percentile": 95.805
+ },
+ {
+  "void_id": "B02",
+  "title": "Spellbook Mixtape",
+  "tags": [
+   "2D",
+   "Pixel Graphics",
+   "Adventure",
+   "1990's",
+   "Deckbuilding",
+   "Card Game",
+   "Retro",
+   "Mystery",
+   "Magic",
+   "Music",
+   "Casual",
+   "Colorful"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A nostalgic 2D deckbuilding adventure set in a wizard academy whose worlds look like strange 1990s music videos. Build a spellbook of cards, duel odd creatures and unravel why the music professor vanished.",
+  "description": "The music professor of a floating wizard academy has gone rogue, and the songs that hold its worlds together are falling silent. As a first-year student with a battered spellbook, you set out through twenty strange worlds that look like forgotten 1990s music videos: neon highways full of space cars, chrome deserts guarded by grinning demons, and cities of giant talking heads.\n\nExplore each world in colourful 2D pixel art, chat with its odd residents and collect clues about the professor's disappearance. When trouble starts, combat switches to turn-based card duels. Your spells are cards drawn from a deck you build yourself: fire, frost, thunder, bloom and dream schools, each with its own sound. Play cards that share a key and they layer into a song that grows more powerful each turn.\n\nBetween worlds you return to the academy to craft new spell cards, swap tracks with classmates and decorate your dorm. Light puzzles, a gentle difficulty curve and a mystery told across every world make it a cozy, nostalgic deckbuilding adventure for anyone who grew up with wizard school stories.",
+  "pitch": "A wizard-school deckbuilder where every spell is a musical phrase and every world is a surreal retro-futuristic 1990s music video, so building your deck also means composing the soundtrack.",
+  "interpretation": "The parents are a whimsical wizard deckbuilding MMORPG and a psychedelic retro-futuristic VR music ride. The decoded tags (2D, Pixel Graphics, 1990's, Deckbuilding, Mystery) pointed to a nostalgic 2D card adventure, so I fused them as spells-as-songs inside music-video worlds. VR-ride readings scored much lower.",
+  "drafts_scored": 20,
+  "first_target_sim": 0.2362,
+  "final_target_sim": 0.4418,
+  "final_novelty_bge_percentile": 93.555
+ },
+ {
+  "void_id": "B03",
+  "title": "The Ashcombe Idol",
+  "tags": [
+   "Puzzle",
+   "Adventure",
+   "Story Rich",
+   "Match 3",
+   "Casual",
+   "3D",
+   "Strategy",
+   "Lovecraftian",
+   "Mystery",
+   "Historical",
+   "Logic",
+   "Action"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Hired as consultant on a maverick director's new film about an ancient cult, a history professor finds the prop idol on set is real. Unlock its secrets in 3D match-3 action puzzles and find out whether you are filming a story or starring in one.",
+  "description": "Professor Tom Avery was hired to make a maverick director's period film look historically accurate. Then the crew moves into the real Ashcombe University, the director unveils an idol borrowed from the college museum, and the actors start forgetting their lines in favour of words none of them should know.\n\nExplore the campus and the half-built film sets in third person, reading old expedition journals, script rewrites and letters from the museum's founders. When the idol stirs, the game becomes an action puzzle: a rotating 3D lattice of carved stones where you swap neighbours to line up three or more matching symbols, setting off chain reactions before the lattice seals itself again.\n\nEach solved lattice unlocks new rooms, new footage and new truths. The faster you clear it, the more the director films, and the more the idol seems to be watching back.\n\nHas Tom become the unwitting star of the film, or has he stumbled into something far older than history?",
+  "pitch": "A story-driven mystery on a film set where every sealed secret is a rotating 3D match-3 lattice, so the investigation moves forward through puzzle chains instead of dialogue trees.",
+  "interpretation": "The parents are Old Gods Rising (a professor consulting on a strange film at a university, a cosmic mystery) and Critical Mass (3D action match-3). The decoded tags are mostly Puzzle, plus Story Rich, Strategy, Historical and Realistic. Leaning on horror wording pulled the draft toward horror games, so the best version keeps a 'period film' and 'historical idol' framing and makes the 3D match-3 the way into the mystery.",
+  "drafts_scored": 18,
+  "first_target_sim": 0.359,
+  "final_target_sim": 0.5542,
+  "final_novelty_bge_percentile": 99.034
+ },
+ {
+  "void_id": "B04",
+  "title": "Bitter Remedies",
+  "tags": [
+   "Casual",
+   "Simulation",
+   "Adventure",
+   "Detective",
+   "Puzzle",
+   "Investigation",
+   "Management",
+   "Mystery",
+   "Choices Matter",
+   "Story Rich",
+   "Crime",
+   "Point & Click"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Become a self-taught back-alley chemist in 1888 London and discover the darker side of chemistry. Mix dubious concoctions for strange customers, then help hunt the killer stalking the fog before your own bottles convict you.",
+  "description": "Whitechapel, autumn 1888. Your little back-alley shop sells hair tonics, miracle lotions and the occasional black-market mixture that is better not asked about. Business is fine until a bottle with your label is found beside a victim of the most feared killer in England, and a sharp-eyed detective starts dropping by every evening with polite questions.\n\nDays are spent behind the counter. Brewing is simple, just tip one flask into another and see what happens, but every customer wants something different and you decide what you are willing to make and who you will sell it to. Watch your stock, money and reputation, because every bottle may come back as evidence.\n\nNights belong to the investigation. Run real Victorian chemistry tests on the samples the detective leaves with you, match handwriting in your order book and point and click through foggy streets to question regulars and suspects. Each clue can clear your name or tighten the noose, depending on what you choose to reveal. Darkly funny, gently paced and full of moral choices, it is a detective story told from the wrong side of the counter.",
+  "pitch": "A Victorian murder mystery told from behind the counter of a shady chemist's shop: the bottles you sell by day are the evidence you must analyse by night, and they may convict you.",
+  "interpretation": "This fuses a darkly comic black-market concoction-mixing sim with a Victorian Whitechapel detective adventure. The decoded tags (Casual, Simulation, Detective, Management, Choices Matter, Point & Click) fit a shop-management loop that feeds an investigation. Making the chemist both supplier and suspect scored best.",
+  "drafts_scored": 18,
+  "first_target_sim": 0.5314,
+  "final_target_sim": 0.6657,
+  "final_novelty_bge_percentile": 97.882
+ },
+ {
+  "void_id": "B05",
+  "title": "Unauthorised Carols",
+  "tags": [
+   "Simulation",
+   "Dystopian",
+   "Choices Matter",
+   "Casual",
+   "Music",
+   "Rhythm",
+   "Text-Based",
+   "Story Rich",
+   "Comedy",
+   "Interactive Fiction",
+   "Christmas",
+   "Dark Humor"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A censorship simulator with a guitar. Christmas has been banned in a post-war country, but your rock band is touring anyway. Edit your lyrics past the censors, play each gig in rhythm and shape the people's opinion one carol at a time.",
+  "description": "In a grey post-war country governed by the recently elected Loyalist Party, carols are now classified as unauthorised gatherings. As the songwriter of the Sleigh Bells, the last independent rock band in the country, your job is to get the music through.\n\nBefore every concert the setlist goes to the local censor's office. Read the new regulations, remove and edit words, swap whole verses and decide which songs to hide inside harmless folk tunes. Every edit changes the people's opinion, the band's reputation and the interest of the secret police.\n\nThen the curtain rises. Play rock versions of famous Christmas songs in a simple rhythm game, and choose in the moment whether to sing the approved lyric or the real one. The crowd reacts to every choice, and so do the officers in the back row.\n\nBetween towns, read letters from fans, smugglers and tired bureaucrats. Bring the holiday back to a frightened country, or play it safe and keep the band together until Christmas Eve.",
+  "pitch": "A censorship sim where the text you edit is your own band's Christmas rock lyrics, and the rhythm game is where you decide in real time whether to sing the approved line or the forbidden one.",
+  "interpretation": "The parents are The Westport Independent (editing a newspaper under a dystopian party, shaping public opinion) and Santa Rockstar (casual Christmas rock rhythm game). The decoded tags lead with Simulation, Choices Matter, Story Rich, Casual and Text-Based. Putting the lyric-censorship simulation first and the rhythm gigs second landed closest. A radio-censor version and a North Pole newspaper version both scored lower.",
+  "drafts_scored": 14,
+  "first_target_sim": 0.5139,
+  "final_target_sim": 0.6351,
+  "final_novelty_bge_percentile": 98.798
+ },
+ {
+  "void_id": "B06",
+  "title": "Nightrotor",
+  "tags": [
+   "Action",
+   "Adventure",
+   "Horror",
+   "1990's",
+   "Action-Adventure",
+   "Atmospheric",
+   "Retro",
+   "Flight",
+   "Shooter",
+   "Dark",
+   "Survival Horror",
+   "3D"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A retro 1990s action-adventure: pilot a deadly helicopter gunship into the darkness over a haunted island, battle the evil that waits below and complete dangerous night missions, where getting in is easy and getting out is hell.",
+  "description": "Inspired by the gunship flight games and survival horror classics of the 1990s, this new adventure puts our hero in the pilot's seat. Winter, 1996: command has lost contact with its island radar station. The island is pitch dark, the radio hisses with voices that should not be there, and the old mansion on its cliffs has every light burning.\n\nTake off from a lonely carrier, fly low along cliffs and coves, and battle possessed soldiers, crawling things and flying shapes with your cannon, rockets and searchlight. Rescue survivors, escort supply boats and destroy the stone totems that keep the darkness alive.\n\nSome objectives cannot be reached from the cockpit. Set down in a courtyard or on a rooftop and the game shifts to tense on-foot exploration of the mansion, where each room you clear reveals a new landing zone or a new piece of the mystery. Fuel, ammunition and armour are always scarce, so every sortie is a gamble. Chunky polygon graphics, arcade-friendly flight handling and a droning synth score complete the retro action horror experience.",
+  "pitch": "A 1990s-style gunship action game whose mission map is a haunted-house survival horror: the island is fought from the air, the mansion is cleared on foot, and each one opens the way into the other.",
+  "interpretation": "The parents are a retro 1990s helicopter gunship sim and a classic 1920s haunted-mansion survival horror. The decoded tags lean Action and Adventure first, with horror and retro as flavour, so the fusion is an action-first gunship campaign over a haunted island. Mansion landings advance the mystery rather than sitting apart as a separate mode.",
+  "drafts_scored": 19,
+  "first_target_sim": 0.3897,
+  "final_target_sim": 0.4769,
+  "final_novelty_bge_percentile": 95.281
+ },
+ {
+  "void_id": "B07",
+  "title": "Home Field '98",
+  "tags": [
+   "1990's",
+   "Psychological Horror",
+   "2D",
+   "Retro",
+   "Sports",
+   "Pixel Graphics",
+   "Horror",
+   "Casual",
+   "Football (American)",
+   "Point & Click",
+   "Old School",
+   "Atmospheric"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Multi-player",
+   "PvP",
+   "Shared/Split Screen"
+  ],
+  "short_description": "Summer, 1998. June's backyard is the only field on the block, so every kid in the neighbourhood plays football at her house. They don't know it is haunted. Win cute retro football games by day, and face a point-and-click psychological horror by night.",
+  "description": "Home Field looks like the 1990s sports games you played as a kid: chunky top-down pixel art, cheerful music and simple controls that let anyone pick up and play football. Choose your team from the kids on your street, each with a nickname, a favourite play and a secret, and score touchdowns between the swing set and the garden shed. A friend can take the rival team in local versus play.\n\nBut June lives in the house beside the field, and it is not empty. As the summer goes on, the matches change. Players vanish from the roster, the crowd stops cheering and the windows watch every down.\n\nWhen the others go home, explore the house in point-and-click scenes. Talk to parents who will not answer, search the attic and basement, and help June balance a normal childhood with the horrors waiting upstairs.\n\nWinning and losing both move the story forward. A perfect season opens some doors; a bad loss opens others. Play through a summer of friendship, rivalry and dread, and decide which memories are worth keeping.",
+  "pitch": "A cute 1990s kids' football game where the field is the backyard of the heroine's haunted house: the matches and the point-and-click horror affect each other, and wins and losses both move the story forward.",
+  "interpretation": "The parents are Backyard Football '99 (cute, simple-control kids' football) and GESTALT: The Fifth Day (a girl living in a haunted house, point-and-click psychological horror where success and failure both progress the story). The decoded tags are led by 1990's, 2D, Psychological Horror and Retro, with a local PvP signal. So the backyard football field belongs to the haunted house itself. A cursed-cartridge version and a horror-first version scored lower.",
+  "drafts_scored": 16,
+  "first_target_sim": 0.5371,
+  "final_target_sim": 0.5933,
+  "final_novelty_bge_percentile": 90.747
+ },
+ {
+  "void_id": "B08",
+  "title": "Good Dog, Old Games",
+  "tags": [
+   "Adventure",
+   "Retro",
+   "1990's",
+   "Old School",
+   "Casual",
+   "2D",
+   "Historical",
+   "1980s",
+   "Puzzle",
+   "Family Friendly",
+   "Side Scroller",
+   "Dogs"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "School trips are tough for an eight-year-old who is blind, and tougher when the class leaves him locked inside a video game museum after dark. You play as his lifelong canine companion: guide him through fifty years of playable history and help him escape.",
+  "description": "First days at school are tough enough. Ollie's first class trip is to the national museum of video games, and he cannot see a single screen. He has Juno, his guide dog, and a head full of old games his dad taught him to play by sound. When the class leaves without them and the lights go out, the two of them are on their own.\n\nYou play as Juno. Every gallery is a different decade, and every exhibit still runs: dozens of playable classics, from 1970s paddle games to 1980s arcade cabinets and 1990s home consoles. Ollie holds your harness while you lead him through side-scrolling rooms, sniff out safe paths, push switches, bark warnings and work out which old machines open which doors.\n\nAlong the way, recorded interviews with designers, original sketches and design documents in each gallery tell the story of how games were made, and hide the clues you need to get out. A gentle, old-school adventure about trust, history and seeing the world differently.",
+  "pitch": "An escort-puzzle adventure where a guide dog leads a blind boy through a museum of video game history after dark, and the playable retro exhibits are the locks on every door.",
+  "interpretation": "The parents are a guide-dog escort adventure (a dog protecting a blind boy at school) and an interactive documentary anthology of 50 years of games. The decoded tags (Retro, 1980s/1990s, Historical, Family Friendly, Side Scroller) suggested a gentle, history-filled escort adventure. A text-adventure reading scored lower.",
+  "drafts_scored": 15,
+  "first_target_sim": 0.4678,
+  "final_target_sim": 0.5492,
+  "final_novelty_bge_percentile": 97.773
+ },
+ {
+  "void_id": "B09",
+  "title": "Lena and the Endless Line",
+  "tags": [
+   "Casual",
+   "2D",
+   "Adventure",
+   "Minigames",
+   "Surreal",
+   "Female Protagonist",
+   "Trains",
+   "Arcade",
+   "Colorful",
+   "Simulation",
+   "Anime",
+   "Exploration"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A collection of dozens of subway-flavoured microgames! Lena fell asleep on the U7 and now the ride never ends. Travel famous lines from Berlin to New York in a dream where every station is a quick, strange challenge and every passenger is one of the oddest characters you will ever meet.",
+  "description": "Every evening Lena takes the U7 home through Berlin. Tonight she dozed off between stations, and when the doors opened the platform was made of jelly, the conductor was a heron and the network map had grown lines to cities all over the world.\n\nRide one famous route after another, from Berlin and Paris to New York and Tokyo, each recreated in bright anime-style 2D with its real station names and its own dream twist. At every stop the doors open onto a microgame lasting a few seconds: hold the handrail through a sudden curve, stamp a ticket for a ghost, help a tourist find the exit or catch a train before it melts.\n\nClear enough stops to reach the end of the line and unlock the next city. Between rides, explore the dream carriages, chat with the strange regulars and collect souvenirs from every station. Some of them know the way back to the waking world.\n\nA cheerful, surreal journey for anyone who has ever fallen asleep on the train.",
+  "pitch": "A cheerful microgame collection built on real, famous subway lines: every station stop is a surreal few-second microgame in a commuter's never-ending dream, not another subway-anomaly horror game.",
+  "interpretation": "The parents are Dreams of Aether (a surreal microgame collection with a female lead trapped in an endless dream) and World of Subways 2 (a realistic Berlin U7 route). The decoded tags are Casual, 2D, Adventure, Anime and Colorful, with no horror. Nightmare-train framings collapsed into the crowded subway-horror cluster, so the best version is a light-hearted dream ride along real lines.",
+  "drafts_scored": 15,
+  "first_target_sim": 0.4359,
+  "final_target_sim": 0.6067,
+  "final_novelty_bge_percentile": 74.099
+ },
+ {
+  "void_id": "B10",
+  "title": "Billy-Jo and the Martian Gallery",
+  "tags": [
+   "Retro",
+   "1990's",
+   "2D",
+   "Old School",
+   "Sci-fi",
+   "Family Friendly",
+   "Horror",
+   "Cute",
+   "Puzzle",
+   "Point & Click",
+   "Space",
+   "Dogs"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A kid genius, a homemade rocket and an alien art gallery haunted by ghost dogs: a cute little 1990s-style horror adventure. Explore the dark halls, find the keys, admire the artwork and get back to Earth before bedtime without getting licked.",
+  "description": "Billy-Jo is eight, a certified backyard genius, and slightly lost. His homemade rocket ship has run out of fuel on Mars, and the only building for miles is a grand gallery of Martian art, closed for the night and full of ghosts. Friendly ones. Mostly. They are dogs, and they want to lick you.\n\nPoint, click and sneak through the gallery's echoing wings in chunky 1990s pixel art. Each room hides a puzzle built from its paintings and sculptures: line up a cosmic portrait, rotate a statue, decode the brushstrokes to find the keys that unlock the next hall and the fuel cells for your rocket. Ghost pups drift between the exhibits, sniffing for you; hide behind plinths, toss a squeaky toy to distract them or zap them with your trusty toy ray gun to buy a few seconds.\n\nSpooky but never cruel, short and replayable, it is a love letter to the shareware adventures of the early nineties, with a gallery full of dogs that just want a friend.",
+  "pitch": "An early-90s shareware-style sci-fi adventure in which a backyard rocket kid gets stranded in a Martian art gallery haunted by affectionate ghost dogs, and the artworks themselves are the puzzles.",
+  "interpretation": "The parents are a family-friendly 1990s sci-fi platformer about a kid genius with a rocket, and a cute short horror about an art gallery haunted by licking ghost dogs. The decoded tags favoured Retro, Horror, Point & Click and Puzzle over Platformer, so I made it a cute-spooky point-and-click on Mars. Versions without the dogs scored worse.",
+  "drafts_scored": 19,
+  "first_target_sim": 0.5074,
+  "final_target_sim": 0.5398,
+  "final_novelty_bge_percentile": 97.012
+ },
+ {
+  "void_id": "B11",
+  "title": "Bearer of the Lamp",
+  "tags": [
+   "Simulation",
+   "VR",
+   "Education",
+   "Historical",
+   "Action",
+   "Thriller",
+   "Asymmetric VR",
+   "Exploration",
+   "3D",
+   "First-Person",
+   "Atmospheric",
+   "Mythology"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Multi-player",
+   "Online PvP"
+  ],
+  "short_description": "Step inside a faithful VR reconstruction of Queen Nefertari's tomb in this asymmetric multiplayer thriller. The lamp bearer reads the painted walls to reach the burial chamber; the agile ba-bird flock hunts the bearer through the dark to seize the light and take their place.",
+  "description": "The tomb of Nefertari, great royal wife of Ramesses II, has been rebuilt in virtual reality, chamber by chamber, with its painted gods and spells restored to their original colours. Every match takes place inside it.\n\nThe Bearer plays in VR with the only lamp. Step inside at true scale, raise the light to reveal murals and hieroglyphs, and handle interactive reconstructions that explain the history, building methods and mythology behind each scene. Every scene understood opens a sealed door. When the flock attacks, focus the lamp into a beam to fend off the monsters and survive.\n\nThe Flock plays on desktop as ba-birds, the human-headed souls of ancient Egyptian belief. Agile and fast in the dark, they swoop through shafts and side passages, but the light burns them. Hunt down the Bearer from the shadows, and whoever lands the final blow takes the lamp and becomes the new Bearer.\n\nPlay solo against an AI flock, or online with friends. Between matches, an in-game museum gathers everything you have discovered.",
+  "pitch": "An educational VR tomb reconstruction turned into the arena of an asymmetric hunt: the VR player has to study the real paintings to progress while desktop players, as ba-bird souls, try to steal the lamp.",
+  "interpretation": "The parents are Nefertari: Journey to Eternity (an educational VR tour of a historical tomb) and The Flock (an asymmetric thriller where agile monsters hunt whoever carries a light artifact and take their place). The decoded tags are 3D, Simulation, Exploration, VR, Historical and Action, so the tomb tour became the match arena and the flock became Egyptian ba-birds. A single-player survival version scored lower than the asymmetric one.",
+  "drafts_scored": 15,
+  "first_target_sim": 0.5067,
+  "final_target_sim": 0.6418,
+  "final_novelty_bge_percentile": 91.402
+ },
+ {
+  "void_id": "B12",
+  "title": "Seating Plan: 1943",
+  "tags": [
+   "Puzzle",
+   "Casual",
+   "Logic",
+   "Strategy",
+   "Comedy",
+   "World War II",
+   "Historical",
+   "War",
+   "Family Friendly",
+   "2D",
+   "Top-Down",
+   "Colorful"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A cozy strategy-flavoured logic puzzle set during the 1943 North Africa campaign of World War II. As protocol officer of a secret Allied summit, find the perfect seat for hilariously particular generals, diplomats and staff, each with pet peeves, without starting a second war at dinner.",
+  "description": "North Africa, January 1943. While tank columns fight across the desert, the Allied leaders gather at a seaside hotel to plan the next stage of World War II, and somebody has to decide where everyone sits. That somebody is you.\n\nEvery level is a seating puzzle drawn from the summit's busy days: the opening banquet, a cramped briefing room, the motorcade to the airfield, a press photograph on the hotel steps. Each guest has a portrait card listing what they need and what they cannot stand. The admiral must face the sea, the general refuses to sit below the air marshal, two interpreters must stay beside their delegations and the war correspondent cannot be within earshot of anything secret.\n\nDrag guests into place, watch their moods change and rearrange until the whole table is satisfied. New rules arrive as the summit goes on, from blackout curtains to surprise guests. Between puzzles, short historical notes explain the real conference behind the comedy. It is a light, top-down logic game about the small human details behind the big decisions of the war.",
+  "pitch": "A cozy seating-arrangement logic puzzle set at a 1943 North African Allied summit, where the strategy of the war comes down to who refuses to sit next to whom.",
+  "interpretation": "This fuses a cozy logic game about seating people with pet peeves with a WWII North Africa 1943 strategy sim. The decoded tags (Puzzle, Casual, Logic, Strategy, WWII, Historical, Top-Down) suggested a non-violent historical logic game. The summit protocol-officer framing beat both a quartermaster seating version and a unit-deployment puzzle wargame.",
+  "drafts_scored": 20,
+  "first_target_sim": 0.5201,
+  "final_target_sim": 0.6286,
+  "final_novelty_bge_percentile": 98.576
+ }
+]

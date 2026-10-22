@@ -1,0 +1,378 @@
+[
+ {
+  "title": "The Ringers of Saxby Green",
+  "tags": [
+   "Rhythm",
+   "Historical",
+   "Puzzle",
+   "Management",
+   "Atmospheric",
+   "Relaxing",
+   "Singleplayer",
+   "Indie",
+   "Logic"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "In 1820 the church bells are the village's voice. Captain eight ringers on eight ropes, call the changes for weddings, funerals and fairs, and ring a three-hour peal without a slip.",
+  "description": "In a Suffolk parish in 1820, the church bells announce every christening, wedding, funeral, harvest home and piece of news from London, and the ringers who pull them are the proudest folk in the village. You are their new captain, and the rival band from the market town across the river has never let you forget it. Eight bells hang in the tower, each heavy as a cart horse and swung full circle on a rope. They sound one after another in rounds, and you call out which neighbouring pair should swap places next, so the order wanders through thousands of rows without repeating. Moment to moment you pull your own rope in steady time, call the changes, and listen for the ringer who has drifted late or lost their place. Between practices you recruit the blacksmith, the schoolmistress, the poacher and the miller's daughter, teach them to handle a rope without being hauled off their feet, settle quarrels over the beer money, and keep the peace with a curate who thinks it all far too loud. The goal is a full peal, five thousand changes without a fault, for the squire's wedding.",
+  "pitch": "English change ringing becomes the game: you lead a village band of bell ringers, calling the swaps in a pattern that must never repeat while keeping eight amateur villagers in time.",
+  "drafts_scored": 8,
+  "first_novelty_bge_percentile": 99.942,
+  "final_novelty_bge_percentile": 99.999
+ },
+ {
+  "title": "The Prompter's Trapdoor",
+  "tags": [
+   "Comedy",
+   "Historical",
+   "Narrative",
+   "Real-Time",
+   "Funny",
+   "Story Rich",
+   "Singleplayer",
+   "Indie",
+   "Hand-drawn"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Bombay, 1890. Hide beneath the stage of a touring theatre company and whisper forgotten lines to its stars, through songs, sword fights and painted thunderstorms.",
+  "description": "In 1890 a theatre company from Bombay tours the railway towns of India, performing grand dramas full of songs, magic, sword fights and painted thunderstorms, in three languages on three different nights. The stars are famous, the plays are long, and nobody knows every line. That is why the company keeps you, the prompter, crouched beneath a trapdoor at the front of the stage with the only complete script and an oil lamp. Moment to moment you follow the play line by line, watch the actors' faces for the frozen look of a forgotten speech or verse, and whisper the next words at the right moment and volume. Too early and you insult the proud leading man; too loud and the front rows laugh; too late and the demon king stands silent while the princess waits to be rescued. Actors skip scenes, add songs the crowd demands and switch languages mid-act, and you must find your place again fast. Between shows the company travels by train, and you learn each actor's habits and settle backstage feuds. The goal is to bring the company home from its longest tour.",
+  "pitch": "You play the hidden prompter of a touring theatre company, saving live shows by whispering the right line at the right moment and volume while the actors improvise, skip scenes and switch languages.",
+  "drafts_scored": 8,
+  "first_novelty_bge_percentile": 17.824,
+  "final_novelty_bge_percentile": 99.998
+ },
+ {
+  "title": "The Drum That Speaks",
+  "tags": [
+   "Puzzle",
+   "Historical",
+   "Language Learning",
+   "Atmospheric",
+   "Narrative",
+   "Rhythm",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "West Africa, 1850. The language here rises and falls in pitch, and so does your drum. Listen to the next town's drummer across the forest, work out the words, and beat the message on toward the palace.",
+  "description": "In the Yoruba towns of 1850, speech is musical: every word rises and falls in pitch, and a skilled drummer can make a talking drum say almost anything by squeezing its cords to bend the note. You are the new royal drummer of a small town on the road between the coast and a king's palace, and you are still learning the drum's language. Moment to moment you listen to the next town's drumming drift across the forest, write down its high, middle and low beats, and work out which words and proverbs they could stand for, since many words share the same melody and only context tells them apart. Then you drum the message onward, squeezing and striking in the right pattern so the town beyond can understand it. Messages announce births, deaths, markets, visiting traders and approaching danger, and one wrong word turns a wedding into a funeral. At court you drum praise names for chiefs and guests, where a clever proverb wins favour. Between messages you carve drums, train apprentices and learn the history of every family. The goal is to become the drummer whose word the king trusts.",
+  "pitch": "A decoding and relay puzzle built on the Yoruba talking drum: you work out tonal drum messages from the next town by context and pass them on accurately, where one wrong word changes the news.",
+  "drafts_scored": 19,
+  "first_novelty_bge_percentile": 58.917,
+  "final_novelty_bge_percentile": 99.989
+ },
+ {
+  "title": "Seating Europe",
+  "tags": [
+   "Puzzle",
+   "Logic",
+   "Historical",
+   "Comedy",
+   "Diplomacy",
+   "Funny",
+   "Choices Matter",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Vienna, 1905. As head waiter of Europe's grandest hotel dining room, seat diplomats, bankers and countesses so that the right people meet, the wrong ones never do, and every dinner ends in toasts.",
+  "description": "In 1905 the dining room of a grand Vienna hotel is where the fate of Europe is quietly arranged between the soup and the coffee, and you are its head waiter. Every evening ambassadors, archdukes, bankers, composers, cavalry officers and countesses reserve tables, and you decide where each one sits, who faces whom and who can overhear which conversation. Each guest has a rank, a temper, a secret and a list of people they cannot stand. Moment to moment you place name cards on a floor plan of tables, read notes from the doorman and the cloakroom girl, and redraw the plan when a late telegram arrives or a duchess appears without a booking. Then the evening unfolds: a quiet table by the palms may let a treaty be agreed, while an insult across the room ends in pistols at dawn. Meanwhile a polite gentleman from the police pays you to seat certain guests where he can listen, and you must decide whose side you are on. The goal is to keep the peace of Europe for one more season.",
+  "pitch": "A seating-chart logic puzzle used as quiet diplomacy: where you seat each guest, and who can overhear whom, decides treaties, duels and police informing in a 1905 hotel dining room.",
+  "drafts_scored": 13,
+  "first_novelty_bge_percentile": 97.341,
+  "final_novelty_bge_percentile": 99.99
+ },
+ {
+  "title": "Forty Thousand Words",
+  "tags": [
+   "Historical",
+   "Puzzle",
+   "Management",
+   "Investigation",
+   "Education",
+   "Relaxing",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "London, 1747. A group of booksellers has paid you to write the first great English dictionary in three years. Hire copyists, mark up every book you own and define forty thousand words before the money runs out.",
+  "description": "In 1747 a group of London booksellers pays you a large advance to do what no one has done: write a complete dictionary of English, with a quotation from a great writer for every meaning of every word, in three years. You rent a garret off Fleet Street, hire six copyists, some of them drunk, and fill the room with borrowed books. Moment to moment you read through poets, sermons, law books and gardening manuals, mark the sentences that show a word's meaning, and pass them to your copyists to cut into slips. Then, word by word, you sort the slips, decide how many meanings each word has, write a definition for each and choose the best quotation. Some definitions are a joy; others take a week. Lenders want their books back with your pencil marks rubbed out, creditors knock at the door, and a lord who once ignored you suddenly wants credit. The booksellers want pages, not perfection. The goal is to finish before the advance is gone and the rival French academy can laugh.",
+  "pitch": "You write an 18th-century dictionary against a deadline: gather quotations, split each word into its meanings and pick the best example, while managing copyists, creditors and the money left.",
+  "drafts_scored": 9,
+  "first_novelty_bge_percentile": 93.912,
+  "final_novelty_bge_percentile": 99.997
+ },
+ {
+  "title": "Saturday Night Noisemaker",
+  "tags": [
+   "Rhythm",
+   "Historical",
+   "Comedy",
+   "Funny",
+   "Hand-drawn",
+   "Casual",
+   "Singleplayer",
+   "Indie",
+   "Music"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "In 1925 the pictures are silent, but the miners in the hall still hear every gunshot, train whistle and custard pie. Stand behind the screen with your box of noisemakers and play the film live.",
+  "description": "In 1925 films have no soundtrack, so the miners' hall in a Welsh valley town hires someone to stand behind the screen on Saturday nights and make the noises live. That someone is you, a pit boy with quick hands. Your kit is a bass drum, a bicycle bell, a train whistle, coconut shells, a crank wind machine, a cap pistol, a sheet of tin and a bucket of coal, and the chapel organist at the piano will not wait for you. Moment to moment you watch the film flicker through the back of the screen, mirrored and blurry, and hit each noise as it happens: a door slam, a car horn, a cowboy's six-gun, a custard pie in the face. Miss the moment and the whole hall laughs at you instead of the picture; get the slapstick timing right and the benches shake. Between shows you work your shift underground, build new noisemakers, and argue with the projectionist about which reels to rent. The goal is to keep the hall full through a long strike.",
+  "pitch": "A prop-based timing game in which you perform the sound effects for silent films live from behind the screen, picking the right noisemaker and hitting each on-screen moment for a mining-town crowd.",
+  "drafts_scored": 12,
+  "first_novelty_bge_percentile": 99.954,
+  "final_novelty_bge_percentile": 99.996
+ },
+ {
+  "title": "Three Miles in the Dark",
+  "tags": [
+   "Historical",
+   "Rhythm",
+   "Simulation",
+   "Atmospheric",
+   "Local Co-Op",
+   "Difficult",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Local Co-op"
+  ],
+  "short_description": "Yorkshire, 1830. The canal tunnel is three miles long, pitch dark and has no towpath, so you lie on a plank across the boat and walk it through with your boots on the dripping walls.",
+  "description": "In 1830 the canal crosses the Pennine hills through a tunnel three miles long, too narrow for a towpath, so the horses are led over the moor while the boats are pushed through by men lying on their backs. You are one of those men, a legger, paid a shilling a trip from a hut at the tunnel mouth. You and your partner lie on planks laid across the boat's bow, and by the light of a single candle you walk the boat along by pressing your boots against the wet walls, step by step, in steady rhythm. Moment to moment you keep time with your partner, shorten your stride where the tunnel narrows, call out at passing places, and save your strength for the long stretch where water pours from the roof and the air turns foul. Push out of step and the boat scrapes and stalls; go too fast and your legs give out halfway. Between trips you bargain with boat families, drink at the tunnel inn, nurse your knees and train new partners. Play alone or with a friend on the second plank, and become the fastest pair on the canal before the railway arrives.",
+  "pitch": "A two-person rhythm and stamina game about 'legging', where you lie on your back and walk a canal boat through a dark three-mile tunnel by pushing your feet against the walls in step with a partner.",
+  "drafts_scored": 12,
+  "first_novelty_bge_percentile": 98.607,
+  "final_novelty_bge_percentile": 99.993
+ },
+ {
+  "title": "Dawn Caller",
+  "tags": [
+   "Historical",
+   "Rhythm",
+   "Puzzle",
+   "Time Management",
+   "Atmospheric",
+   "Wholesome",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Cairo, 1935. Through the thirty nights of Ramadan, walk the old city's alleys with a small drum before dawn and call every family by name, so no one sleeps through the last meal before the fast.",
+  "description": "In the old quarter of Cairo in 1935, the nights of Ramadan belong to the dawn caller: the person who walks the alleys in the dark hours with a small drum and a lantern, stopping at each door to call the family by name and wake them for the meal before the day's fast begins. Your father did it for forty years; this year it is your turn. Each evening you plan your route through a maze of lanes, courtyards and stairways, because every household must be woken in time to cook and eat before the call to prayer. Moment to moment you walk, beat a steady rhythm, and sing short rhymed greetings for each door, using the right names and a kind word for the sick widow or the new baby. Children follow you, shopkeepers offer tea, and grumpy neighbours shout from balconies. Forget a family and they will not forgive you. At the end of the month, the people you woke repay you with sweets, coins and cloth for the feast. The goal is to earn the trust of the whole quarter.",
+  "pitch": "A route-planning and drumming game about the Ramadan dawn caller: across thirty nights you wake every household in an old Cairo quarter by name, in time, before the fast begins.",
+  "drafts_scored": 11,
+  "first_novelty_bge_percentile": 64.082,
+  "final_novelty_bge_percentile": 99.998
+ },
+ {
+  "title": "Bellfast Tower",
+  "tags": [
+   "Rhythm",
+   "Faith",
+   "Music",
+   "Physics",
+   "Online Co-Op",
+   "Co-op",
+   "Team-Based",
+   "Historical",
+   "Wholesome",
+   "Narrative"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Online Co-op"
+  ],
+  "short_description": "1919. The bells of St Anne's fell silent when the village ringers went to war and never came home. Rehang the bells, recruit a band of complete beginners, and teach them to ring before the new year.",
+  "description": "Bellfast Tower begins in an English village church a year after the Great War. The old band of ringers marched away in 1914 and none of them returned, and the bells have hung silent ever since. The ropes are rotten, a bell is cracked and nobody remembers how it was done. With the vicar's blessing and a handful of volunteers, you set out to bring them back. Ringing is hard physical work: each bell weighs as much as a small car and swings a full circle with every pull, and the band must keep perfect time as the bells swap places in long patterns called methods. Teach a farmer, a schoolgirl, a shy postman and a wounded soldier to handle a rope safely, then to ring rounds, then to ring changes. Mend the frame, raise money at the fete and keep the band together through grief and harvests. Play alone with computer ringers or with friends online, each holding one rope, and ring the village into the new year.",
+  "pitch": "A co-op rhythm game built on English church change-ringing, where each player handles one physically swinging bell and the band must ring permutation patterns together without a clash.",
+  "drafts_scored": 9,
+  "first_novelty_bge_percentile": 99.682,
+  "final_novelty_bge_percentile": 99.99
+ },
+ {
+  "title": "Coconuts and Thunder",
+  "tags": [
+   "Rhythm",
+   "Comedy",
+   "Physics",
+   "Crafting",
+   "Historical",
+   "Co-op",
+   "Local Co-Op",
+   "Narrative",
+   "Party Game",
+   "Simulation"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Local Co-op"
+  ],
+  "short_description": "It is 1938 and the radio play goes out live in ten minutes. You make every sound the listeners hear, from horses and storms to gunshots and slammed doors, with nothing but a table full of junk.",
+  "description": "Coconuts and Thunder puts you at the sound effects table of a radio drama studio in the golden age of broadcasting. Actors read the script into the microphone and you make the world around them, live, with no second take. Coconut shells become galloping horses, crumpled cellophane becomes a crackling fire, a box of gravel becomes footsteps, and a sheet of tin becomes thunder. Follow the script, watch the director's hand signals, and hit every cue at exactly the right moment. A late door slam ruins a murder scene. A wrong sound turns a love story into a comedy. Between shows you build new props from whatever you can find, invent sounds for scripts that ask for impossible things like a rocket landing on the moon, and keep up with a cast that loves to improvise. Play alone or with friends on the same couch, each running part of the table, and keep the nation listening every week.",
+  "pitch": "You are the live sound-effects artist on a 1930s radio drama, hitting script cues with household props in real time and building new props between broadcasts.",
+  "drafts_scored": 12,
+  "first_novelty_bge_percentile": 82.56,
+  "final_novelty_bge_percentile": 99.984
+ },
+ {
+  "title": "Landfall Captions",
+  "tags": [
+   "Typing",
+   "Narrative",
+   "Emotional",
+   "Choices Matter",
+   "Modern",
+   "Real-Time",
+   "Dialogue Heavy",
+   "Multiple Endings",
+   "Realistic",
+   "Time Management"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Work the overnight shift as the live captioner at a small-town TV station. Type every word spoken on air in real time while a hurricane cuts the town off, and your captions become its lifeline.",
+  "description": "Landfall Captions puts you in a cramped booth at a local television station on the night a hurricane makes landfall. You are the live captioner: everything said on air must appear as text within seconds, so viewers who cannot hear the broadcast know where to go and when to leave. Anchors improvise, reporters shout over the wind, and the emergency office reads out road closures and shelter addresses that must be typed exactly right. A wrong street name can send people the wrong way. When the power goes and the station switches to radio, your captions on the website become the only place deaf viewers can follow the news. Between broadcasts the phone rings with questions, the station manager pushes for ratings, and the building leaks. You decide what to keep when the anchor speaks faster than anyone can type, and whether to post a warning nobody approved. Six real-time hours of rising water, and every word counts.",
+  "pitch": "A real-time typing game where you are a TV station's live captioner during a hurricane, and your speed, accuracy and choices about what to keep decide which deaf viewers reach safety.",
+  "drafts_scored": 9,
+  "first_novelty_bge_percentile": 98.592,
+  "final_novelty_bge_percentile": 99.948
+ },
+ {
+  "title": "Saddlebag Nurse",
+  "tags": [
+   "Horses",
+   "Medical Sim",
+   "Historical",
+   "Female Protagonist",
+   "Narrative",
+   "Exploration",
+   "Nature",
+   "Choices Matter",
+   "Emotional",
+   "Management"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Kentucky mountains, 1925. You are a nurse-midwife on horseback, the only care for hundreds of families spread across hollows with no roads. Ride out in any weather and bring mothers and babies through.",
+  "description": "Saddlebag Nurse follows a young nurse-midwife on her first posting to a remote mountain district where the nearest hospital is two days away. Her clinic is a log cabin, her ambulance is a horse called Pepper, and her patients live up creeks and ridges that no car can reach. Each day you plan rounds across the district map, fording rivers, climbing trails and checking on expecting mothers, sick children and old folks living alone. Then a rider arrives at night, and you set out to a birth in the rain. At the bedside you work with what is in your saddlebags: listen, feel the baby's position, time the labour and watch for the warning signs that mean you must act. Families are proud, suspicious of outsiders and full of their own remedies, and trust is earned one visit at a time. Care for your horse, keep careful records, and get the whole district through a year of floods, fevers and snow.",
+  "pitch": "A medical game played on horseback: you plan rounds across a roadless 1920s mountain district as a nurse-midwife, then handle births at the bedside with only what fits in your saddlebags.",
+  "drafts_scored": 17,
+  "first_novelty_bge_percentile": 97.537,
+  "final_novelty_bge_percentile": 99.965
+ },
+ {
+  "title": "The Airlock Kitchen",
+  "tags": [
+   "Cooking",
+   "Modern",
+   "Underwater",
+   "Realistic",
+   "Management",
+   "Narrative",
+   "Emotional",
+   "Time Management",
+   "Resource Management",
+   "Atmospheric"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Six divers will live inside a sealed pressure chamber for twenty-eight days while they repair a pipeline on the seabed. You are the ship's cook, and every one of their meals goes in through a tiny airlock.",
+  "description": "The Airlock Kitchen is set on a diving support ship working in the North Sea. Six saturation divers live sealed inside a steel chamber on deck, kept at the pressure of the seabed, and each day a bell lowers them to repair a broken pipeline a hundred metres below. They cannot come out for a month. You are the ship's cook. You feed forty sailors in the mess and pass the divers' meals through a small airlock in the chamber wall. Under pressure, bread collapses, flavours fade and the helium in the air makes the divers cold and hungry all the time. Plan menus that keep them warm and strong, time meals around dives and rest, and follow their work on the seabed through the helmet cameras in the dive control room, where a tired, hungry diver starts making mistakes. Storms toss the galley and the supply boat runs late. Keep the whole ship fed and bring every diver home.",
+  "pitch": "A cooking and management game where you feed saturation divers sealed in a pressure chamber for a month, and how well you feed them shows up in their work on the seabed.",
+  "drafts_scored": 21,
+  "first_novelty_bge_percentile": 94.973,
+  "final_novelty_bge_percentile": 99.8
+ },
+ {
+  "title": "Heave and Sing",
+  "tags": [
+   "Rhythm",
+   "Music",
+   "Sailing",
+   "Historical",
+   "Racing",
+   "Co-op",
+   "Online Co-Op",
+   "Team-Based",
+   "Narrative",
+   "Atmospheric"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Online Co-op"
+  ],
+  "short_description": "Lead the work songs on a tea clipper racing from China to London in 1866. Every rope is hauled by hand, and the crew pull only as fast and as long as you can keep them singing.",
+  "description": "Heave and Sing puts you aboard a sleek tea clipper in the great race to bring the season's first tea from China to London, ninety-nine days across three oceans. You are the shantyman, the sailor whose job is to sing. Raising the anchor, setting sail and pumping the hold are all done by hand, and a crew only pulls together when someone keeps the rhythm. Choose the right song for each job, call the verses, and hold the beat so thirty sailors haul at the same moment. Sing too fast and they tire. Sing too slow and the sail is not set before the squall hits, and the rival ships pull ahead. Between watches you learn songs from sailors of a dozen countries, make up verses about the cook, and lift the spirits of a crew that shares no single language. Play alone or with friends online, each hauling a line, and bring your ship into London first.",
+  "pitch": "A rhythm game turned into an ocean race: as the ship's shantyman you set the tempo of the crew's work, and your ship's speed against rival clippers depends on how well you keep the beat.",
+  "drafts_scored": 9,
+  "first_novelty_bge_percentile": 95.827,
+  "final_novelty_bge_percentile": 99.976
+ },
+ {
+  "title": "Doorstep 1917",
+  "tags": [
+   "Cycling",
+   "Historical",
+   "World War I",
+   "Female Protagonist",
+   "Narrative",
+   "Emotional",
+   "Choices Matter",
+   "Story Rich",
+   "Life Sim",
+   "Time Management"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "It is 1917 and the boys have gone to war, so the post office hires you. Ride your bicycle through town with telegrams of births, business and death, and learn to read a face before you hand one over.",
+  "description": "Doorstep 1917 is a story about the young people who carried news through a small industrial town during the First World War. Every morning you collect envelopes at the post office counter and ride out through cobbled streets, steep hills and factory yards. Some telegrams are good news: a wedding, a birth, an order for the mill. Some are the ones every family dreads, from the War Office, and people learn to fear the sight of your cap. Plan your route, beat the clock for urgent messages, and decide how to deliver the hardest ones: wait with a mother until a neighbour comes, find the father at the factory first, or hand it over and ride on. Your bicycle needs repairs, your wages help feed your family, and the older messengers think a girl will not last a month. Over a year you come to know every street and every family. Finish the year with your job, your conscience and your friends.",
+  "pitch": "A bicycle delivery game where the hard part comes after you arrive: as a wartime telegram messenger you decide how to break good and terrible news to the same families all year.",
+  "drafts_scored": 12,
+  "first_novelty_bge_percentile": 91.608,
+  "final_novelty_bge_percentile": 99.913
+ },
+ {
+  "title": "Sky Post of Paris",
+  "tags": [
+   "Historical",
+   "Flight",
+   "Birds",
+   "Management",
+   "Physics",
+   "Strategy",
+   "Atmospheric",
+   "Choices Matter",
+   "Resource Management",
+   "Crafting"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Paris, 1870. The city is under siege and the only way out is up. Launch mail balloons by night, and bring replies home on pigeons carrying thousands of letters shrunk onto a film no bigger than a thumbnail.",
+  "description": "Sky Post of Paris is set during the four-month siege of Paris. Enemy armies surround the city and every road is cut. You run the post that keeps it talking to the world. Turn empty railway stations into workshops where seamstresses stitch and varnish cotton balloons, fill them from the city gas mains, and train navy sailors to fly them. Each night you read the wind and decide whether to launch. Once aloft, a balloon cannot be steered, so you guide it only by dropping sand to climb or venting gas to sink into a better wind, and a bad choice carries it into enemy hands. Outgoing balloons carry letters and baskets of homing pigeons. The replies come back on those pigeons, thousands of messages photographed onto tiny films tucked into a feather quill. When a bird lands in your loft, project the film onto a wall and have clerks copy every message by hand. Manage cloth, gas, crews and hope until the siege ends.",
+  "pitch": "A two-way logistics game set in the 1870 siege of Paris: balloons you cannot steer carry the mail out, and homing pigeons carrying microfilm letters bring the replies back.",
+  "drafts_scored": 14,
+  "first_novelty_bge_percentile": 69.937,
+  "final_novelty_bge_percentile": 99.843
+ }
+]

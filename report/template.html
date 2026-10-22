@@ -1,0 +1,451 @@
+<title>Uncharted Steam</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap">
+<style>
+/* Layout: a survey chart of Steam's idea-space. One reading column (~68ch) with the chart and the
+   comparison strip breaking out to a wider measure. Overlays (voids, ideas) are printed in chart
+   magenta, the way nautical charts print hazards and aids over the base map. */
+:root {
+  --bg: #edf0f3;
+  --surface: #f7f9fb;
+  --ink: #17202b;
+  --ink-2: #4a5665;
+  --muted: #6f7b8a;
+  --rule: #cfd6de;
+  --dot: rgba(23, 32, 43, 0.20);
+  --accent: #b4236e;          /* chart magenta: voids and ideas */
+  --accent-soft: rgba(180, 35, 110, 0.10);
+  --hl: #2a78d6;              /* highlighted genre */
+  --good: #1f7a4d;
+  --warn: #9a6a00;
+  --bad: #b3261e;
+  --display: "Spectral", "Iowan Old Style", Georgia, serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --wide: 1080px;
+  --text: 680px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c121c; --surface: #121a26; --ink: #e3e8ef; --ink-2: #aab4c2; --muted: #8692a4; --rule: #263243;
+    --dot: rgba(214, 224, 240, 0.22); --accent: #e0559a; --accent-soft: rgba(224, 85, 154, 0.14); --hl: #3987e5;
+    --good: #4fbf86; --warn: #d9a530; --bad: #ef6b62; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c121c; --surface: #121a26; --ink: #e3e8ef; --ink-2: #aab4c2; --muted: #8692a4; --rule: #263243;
+  --dot: rgba(214, 224, 240, 0.22); --accent: #e0559a; --accent-soft: rgba(224, 85, 154, 0.14); --hl: #3987e5;
+  --good: #4fbf86; --warn: #d9a530; --bad: #ef6b62; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px; }
+.col { max-width: var(--text); margin-inline: auto; }
+.wide { max-width: var(--wide); margin-inline: auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2.6rem, 7vw, 4.4rem); letter-spacing: -0.01em; }
+h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); }
+h3 { font-size: 1.35rem; }
+p { margin: 0; }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.eyebrow { font: 500 0.72rem/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: 1.12rem; color: var(--ink-2); max-width: 62ch; }
+.stack > * + * { margin-top: 1rem; }
+section { margin-top: 72px; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* hero */
+.hero { display: grid; gap: 20px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 6px 0 0; padding: 14px 0 0; border-top: 1px solid var(--rule); }
+.facts div { display: grid; }
+.facts dt { font: 500 0.7rem/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font: 500 1.35rem/1.3 var(--mono); font-variant-numeric: tabular-nums; }
+
+/* map */
+.mapframe { position: relative; margin-top: 18px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.mapframe canvas { display: block; width: 100%; aspect-ratio: 16 / 10; max-width: 100%; touch-action: manipulation; cursor: crosshair; }
+@media (max-width: 560px) { .mapframe canvas { aspect-ratio: 1 / 1; } }
+.maptip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font: 500 0.78rem/1.35 var(--body);
+  padding: 6px 9px; border-radius: 4px; max-width: 260px; transform: translate(-50%, calc(-100% - 12px)); white-space: normal; }
+.maptools { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-top: 12px; font-size: 0.86rem; color: var(--ink-2); }
+.maptools label { display: inline-flex; gap: 6px; align-items: center; }
+.maptools select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 3px 6px; }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; display: inline-block; flex: none; }
+.sw.k-idea { background: var(--accent); border-radius: 50%; }
+.sw.k-void { border: 1.5px dashed var(--accent); border-radius: 50%; }
+.sw.k-ctrl { border: 1.5px solid var(--ink); }
+.sw.k-game { background: var(--dot); border-radius: 50%; }
+.sw.k-hl { background: var(--hl); border-radius: 50%; }
+.caption { font-size: 0.86rem; color: var(--muted); margin-top: 10px; max-width: 75ch; }
+
+/* comparison strip */
+.strip { margin-top: 22px; display: grid; gap: 4px; }
+.srow { display: grid; grid-template-columns: minmax(150px, 230px) 1fr; gap: 14px; align-items: center; }
+.srow .lab { font-size: 0.88rem; line-height: 1.3; min-width: 0; }
+.srow .lab b { font-weight: 600; display: block; }
+.srow .lab span { color: var(--muted); font-size: 0.78rem; }
+.srow svg { width: 100%; display: block; overflow: visible; }
+@media (max-width: 560px) { .srow { grid-template-columns: 1fr; gap: 0; } .srow .lab { margin-top: 8px; } }
+.strip text { fill: var(--muted); font: 500 10.5px var(--mono); }
+.findings { margin-top: 26px; display: grid; gap: 12px; }
+.findings li { margin-left: 1.1em; }
+.findings ul { margin: 0; padding: 0; display: grid; gap: 10px; }
+.tbl { overflow-x: auto; margin-top: 12px; }
+table { border-collapse: collapse; font-size: 0.85rem; min-width: 560px; }
+th, td { text-align: right; padding: 5px 10px; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+th { font: 500 0.72rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+details > summary { cursor: pointer; color: var(--ink-2); font-size: 0.9rem; }
+
+/* idea list */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.chip { font: 500 0.8rem/1 var(--body); padding: 7px 11px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.ideas { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 0; }
+.idea { display: grid; grid-template-columns: 3.2rem 1fr; gap: 6px 14px; padding: 22px 0; border-top: 1px solid var(--rule); scroll-margin-top: 20px; }
+.idea:target, .idea.flash { background: linear-gradient(90deg, var(--accent-soft), transparent 70%); }
+.rk { font: 500 1.5rem/1.1 var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.ib { min-width: 0; display: grid; gap: 10px; }
+.ititle { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.method { font: 500 0.68rem/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); padding: 3px 6px; border-radius: 3px; }
+.short { color: var(--ink-2); }
+.meters { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; font-size: 0.8rem; max-width: 520px; }
+.meters .ml { color: var(--muted); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; }
+.bar { position: relative; height: 8px; background: var(--rule); border-radius: 4px; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 4px; }
+.bar b { position: absolute; right: 0; top: -17px; font: 500 0.72rem var(--mono); color: var(--ink-2); }
+.sigma { font: 500 1.05rem var(--mono); }
+.facts2 { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.84rem; color: var(--ink-2); }
+.pa { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+.pa::before { content: ""; width: 9px; height: 9px; border-radius: 2px; background: currentColor; }
+.pa.none_found { color: var(--good); } .pa.close { color: var(--warn); } .pa.exists { color: var(--bad); } .pa.unchecked { color: var(--muted); }
+.thin { color: var(--muted); font-size: 0.78rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; padding: 0; margin: 0; }
+.tags li { font-size: 0.74rem; color: var(--ink-2); background: var(--surface); border: 1px solid var(--rule); padding: 2px 7px; border-radius: 3px; }
+.more { display: grid; gap: 10px; margin-top: 8px; font-size: 0.93rem; }
+.more p { color: var(--ink); }
+.more .k { font: 500 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+.empty { color: var(--muted); padding: 20px 0; }
+
+/* method */
+.steps { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: s; display: grid; gap: 18px; }
+.steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 12px; counter-increment: s; }
+.steps li::before { content: counter(s); font: 500 1rem var(--mono); color: var(--accent); border: 1px solid var(--accent); border-radius: 50%; width: 1.9rem; height: 1.9rem; display: grid; place-items: center; }
+.steps b { display: block; }
+.steps p { color: var(--ink-2); font-size: 0.95rem; }
+.caveats { margin-top: 18px; padding-left: 1.1em; color: var(--ink-2); display: grid; gap: 8px; font-size: 0.95rem; }
+footer { margin-top: 72px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.84rem; }
+@media (prefers-reduced-motion: no-preference) { .idea.flash { transition: background 1.2s ease; } }
+</style>
+
+<div class="page">
+  <header class="col hero">
+    <p class="eyebrow" id="eyebrow">A survey of every game on Steam</p>
+    <h1>Uncharted <em>Steam</em></h1>
+    <p class="lede" id="lede"></p>
+    <dl class="facts" id="facts"></dl>
+  </header>
+
+  <section class="wide" aria-labelledby="map-h">
+    <div class="col stack" style="margin-inline:0">
+      <p class="eyebrow">The map</p>
+      <h2 id="map-h">195,015 games, one dot each</h2>
+    </div>
+    <div class="mapframe">
+      <canvas id="map" aria-label="Map of Steam games with the generated ideas and the empty points marked"></canvas>
+      <div class="maptip" id="maptip" hidden></div>
+    </div>
+    <div class="maptools">
+      <span class="key"><span class="sw k-game"></span>Steam game</span>
+      <span class="key"><span class="sw k-idea"></span>Generated idea</span>
+      <span class="key"><span class="sw k-void"></span>Empty point (void)</span>
+      <span class="key"><span class="sw k-ctrl"></span>Unguided brainstorm</span>
+      <label for="genre"><span class="sw k-hl"></span>Highlight
+        <select id="genre"><option value="-1">no genre</option></select></label>
+      <label for="showvoids"><input type="checkbox" id="showvoids" checked> voids</label>
+      <label for="showctrl"><input type="checkbox" id="showctrl" checked> brainstorm</label>
+    </div>
+    <p class="caption">A 2-D projection (UMAP) of the 64-dimensional space the voids were searched in; the 0.4% of games furthest out are trimmed from the frame. Hover or tap a dot. Flattening 64 dimensions into 2 cannot preserve emptiness: an idea that is far from everything in the full space can still be drawn next to its nearest neighbours here. The numbers on each idea are measured in the full space.</p>
+  </section>
+
+  <section class="col" aria-labelledby="verdict-h">
+    <p class="eyebrow">The test</p>
+    <h2 id="verdict-h">Did the empty points beat just asking?</h2>
+    <p class="lede" style="margin-top:12px">Every dot below is one idea, placed by how isolated it is from all 195k Steam games: standard deviations above a typical game, averaged over two independent embedding models. Taller tick = group median.</p>
+  </section>
+  <section class="wide" style="margin-top:8px">
+    <div class="strip" id="strip"></div>
+    <div class="col findings" id="findings" style="margin-inline:auto"></div>
+    <details class="col" style="margin-top:16px">
+      <summary>Show the numbers as a table</summary>
+      <div class="tbl" id="armtable"></div>
+    </details>
+  </section>
+
+  <section class="col" aria-labelledby="ideas-h">
+    <p class="eyebrow">The ideas</p>
+    <h2 id="ideas-h">Ranked by how unlike any Steam game they are</h2>
+    <p class="lede" style="margin-top:12px" id="ideas-lede"></p>
+    <div class="filters" id="filters" role="group" aria-label="Filter ideas by method"></div>
+    <ol class="ideas" id="ideas"></ol>
+  </section>
+
+  <section class="col" aria-labelledby="ctrl-h">
+    <p class="eyebrow">The baseline</p>
+    <h2 id="ctrl-h">What the same AI wrote with no map at all</h2>
+    <p class="lede" style="margin-top:12px">Asked for 16 ideas "unlike any game on Steam", with no access to the data. Scored the same way. The rank shows where each would sit in the list above.</p>
+    <ol class="ideas" id="controls"></ol>
+  </section>
+
+  <section class="col" aria-labelledby="method-h">
+    <p class="eyebrow">How it was made</p>
+    <h2 id="method-h">The pipeline, step by step</h2>
+    <ol class="steps" id="steps"></ol>
+    <h3 style="margin-top:36px">Caveats</h3>
+    <ul class="caveats" id="caveats"></ul>
+  </section>
+
+  <footer class="col" id="foot"></footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (x, d = 2) => (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(d);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const METHOD_LABEL = {
+  "v1-void/frontier": "v1 · frontier void", "v1-void/hole": "v1 · hole void",
+  "v2-blend/blend": "v2 · blend void", "v3-search/search": "v3 · novelty search", "control": "brainstorm"
+};
+const mkey = r => r.method === "control" ? "control" : `${r.method}/${r.family}`;
+
+/* ---------- hero ---------- */
+(function hero() {
+  const m = DATA.meta;
+  $("#eyebrow").textContent = `A survey of every game on Steam · scraped ${m.scraped}`;
+  $("#lede").innerHTML = `A post argued that AI can't create a brand-new idea. The reply: embed every Steam game, find the empty places in that space, and turn them back into descriptions. This page does exactly that, then checks whether the empty places beat simply asking an AI for something original.`;
+  const facts = [["Games scraped", m.n_games.toLocaleString("en-US")], ["Empty points searched", m.n_voids], ["Drafts embedded", m.n_drafts.toLocaleString("en-US")], ["Ideas ranked", DATA.ideas.length]];
+  $("#facts").innerHTML = facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+})();
+
+/* ---------- map ---------- */
+const MAP = (function () {
+  const M = DATA.map;
+  const bin = atob(M.xy_b64), n = M.n;
+  const xy = new Uint16Array(n * 2);
+  for (let i = 0; i < n * 2; i++) xy[i] = bin.charCodeAt(2 * i) | (bin.charCodeAt(2 * i + 1) << 8);
+  const gb = atob(M.genre_b64), genre = new Uint8Array(n);
+  for (let i = 0; i < n; i++) genre[i] = gb.charCodeAt(i);
+  const counts = new Array(M.genres.length).fill(0);
+  genre.forEach(g => counts[g]++);
+  const sel = $("#genre");
+  M.genres.forEach((g, i) => sel.insertAdjacentHTML("beforeend", `<option value="${i}">${esc(g)} (${counts[i].toLocaleString("en-US")})</option>`));
+  const labels = new Map(M.labels.map(([i, name]) => [i, name]));
+  const q = (arr, p) => arr[Math.min(arr.length - 1, Math.floor(p * arr.length))];
+  const xs = [], ys = [];
+  for (let i = 0; i < n; i += 7) { xs.push(xy[2 * i]); ys.push(xy[2 * i + 1]); }
+  xs.sort((a, b) => a - b); ys.sort((a, b) => a - b);
+  const ext = { x0: q(xs, 0.002), x1: q(xs, 0.998), y0: q(ys, 0.002), y1: q(ys, 0.998) };
+  return { M, xy, genre, labels, n, ext };
+})();
+
+function drawMap() {
+  const cv = $("#map"), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const W = cv.clientWidth, H = cv.clientHeight;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = css("--surface"); ctx.fillRect(0, 0, W, H);
+  const E = MAP.ext, pad = 16, ew = E.x1 - E.x0, eh = E.y1 - E.y0;
+  const s = Math.min((W - 2 * pad) / ew, (H - 2 * pad) / eh);
+  const ox = (W - ew * s) / 2, oy = (H - eh * s) / 2;
+  const cl = (v, a, b) => Math.max(a, Math.min(b, v));
+  const P = (x, y) => [ox + (cl(x, E.x0, E.x1) - E.x0) * s, oy + (E.y1 - cl(y, E.y0, E.y1)) * s];
+  MAP.P = P; MAP.scale = s;
+  const hl = +$("#genre").value, r = W < 560 ? 0.9 : 1.1;
+  ctx.fillStyle = css("--dot");
+  const { xy, genre, n } = MAP;
+  const inside = i => xy[2 * i] >= MAP.ext.x0 && xy[2 * i] <= MAP.ext.x1 && xy[2 * i + 1] >= MAP.ext.y0 && xy[2 * i + 1] <= MAP.ext.y1;
+  for (let i = 0; i < n; i++) { if (genre[i] === hl || !inside(i)) continue; const [x, y] = P(xy[2 * i], xy[2 * i + 1]); ctx.fillRect(x, y, r, r); }
+  if (hl >= 0) { ctx.fillStyle = css("--hl"); ctx.globalAlpha = 0.55;
+    for (let i = 0; i < n; i++) { if (genre[i] !== hl || !inside(i)) continue; const [x, y] = P(xy[2 * i], xy[2 * i + 1]); ctx.fillRect(x - 0.3, y - 0.3, r + 0.6, r + 0.6); }
+    ctx.globalAlpha = 1; }
+  const acc = css("--accent"), ink = css("--ink"), surf = css("--surface");
+  if ($("#showvoids").checked) {
+    ctx.strokeStyle = acc; ctx.lineWidth = 1.3; ctx.setLineDash([3, 3]);
+    DATA.map.voids.forEach(v => { const [x, y] = P(v.xy[0], v.xy[1]); ctx.beginPath(); ctx.arc(x, y, 7, 0, 7); ctx.stroke(); });
+    ctx.setLineDash([]);
+  }
+  if ($("#showctrl").checked) {
+    ctx.strokeStyle = ink; ctx.lineWidth = 1.4;
+    DATA.map.controls.forEach(c => { const [x, y] = P(c.xy[0], c.xy[1]); ctx.strokeRect(x - 4, y - 4, 8, 8); });
+  }
+  DATA.map.ideas.forEach(d => {
+    const [x, y] = P(d.xy[0], d.xy[1]);
+    ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fillStyle = acc; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = surf; ctx.stroke();
+  });
+  ctx.font = `500 10px ${css("--mono").split(",")[0]}`; ctx.fillStyle = ink; ctx.textBaseline = "middle";
+  DATA.map.ideas.filter(d => d.rank <= 10).forEach(d => { const [x, y] = P(d.xy[0], d.xy[1]); ctx.fillText(d.rank, x + 8, y); });
+  buildGrid();
+}
+
+function buildGrid() { /* bucket labelled games for hover lookup */
+  const G = new Map(), cell = 12;
+  MAP.labels.forEach((name, i) => {
+    if (MAP.xy[2 * i] < MAP.ext.x0 || MAP.xy[2 * i] > MAP.ext.x1 || MAP.xy[2 * i + 1] < MAP.ext.y0 || MAP.xy[2 * i + 1] > MAP.ext.y1) return;
+    const [x, y] = MAP.P(MAP.xy[2 * i], MAP.xy[2 * i + 1]);
+    const k = `${Math.floor(x / cell)},${Math.floor(y / cell)}`;
+    if (!G.has(k)) G.set(k, []); G.get(k).push([x, y, name]);
+  });
+  MAP.grid = G; MAP.cell = cell;
+}
+
+function hitTest(px, py) {
+  let best = null, bd = 12 * 12;
+  DATA.map.ideas.forEach(d => { const [x, y] = MAP.P(d.xy[0], d.xy[1]); const dd = (x - px) ** 2 + (y - py) ** 2; if (dd < bd) { bd = dd; best = { kind: "idea", d }; } });
+  if (best) return best;
+  if ($("#showctrl").checked) DATA.map.controls.forEach(c => { const [x, y] = MAP.P(c.xy[0], c.xy[1]); const dd = (x - px) ** 2 + (y - py) ** 2; if (dd < bd) { bd = dd; best = { kind: "ctrl", d: c }; } });
+  if (best) return best;
+  if ($("#showvoids").checked) DATA.map.voids.forEach(v => { const [x, y] = MAP.P(v.xy[0], v.xy[1]); const dd = (x - px) ** 2 + (y - py) ** 2; if (dd < 81 && dd < bd) { bd = dd; best = { kind: "void", d: v }; } });
+  if (best) return best;
+  bd = 8 * 8;
+  const cx = Math.floor(px / MAP.cell), cy = Math.floor(py / MAP.cell);
+  for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) (MAP.grid.get(`${cx + a},${cy + b}`) || []).forEach(([x, y, name]) => {
+    const dd = (x - px) ** 2 + (y - py) ** 2; if (dd < bd) { bd = dd; best = { kind: "game", name }; } });
+  return best;
+}
+
+(function mapEvents() {
+  const cv = $("#map"), tip = $("#maptip");
+  const show = e => {
+    const r = cv.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+    const h = hitTest(px, py);
+    if (!h) { tip.hidden = true; return; }
+    tip.hidden = false;
+    tip.style.left = `${Math.min(Math.max(px, 120), r.width - 120)}px`; tip.style.top = `${py}px`;
+    tip.innerHTML = h.kind === "idea" ? `#${h.d.rank} ${esc(h.d.title)}` : h.kind === "ctrl" ? `Brainstorm: ${esc(h.d.title)}`
+      : h.kind === "void" ? `Void ${esc(h.d.void_id)} (${esc(h.d.family)})` : esc(h.name);
+    return h;
+  };
+  cv.addEventListener("pointermove", show);
+  cv.addEventListener("pointerleave", () => { tip.hidden = true; });
+  cv.addEventListener("click", e => { const h = show(e); if (h && h.kind === "idea") focusIdea(h.d.rank); });
+  ["#genre", "#showvoids", "#showctrl"].forEach(s => $(s).addEventListener("change", drawMap));
+  let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(drawMap, 120); });
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawMap);
+  new MutationObserver(drawMap).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+
+/* ---------- comparison strip ---------- */
+function drawStrip() {
+  const S = DATA.stats, arms = DATA.arms;
+  const all = arms.flatMap(a => a.z);
+  const lo = Math.floor(Math.min(-1.5, ...all)), hi = Math.ceil(Math.max(3, ...all));
+  const q = S.real_games_z_quantiles;
+  const refs = [q["50"], q["90"], q["99"], q["99.9"]];
+  const ticks = []; for (let t = lo; t <= hi; t++) ticks.push(t);
+  const rows = [{ ref: true }, ...arms, { axis: true }];
+  $("#strip").innerHTML = rows.map(a => a.ref
+    ? `<div class="srow ref"><div class="lab"><b>All 195k Steam games</b><span>dashed lines: median, 90th, 99th, 99.9th percentile</span></div><svg aria-hidden="true"></svg></div>`
+    : a.axis ? `<div class="srow axisrow"><div class="lab"></div><svg aria-hidden="true"></svg></div>`
+    : `<div class="srow"><div class="lab"><b>${esc(a.label)}</b><span>${esc(a.sub)} · n=${a.z.length} · median ${fmt(a.median)}σ</span></div><svg role="img" aria-label="${esc(a.label)}: median ${fmt(a.median)} standard deviations"></svg></div>`).join("");
+  const svgs = [...document.querySelectorAll("#strip svg")];
+  const W = Math.max(200, svgs[0].clientWidth), pad = 8;
+  const X = z => pad + ((z - lo) / (hi - lo)) * (W - 2 * pad);
+  const vline = (x, y1, y2, stroke, w, dash) => `<line x1="${x}" x2="${x}" y1="${y1}" y2="${y2}" stroke="${stroke}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ""}/>`;
+  svgs.forEach((svg, k) => {
+    const row = rows[k], H = row.axis ? 22 : 34;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("height", H);
+    if (row.axis) {
+      svg.innerHTML = ticks.map(t => vline(X(t), 0, 5, "var(--muted)", 1) +
+        `<text x="${X(t)}" y="17" text-anchor="${t === lo ? "start" : t === hi ? "end" : "middle"}">${t > 0 ? "+" : t < 0 ? "−" : ""}${Math.abs(t)}σ</text>`).join("");
+      return;
+    }
+    const grid = ticks.map(t => vline(X(t), 0, H, "var(--rule)", 1)).join("") + refs.map(v => vline(X(v), 2, H - 2, "var(--muted)", 1, "2 3")).join("");
+    if (row.ref) { svg.innerHTML = grid; return; }
+    const ink = row.key === "calibration" || row.key === "control" ? "var(--ink-2)" : "var(--accent)";
+    svg.innerHTML = grid + vline(X(row.median), 3, H - 3, "var(--ink)", 2.5) + row.z.map((z, i) =>
+      `<circle cx="${X(z)}" cy="${17 + ((i * 37) % 11) - 5}" r="4.5" fill="${ink}" fill-opacity="0.8" stroke="var(--surface)" stroke-width="1"><title>${esc(row.titles[i])}: ${fmt(z)}σ</title></circle>`).join("");
+  });
+}
+window.addEventListener("resize", (() => { let t; return () => { clearTimeout(t); t = setTimeout(drawStrip, 150); }; })());
+
+/* ---------- ideas ---------- */
+function verdictChip(v) {
+  if (!v) return `<span class="pa unchecked">prior art not checked</span>`;
+  const t = { none_found: "no prior game found", close: "a close game exists", exists: "already exists" }[v.prior_art];
+  const thin = v.searches_run <= 2 ? ` <span class="thin">(thin check: ${v.searches_run} search${v.searches_run === 1 ? "" : "es"})</span>` : "";
+  return `<span class="pa ${v.prior_art}">${t}</span>${thin}`;
+}
+function bar(label, pct, heldout) {
+  return `<span class="ml">${label}</span><span class="bar" title="More isolated than ${pct.toFixed(1)}% of Steam games"><i style="width:${Math.max(2, pct)}%"></i><b>${pct.toFixed(1)}%</b></span>`;
+}
+function ideaCard(r, isControl) {
+  const s = r.score, v = DATA.verify[r.key] || null;
+  const nn = s.nearest[0];
+  const how = isControl ? "" : r.method === "v3-search"
+    ? `<p><span class="k">How it was found</span>No target point. The AI wrote ${r.drafts_scored} drafts, and each was embedded and measured against all 195k games before the next revision.</p>`
+    : `<p><span class="k">How it was found</span>Void ${esc(r.void_id)} (${esc(r.family)}), emptier than ${r.void_emptiness_percentile.toFixed(1)}% of games${r.void_parents && r.void_parents.length ? `, built from ${r.void_parents.map(esc).join(", ")}` : ""}. Metadata read back from the void: ${r.void_tags.map(esc).join(", ")}. The final text landed at similarity ${s.target_sim.toFixed(2)} to the void after ${r.drafts_scored} scored drafts.</p>`;
+  const pa = v ? `<p><span class="k">Prior-art search</span>${esc(v.explanation)}${v.closest_url ? ` <a href="${esc(v.closest_url)}" target="_blank" rel="noopener">${esc(v.closest_match)}</a>` : v.closest_match && v.closest_match !== "none" ? ` Closest: ${esc(v.closest_match)}.` : ""} Coherence ${v.coherence}/5: ${esc(v.coherence_note)}</p>` : "";
+  const rankTxt = isControl ? `<span title="would rank">~${r.would_rank}</span>` : String(r.rank).padStart(2, "0");
+  return `<li class="idea" id="${isControl ? "c" : "idea-"}${isControl ? r.idx : r.rank}" data-m="${esc(mkey(r))}">
+    <div class="rk">${rankTxt}</div>
+    <div class="ib">
+      <div class="ititle"><h3>${esc(r.title)}</h3><span class="method">${esc(METHOD_LABEL[mkey(r)] || r.method)}</span></div>
+      <p class="short">${esc(r.short_description)}</p>
+      <div class="facts2"><span class="sigma">${fmt(s.novelty_z)}σ</span><span>closest Steam game: <b>${esc(nn.name)}</b> <span class="num">(${nn.sim.toFixed(2)})</span></span>${verdictChip(v)}</div>
+      <div class="meters">${bar("bge", s.novelty_bge_percentile)}${bar("MiniLM*", s.novelty_minilm_percentile)}</div>
+      <ul class="tags">${r.tags.slice(0, 10).map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <details><summary>Full description${isControl ? "" : ", how it was found"}${v ? ", prior art" : ""}</summary>
+        <div class="more">${r.description.split(/\n+/).map(p => `<p>${esc(p)}</p>`).join("")}
+          <p><span class="k">Pitch</span>${esc(r.pitch)}</p>${how}${pa}</div></details>
+    </div></li>`;
+}
+function renderIdeas(filter) {
+  const list = DATA.ideas.filter(r => filter === "all" || mkey(r) === filter);
+  $("#ideas").innerHTML = list.length ? list.map(r => ideaCard(r, false)).join("") : `<li class="empty">No ideas in this group.</li>`;
+}
+function focusIdea(rank) {
+  const b = document.querySelector('.chip[data-f="all"]'); if (b && b.getAttribute("aria-pressed") !== "true") b.click();
+  const el = document.getElementById(`idea-${rank}`); if (!el) return;
+  el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600);
+  const d = el.querySelector("details"); if (d) d.open = true;
+}
+(function ideas() {
+  $("#ideas-lede").innerHTML = DATA.ideasLede;
+  const groups = [["all", "All"], ...Object.entries(METHOD_LABEL).filter(([k]) => k !== "control" && DATA.ideas.some(r => mkey(r) === k))];
+  $("#filters").innerHTML = groups.map(([k, l], i) => `<button class="chip" data-f="${k}" aria-pressed="${i === 0}">${esc(l)} <span class="num">${k === "all" ? DATA.ideas.length : DATA.ideas.filter(r => mkey(r) === k).length}</span></button>`).join("");
+  $("#filters").addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b));
+    renderIdeas(b.dataset.f);
+  });
+  renderIdeas("all");
+  $("#controls").innerHTML = DATA.controls.map((r, i) => ideaCard({ ...r, idx: i + 1 }, true)).join("");
+})();
+
+/* ---------- findings, table, method ---------- */
+(function text() {
+  $("#findings").innerHTML = `<ul>${DATA.findings.map(f => `<li>${f}</li>`).join("")}</ul>`;
+  const cols = ["Group", "n", "median σ", "bge pct", "MiniLM pct*", "top 5% in both", "landing"];
+  $("#armtable").innerHTML = `<table><thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead><tbody>${DATA.arms.map(a =>
+    `<tr><td>${esc(a.label)}</td><td>${a.z.length}</td><td>${fmt(a.median)}</td><td>${a.bge.toFixed(1)}</td><td>${a.minilm.toFixed(1)}</td><td>${Math.round(a.top5 * 100)}%</td><td>${a.landing == null ? "–" : a.landing.toFixed(2)}</td></tr>`).join("")}</tbody></table>
+    <p class="caption">* MiniLM was never shown to any agent; it is a held-out check. "Landing" is the median similarity between the final text and the empty point it was written for.</p>`;
+  $("#steps").innerHTML = DATA.steps.map(([t, d]) => `<li><div><b>${t}</b><p>${d}</p></div></li>`).join("");
+  $("#caveats").innerHTML = DATA.caveats.map(c => `<li>${c}</li>`).join("");
+  $("#foot").innerHTML = DATA.footer;
+})();
+
+drawMap();
+drawStrip();
+if (location.hash && /^#idea-\d+$/.test(location.hash)) focusIdea(+location.hash.slice(6));
+</script>

@@ -50,6 +50,8 @@ SEP = 0.5
 K = 10
 N_ANCHORS = 24
 ADULT = {3, 4}            # Steam content descriptors: adult-only sexual content, frequent nudity/sexual content
+ADULT_TAGS = {"Sexual Content", "Nudity", "Hentai", "NSFW"}
+MAX_ADULT_P = 0.15        # max decoded P(Sexual Content) / P(Nudity) at a void
 F = torch.nn.functional
 
 
@@ -168,7 +170,8 @@ def main():
     w_hole = F.softplus(P_h)
 
     # ---------------- score, filter, select ----------------
-    adult = torch.tensor([bool(ADULT & set(c)) for c in g.content_descriptors])
+    adult = torch.tensor([bool(ADULT & set(c)) or bool(ADULT_TAGS & set(t))
+                          for c, t in zip(g.content_descriptors, g.tags)])
     nonen = torch.tensor((g.lang != "en").values)
     space = pd.read_parquet(DATA / "space.parquet")
     real_sem = np.sort(space.loc[space.embeddable, "novelty_sem"].values)
@@ -184,7 +187,11 @@ def main():
         emp = 1 - v[:, :K].mean(1)
         rad = radius(d)
         fa, fn = adult[i].float().mean(1), nonen[i].float().mean(1)
-        ok = (fa <= 0.25) & (fn <= 0.25) & (rad <= R * 1.01)
+        with torch.no_grad():
+            Pall = torch.sigmoid(model(m * d))
+        adult_cols = [labels.index(f"tag:{t}") for t in ADULT_TAGS if f"tag:{t}" in labels]
+        p_adult = Pall[:, adult_cols].max(1).values
+        ok = (fa <= 0.25) & (fn <= 0.25) & (rad <= R * 1.01) & (p_adult <= MAX_ADULT_P)
         pct = np.searchsorted(real_sem, emp.numpy()) / len(real_sem) * 100
         # parents: non-negative reconstruction from 16 nearest games (frontier) / anchor weights (hole)
         _, i16 = topk_sims(d, Zn, k=16)

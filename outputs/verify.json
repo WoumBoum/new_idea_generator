@@ -1,0 +1,492 @@
+{
+ "v2-blend:B12": {
+  "title": "Seating Plan: 1943",
+  "prior_art": "exists",
+  "closest_match": "Is This Seat Taken? (Poti Poti Studio / Wholesome Games, Steam, Aug 2025)",
+  "closest_url": "https://store.steampowered.com/app/3035120/",
+  "explanation": "Is This Seat Taken? is a released cozy logic puzzler built on the same loop: you seat 'hilariously particular' characters whose pet peeves decide who can sit next to whom, across venues including banquets, a wedding reception, buses and taxis. The idea uses nearly the same wording. The only difference is a WWII 1943 summit reskin with historical notes, which is setting, not mechanics. I found no WWII-themed seating puzzle.",
+  "searches_run": 4,
+  "coherence": 4,
+  "coherence_note": "A proven, clearly buildable constraint-puzzle loop. The WWII summit theme suits the comedy of protocol, though it adds little to the gameplay."
+ },
+ "v1-void:V26": {
+  "title": "Seeds of Freedom",
+  "prior_art": "none_found",
+  "closest_match": "Sankofa (UC Irvine educational game, 18th/19th-century Asante/Ghana)",
+  "closest_url": "https://news.uci.edu/2018/05/21/uci-created-computer-game-that-immerses-players-in-18th-century-ghana-wins-award",
+  "explanation": "I found no game set on the eve of Ghana's 1957 independence, and none that combines village football with Oware matches against elders that unlock oral history. Sankofa shares the educational Ghana-history village setting, but a girl gathers folk tales in a much earlier era, with no sport or board-game gating. Mancala Adventures has character duels but no history or story unlocks.",
+  "searches_run": 7,
+  "coherence": 3,
+  "coherence_note": "Workable but loose: an educational walking adventure that gates its story behind two unrelated minigames (an arcade kickabout and Oware), with no strong core loop tying them together."
+ },
+ "v2-blend:B01": {
+  "title": "Black Door Holdings",
+  "prior_art": "close",
+  "closest_match": "Sunken Engine (Two Nomads/PlayWay, Steam, Oct 2025); also DREDGE (2023) and Drill Deep (Steam, announced)",
+  "closest_url": "https://rawg.io/games/sunken-engine",
+  "explanation": "The central twist, a business you inherited whose economic loop pulls you toward Lovecraftian horror while you uncover the previous owner's secrets, already exists. Sunken Engine has an inherited shop, sanity and the father's secrets. DREDGE ties profit to deeper, more eldritch waters, and in Drill Deep you mine deeper for an empire and approach something ancient. None of them is a Victorian oil-tycoon empire paired with point-and-click investigation of a missing patient.",
+  "searches_run": 5,
+  "coherence": 4,
+  "coherence_note": "The bridge between the halves is clear (the richest wells go deepest toward the horror), though a day tycoon / night point-and-click split risks two half-games."
+ },
+ "v2-blend:B08": {
+  "title": "Good Dog, Old Games",
+  "prior_art": "close",
+  "closest_match": "Ian's Eyes (Florida Replay, Steam, 2016)",
+  "closest_url": "https://store.steampowered.com/app/452340/Ians_Eyes/",
+  "explanation": "In Ian's Eyes you play North, a seeing-eye dog guiding Ian, a blind boy, on his first day at a new school. That is the same escort-as-guide-dog twist, and even the school framing matches. Several itch.io jam games do the same (Guiding Paws, Life of a Guide Dog, Stan). What I did not find is the setting of a video game history museum where playable retro exhibits act as the door locks.",
+  "searches_run": 5,
+  "coherence": 3,
+  "coherence_note": "Clear escort loop, but there is a thematic and mechanical tension: it is unclear who plays the screen-based retro exhibits, the dog or the blind boy, and how they open doors."
+ },
+ "v1-void:V02": {
+  "title": "Prime Time Planet",
+  "prior_art": "close",
+  "closest_match": "Showgunners (Artificer / Good Shepherd, PC, May 2023)",
+  "closest_url": "https://en.wikipedia.org/wiki/Showgunners",
+  "explanation": "Showgunners is a linear, story-driven game about a contestant on a cruel TV show. Fame from fans turns into sponsorships with rewards, the host adds hazards, and between fights you avoid traps, solve puzzles and talk to other contestants. Rogue Labyrinth (2025, where 'ratings matter more than survival') and DeathRun TV (likes unlock powers) cover the ratings-as-progression angle. What differs is that the idea spends ratings in a control room to sabotage rivals and pick hazards, and its rounds are short skill challenges rather than tactics battles.",
+  "searches_run": 5,
+  "coherence": 3,
+  "coherence_note": "Muddled: three modes (skill rounds, strategy screen, point-and-click) plus contradictory tags (difficult/casual, linear/incremental/survival). Workable, but the core loop is unclear."
+ },
+ "v2-blend:B05": {
+  "title": "Unauthorised Carols",
+  "prior_art": "close",
+  "closest_match": "Electric Bard (itch.io, HTML5 jam game, Mini Jam 203)",
+  "closest_url": "https://scalphamission.itch.io/electric-bard",
+  "explanation": "Electric Bard already combines rhythm guitar lanes with choosing, mid-song, which lyric line to sing. One option 'lifts the crowd', one 'twists them' and one 'fades into safety and silence', which is close to the idea's approved-vs-forbidden choice. Clipped (a rockstar turned radio censor deciding what songs the public hears), Unbeatable and Rhythms of Revolution (musicians against a regime) cover the censorship side. No single game found combines editing lyrics past a censor before the gig with a live safe-or-real lyric choice under secret-police scrutiny.",
+  "searches_run": 8,
+  "coherence": 4,
+  "coherence_note": "Clear two-phase loop (censor-editing desk, then a rhythm gig with lyric choices feeding opinion/police heat); the rhythm layer may stay shallow but the design is buildable and the comedy premise is strong."
+ },
+ "v1-void:V03": {
+  "title": "Contraband Beard",
+  "prior_art": "close",
+  "closest_match": "BeardMan (itch.io, Windows/macOS platformer)",
+  "closest_url": "https://cwru-ecse390.itch.io/beardman",
+  "explanation": "BeardMan already has a sentient beard as the hero's tool: growing it extends attack and grapple range, and the villain is a Barber who wants to shave every creature. Who Stole My Beard? (Steam) builds stealth and authority-dodging around beard laws, but in reverse, since there being beardless is illegal. Not found anywhere: the beard as hidden contraband that grows while you sleep, open-world stealth from patrolling barbers, and PvP barber hunters.",
+  "searches_run": 8,
+  "coherence": 3,
+  "coherence_note": "Memorable hook and a sound tension (a longer beard is more useful but harder to hide), but the explore/hide/sleep loop is thin and the PvP barber mode and 'beard remembers places' feel bolted on."
+ },
+ "v2-blend:B03": {
+  "title": "The Ashcombe Idol",
+  "prior_art": "exists",
+  "closest_match": "Jewel Link Mysteries: Mountains of Madness (Nintendo DS, Avanquest)",
+  "closest_url": "https://www.cubed3.com/games/reviews/nintendo-ds/jewel-link-mysteries-mountains-of-madness",
+  "explanation": "A story mystery that moves forward through match-3 puzzles is a long-established casual genre. That includes Lovecraftian versions (Jewel Link Mysteries: Mountains of Madness, Cthulhu Awakens) and cursed-artifact detective versions (Big Fish's Detective Barnett: The Cursed Artifact). Rotating 3D-cube match-3 also exists (Cube Match, Temple PuzzleBox). Only the film-set framing and the 3D lattice skin are new.",
+  "searches_run": 5,
+  "coherence": 3,
+  "coherence_note": "Workable, but it is a standard match-3 adventure with a muddled third-person/action layer, and a self-sealing rotating 3D lattice risks poor readability."
+ },
+ "v2-blend:B04": {
+  "title": "Bitter Remedies",
+  "prior_art": "close",
+  "closest_match": "Strange Horticulture (Bad Viking, Steam, 2022)",
+  "closest_url": "https://store.steampowered.com/app/1574580/Strange_Horticulture/",
+  "explanation": "In Strange Horticulture you run an odd little shop, and which plant you give each customer drives an occult murder mystery that you also investigate by exploring the town on a map. That is the same shop-plus-investigation core loop. Not covered: the 1888 Whitechapel chemist setting, nightly chemistry tests, and the twist that your own bottles are evidence that may convict you. Ripper investigations (Sherlock Holmes vs Jack the Ripper) and period apothecary sims (Dear Apothecary) exist separately.",
+  "searches_run": 5,
+  "coherence": 4,
+  "coherence_note": "Clear day-shop/night-investigation loop where sales choices feed the evidence; buildable and on-tone, though the 'tip one flask into another' brewing is thin."
+ },
+ "v1-void:V07": {
+  "title": "Wallcode 1920",
+  "prior_art": "close",
+  "closest_match": "War In The Dark (Sprout Studio, Steam, announced for Q1 2027)",
+  "closest_url": "https://store.steampowered.com/app/4949240",
+  "explanation": "War In The Dark has you command your forces only through coded messages (tapped Morse code) and intercept and decipher enemy orders. That is the same 'orders as code, crack the enemy's code' core loop, but as a 2D turn-based wiretapping game rather than first-person painted walls. Decrypto (board game) shares encoding for your team while the other team intercepts, and Graffiti Wars/CS sprays share painting over walls. No game was found where painted wall symbols are the squad's command channel.",
+  "searches_run": 6,
+  "coherence": 2,
+  "coherence_note": "Tag soup: 'realistic FPS' plus paint-commanded squads plus notebook cipher-breaking plus visual novel plus roguelite classes, with no clear account of how real-time first-person action fits slow cipher work."
+ },
+ "v1-void:V38": {
+  "title": "Nora Off the Page",
+  "prior_art": "close",
+  "closest_match": "The Book Keeper (Futuregames students, itch.io)",
+  "closest_url": "https://futuregames.itch.io/the-book-keeper",
+  "explanation": "In The Book Keeper the characters of a narrated enchanted storybook escape and you chase them down and catch them (as a 3D platformer, not a runner). Sierra's Mixed-Up Fairy Tales has you put displaced characters back into their stories. StoryToys pop-up storybook apps (e.g. Puss in Boots) already put chase and obstacle-jumping minigames inside read-along chapters. No exact read-along chapter that turns into an arcade runner was found.",
+  "searches_run": 4,
+  "coherence": 4,
+  "coherence_note": "Simple, clear and buildable family loop (read a chapter, then a jump/slide chase that rebuilds the story); low novelty but coherent."
+ },
+ "v2-blend:B10": {
+  "title": "Billy-Jo and the Martian Gallery",
+  "prior_art": "exists",
+  "closest_match": "Ruff Night At The Gallery (Steam / itch.io, CaseyDonnellanGames)",
+  "closest_url": "https://store.steampowered.com/app/1463470/Ruff_Night_At_The_Gallery/",
+  "explanation": "The core concept already exists in Ruff Night at the Gallery. You spend a night in a closed art gallery whose dog paintings are haunted, ghost dogs jump off their canvases to lick you ('Don't get licked!'), and you collect keys to get through each exhibit. It is light, cute horror tagged Horror/Cute/Puzzle/Dogs. What differs is only framing and presentation: the Mars and rocket-kid premise, 2D 90s pixel point-and-click instead of first-person 3D, and puzzles built into the artworks (which Ib also does). Only 1 search was run because the shared web-search budget ran out, but the match is direct.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "Clear and small in scope: sneak, solve art puzzles, find keys. Cute horror with non-lethal ghosts is a proven tone. The Mars and rocket wrapper adds little to the loop."
+ },
+ "v2-blend:B02": {
+  "title": "Spellbook Mixtape",
+  "prior_art": "close",
+  "closest_match": "Kord (itch.io, browser prototype, Octave Games Studio, 2026)",
+  "closest_url": "https://octavegamesstudio.itch.io/kord",
+  "explanation": "Kord is a deckbuilder in which each card is a musical phrase. Placing cards (with suit locks across linked slots, similar to 'cards that share a key') composes a multitrack song unique to each run, which is the idea's central twist. Jam Jam! (itch.io jam game) is also a deckbuilder where melody, harmony and rhythm cards build a song. Neither has the wizard-school exploration, turn-based duels or 90s music-video worlds, so this is close rather than exists. Only 1 search was run because the search budget ran out, so other music deckbuilders may also exist.",
+  "searches_run": 1,
+  "coherence": 3,
+  "coherence_note": "The deckbuilding loop with key-matching combos that layer music works. The theme stacks wizard school, 90s music videos, a mystery, crafting and dorm decorating, so it reads muddled."
+ },
+ "v2-blend:B11": {
+  "title": "Bearer of the Lamp",
+  "prior_art": "close",
+  "closest_match": "Nefertari: Journey to Eternity (Steam VR, Experius VR/CuriosityStream, 2018)",
+  "closest_url": "https://store.steampowered.com/app/861400/",
+  "explanation": "The VR player's loop already exists as a released product. Nefertari: Journey to Eternity is a VR reconstruction of Nefertari's tomb where you explore 'its art, history, construction, and mythology through interactive elements', almost the same wording as the idea. Asymmetric VR-versus-desktop hunts are also an established form (Nemesis Perspective, Epochalyptic, VRoom). No search found the two combined, with the tomb as a hunting arena and a lamp that changes hands, so this is close rather than exists. Only 1 search was run, plus page fetches, because the search budget ran out.",
+  "searches_run": 1,
+  "coherence": 3,
+  "coherence_note": "The lamp-steal role swap and the light-versus-dark asymmetry are neat. But reading murals slowly to open doors fights with being hunted, so the educational half and the thriller half pull against each other."
+ },
+ "control:Secondhand Truth": {
+  "title": "Secondhand Truth",
+  "prior_art": "close",
+  "closest_match": "Loop Me In (itch.io jam puzzle) / Where the Water Tastes Like Wine (Steam, Dim Bulb)",
+  "closest_url": "https://lewlew-mcdewdew.itch.io/loop-me-in",
+  "explanation": "Loop Me In is a gossip-routing puzzle: you place character types (Yeller, Super Spreader) to get gossip from the Smack Talker to the Insider. Where the Water Tastes Like Wine has stories you seed come back changed and exaggerated as they spread. Defenestration of Mary Margaret and Heretic are other rumor-spreading games. No game found combines routing with personality-driven, predictable changes to the sentence's content, which is the idea's twist, so close rather than exists.",
+  "searches_run": 8,
+  "coherence": 4,
+  "coherence_note": "The puzzle is clear and authored: pick an entry point and predict how each personality transforms the sentence. Writing deterministic sentence mutations is the hard part, but it can be built with templated statements."
+ },
+ "control:The Quiet Meter": {
+  "title": "The Quiet Meter",
+  "prior_art": "none_found",
+  "closest_match": "none",
+  "closest_url": "",
+  "explanation": "No game found uses minute-by-minute household utility readings as the evidence for a crime. The same idea exists only as academic research and patents (inferring household activity from appliance power signatures, also known as NILM). Timeline-deduction games (Crimson Rain, The Midnight Guest) and, from memory without a search to confirm, Unheard (reconstructing events from audio) share the 'rebuild the night from one indirect channel' structure but not the data source.",
+  "searches_run": 5,
+  "coherence": 4,
+  "coherence_note": "A clear deduction loop: tag the signatures, place them on a timeline, explain every anomaly. It fits Obra Dinn-style verification well, though reading charts may feel dry without strong presentation."
+ },
+ "control:Sold to the Back Row": {
+  "title": "Sold to the Back Row",
+  "prior_art": "none_found",
+  "closest_match": "Auctioneer (mobile, Cherrypick Games); Papeer Auktioneer (itch.io jam)",
+  "closest_url": "https://papeer-auktioneer.itch.io/gamejam",
+  "explanation": "Existing auctioneer games cover only the crowd-scanning half. In Cherrypick's mobile Auctioneer you spot the highest paddle in a crowd under a timer. In Papeer Auktioneer you click target items in a moving crowd. Neither has a rhythm chant. Auction-chant music appears only as a DDR song ('Auctioneer Beats'). No game found that combines keeping a chant on the beat with reading bidder signals, budgets and the timing of the hammer.",
+  "searches_run": 7,
+  "coherence": 4,
+  "coherence_note": "A strong dual-task hook in the vein of Rhythm Heaven, with clear success and failure states and a natural difficulty ramp. Keeping the beat while scanning for subtle bids needs careful readability tuning."
+ },
+ "v1-void:V31": {
+  "title": "The Last Löyly",
+  "prior_art": "close",
+  "closest_match": "Shaun Sauna And The Steamy Robots (itch.io); also Sauna of the DEAD (Steam), Sauna2000 (Steam), FimbulWinter",
+  "closest_url": "https://eikon.itch.io/shaun-sauna-and-the-steamy-robots",
+  "explanation": "Shaun Sauna is a wave shooter where you defend a sauna, and it has sauna health pickups. Sauna of the DEAD uses hot löyly air as a weapon, Sauna2000 pairs a sauna-restoring sim with psychedelic Finnish horror, and FimbulWinter is a Scandinavian winter FPS where you defend your base at night. None of them adds the idea's own piece: a heat-management sim (logs, water, stones) whose steam heals you and pushes back frost enemies in an endless winter, or the VR play.",
+  "searches_run": 7,
+  "coherence": 4,
+  "coherence_note": "Clear loop: tend the stove between waves, then shoot the frost. The heat resource ties the halves together, but the 'realistic' and 'psychedelic' tags pull in different directions."
+ },
+ "v1-void:V25": {
+  "title": "Starfall Over Taihoku",
+  "prior_art": "close",
+  "closest_match": "Raid on Taihoku (PC/Switch, 2023, Mizo Games/Softstar)",
+  "closest_url": "https://rawg.io/games/raid-on-taihoku",
+  "explanation": "Raid on Taihoku already does the whole ground half: a girl surviving the 1945 American air raids on Taipei, exploring safe zones and sneaking through danger zones. Nothing found has the idea's real twist, an alien rocket found in a bomb crater that turns the game into a side-scrolling space shooter with RPG upgrades.",
+  "searches_run": 4,
+  "coherence": 3,
+  "coherence_note": "Two separate games bolted together (home-front stealth survival and a space shmup). The jump from a real wartime tragedy to a rescue-the-alien story could jar."
+ },
+ "v1-void:V05": {
+  "title": "The Last Updraft",
+  "prior_art": "close",
+  "closest_match": "Two Swords (itch.io, 2-player narrative fighting game)",
+  "closest_url": "https://milessupshur.itch.io/two-swords",
+  "explanation": "Two Swords already makes a two-rival life story into PvP. Two players take one childhood-friends-turned-rivals character each and fight three duels at different ages, and who wins each fight decides which of 8 endings you get. Lose It! (itch.io) also ties the story outcome to the result of a split-screen race. Nothing found has the glider racing, the exploration and puzzles on foot between races, the single-player rival who adapts, or the sisters setup.",
+  "searches_run": 4,
+  "coherence": 4,
+  "coherence_note": "The core works: race chapters with an ending decided by the versus result. Scope spreads across racing, on-foot exploration, puzzles and both single-player and versus modes."
+ },
+ "control:The Lip Reader": {
+  "title": "The Lip Reader",
+  "prior_art": "none_found",
+  "closest_match": "Orwell: Keeping an Eye on You (Steam), nearest only in surveillance reports whose contents have consequences",
+  "closest_url": "https://store.steampowered.com/app/491950/Orwell/",
+  "explanation": "No video game was found where lip-reading is the deduction mechanic, with sounds that look alike on the lips creating real ambiguity. The lip-reading results were only party games (Read My Lips, Hearing Things, Mega Mouth) and training tools. Orwell shares the loop of filing surveillance reports that superiors act on, and Unheard is a detective game built on hearing past events, but neither uses visual speech decoding.",
+  "searches_run": 5,
+  "coherence": 4,
+  "coherence_note": "Clear loop: film, scrub frames, match mouth shapes, assemble the transcript, live with the consequences. The risk is that the viseme ambiguity feels like guessing unless the context clues are designed tightly."
+ },
+ "control:The Interpreter's Chair": {
+  "title": "The Interpreter's Chair",
+  "prior_art": "close",
+  "closest_match": "Intergalactic Interpreter (itch.io, GMTK Game Jam 2021); also Diplomatic Dictation (itch.io)",
+  "closest_url": "https://sebastianscaini.itch.io/intergalactic-interpreter",
+  "explanation": "Intergalactic Interpreter makes you the go-between in peace talks between two leaders who speak different languages (one in alien gibberish). You make timed dialogue choices, war must be avoided, and there are multiple peace or doom endings. Diplomatic Dictation casts you as a translator who bends politicians' words to make them sound good. Both are small jam games, and neither page confirms the idea's specific system of partly bilingual aides who can catch your edits, or the corridor favour-trading between sessions.",
+  "searches_run": 4,
+  "coherence": 5,
+  "coherence_note": "Very clear and buildable loop: hear the true meaning, choose how to render it, the table reacts, and the risk of detection grows. The stakes are strong and it replays well."
+ },
+ "control:Rounds and Changes": {
+  "title": "Rounds and Changes",
+  "prior_art": "close",
+  "closest_match": "Ringing Room (browser virtual belltower, 2020) with its Wheatley computer ringer; also Abel/Mabel/Beltower change-ringing simulators (PC/Mac/iOS)",
+  "closest_url": "https://ringingroom.co.uk/help",
+  "explanation": "Ringing Room already does the core loop online: each person takes one bell in a shared virtual tower and rings methods in time, computer ringers (Wheatley) fill the empty bells, and players call bobs and singles with hotkeys. Abel and Mobel offer the same thing solo with 20,000 methods. What it lacks is the pitched centrepiece, physically controlling a swinging bell's balance with pull and check, along with any game wrapper such as a campaign or progression. It is a practice tool rather than a game, so this is close, bordering on exists.",
+  "searches_run": 7,
+  "coherence": 4,
+  "coherence_note": "A clear, authentic co-op rhythm loop. Learning methods on top of swing physics makes the curve very steep, and network latency is a known problem for online ringing."
+ },
+ "control:Root Exchange": {
+  "title": "Root Exchange",
+  "prior_art": "exists",
+  "closest_match": "Mutualist (EvilWays/Securen, Steam, Early Access announced for Nov 2, 2026)",
+  "closest_url": "https://store.steampowered.com/app/5367990/Mutualist/",
+  "explanation": "In Mutualist you play the mycelial network itself ('A forest is not a collection of trees. It is a market'). You draw connections tree by tree and route carbon, phosphorus and water between species, facing beetles, frost and an underground parasite, then sporulate to reset into new forests. That matches this idea's premise, trade loop, threats and spore-to-new-forest progression almost point for point. Smaller relatives are Mycelium Empire (itch.io, fungus trades with plant roots), Mycenial (itch.io) and the board game Undergrove, which covers the same trade from the trees' side.",
+  "searches_run": 6,
+  "coherence": 4,
+  "coherence_note": "A clean economic-management loop with a clear ecological metaphor. Setting exchange rates and taking a cut maps naturally onto the sim."
+ },
+ "control:Fair or Foul": {
+  "title": "Fair or Foul",
+  "prior_art": "close",
+  "closest_match": "J. Weatherman Jr. (itch.io), with Silent Sky (itch.io) and Rituals of Raindrops and Rays (itch.io)",
+  "closest_url": "https://defaulttidus.itch.io/weatherman",
+  "explanation": "The daily loop of 'read instruments and signs, issue a forecast, live with the consequences' exists in several small games. In J. Weatherman Jr. you forecast by interpreting instrument data, Silent Sky has you gather pressure, wind and temperature and warn authorities or lose your job, Dracula's Meteorologist (1895) predicts weather from clues, and Rituals of Raindrops and Rays ties daily weather prediction to villager satisfaction. None found has a physically simulated sky, a 19th-century harbour storm signal, or forecaster trust that changes how the fleet behaves. The search budget ran out before lighthouse- and storm-signal-specific queries could run.",
+  "searches_run": 6,
+  "coherence": 4,
+  "coherence_note": "A strong daily decide-then-see-outcome loop with meaningful stakes. A fully physical sky sim is expensive, and the forecasting has to stay readable rather than become guesswork."
+ },
+ "control:The Last Tuning": {
+  "title": "The Last Tuning",
+  "prior_art": "close",
+  "closest_match": "I NEED TO PRACTICE (itch.io, free horror sim)",
+  "closest_url": "https://randomgamer13.itch.io/i-need-to-practice",
+  "explanation": "I NEED TO PRACTICE is a horror game where you tune four strings by turning pegs and then play. Off-key playing makes the haunting close in (lights flicker, shadows creep), which shares this idea's twist that sour notes summon danger. It differs a lot, though: it is a short bowed-string piece about playing, not by-ear piano tuning through acoustic beats across a house of instruments. Only one web search ran for this idea because the shared search budget ran out, so a direct match could have been missed.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "A distinctive, well-tied mechanic: the beat-rate tuning is both puzzle and threat. Accessibility for players with weak pitch perception is a real design risk."
+ },
+ "control:Altitude Only": {
+  "title": "Altitude Only",
+  "prior_art": "exists",
+  "closest_match": "Kaze no NOTAM / NOTAM of Wind (Artdink, PlayStation, 1997); also the board game Balmy Balloonists",
+  "closest_url": "https://obscuritory.com/sim/kaze-no-notam/",
+  "explanation": "Kaze no NOTAM is a balloon game where you control only up and down (burner and vent). A panel shows the wind direction at each altitude, and you steer to targets by picking a layer, with winds shifting by weather and time of day. Balmy Balloonists is a competitive balloon race where your altitude choice decides your wind and costs ballast or gas. Many smaller games use the same twist (The Balloonist and Patterns of the Wind on Playdate, Blazing Balloons, a 2018 Gordon Bennett gas-balloon game from HEIA-FR). Only the real-time online shared-sky race is new.",
+  "searches_run": 7,
+  "coherence": 4,
+  "coherence_note": "An elegant one-input design with real depth. Long races and the risk of copying the leader need careful pacing."
+ },
+ "control:Card Section": {
+  "title": "Card Section",
+  "prior_art": "none_found",
+  "closest_match": "none (only real-world card stunts and crowd-pixel apps such as Wichita State's People Pixel and PixMob, none of which are games)",
+  "closest_url": "",
+  "explanation": "I found no video or tabletop game where you design a stadium card-stunt mosaic for the seat grid and then conduct an unreliable crowd live. Searches only turned up real card stunts and tifos, plus phone and LED 'crowd as pixels' tech for live events. None of these is a game.",
+  "searches_run": 8,
+  "coherence": 4,
+  "coherence_note": "Clear plan-then-execute loop like Overcooked crossed with Picross, and live crowd failures give real-time tension. Simulating thousands of bodies is a scope risk, but it can be built."
+ },
+ "control:Unseen Stage": {
+  "title": "Unseen Stage",
+  "prior_art": "close",
+  "closest_match": "Other Inside (IndieDB mime puzzle game); also Blind Exit (itch.io, LD54) and Out of the World (2.5D platformer where objects you see materialize)",
+  "closest_url": "https://www.indiedb.com/games/other-inside",
+  "explanation": "Mime games where pantomimed walls and objects actually work already exist (Other Inside has imaginary walls and a pantomime lasso; Magic Mime and Blind Exit use invisible walls). Platformers where things exist only while seen also exist (Out of the World, Object Impermanence), and It's Mime Time! has a mime performing for spectators in an invisible maze. I found nothing that makes mimed objects solid only while an NPC audience is watching, so that crowd-attention resource is the new part.",
+  "searches_run": 9,
+  "coherence": 4,
+  "coherence_note": "An elegant, readable rule: attention is the resource and audience types are the puzzle variables. Steering the crowd could get fiddly, but the core is strong."
+ },
+ "control:Long Water": {
+  "title": "Long Water",
+  "prior_art": "close",
+  "closest_match": "River by JefferyXue (itch.io); also You Are A River (solo TTRPG, Big Lizard Games)",
+  "closest_url": "https://jefferyxue.itch.io/river/devlog/298032/development-documentation-of-river",
+  "explanation": "In JefferyXue's River you play the river's source, and humans automatically settle, farm and die by your drought or flood, which is the same 'you are the river that civilizations depend on' premise. The solo TTRPG You Are A River maps a river's course and narrates the history of the world along it. Neither has turn-based meander carving and silt over millennia, or towns building dams and embankments to pin you in place.",
+  "searches_run": 4,
+  "coherence": 3,
+  "coherence_note": "Evocative, but a river's agency and goals are abstract: the 'strength of current' economy and the win and fail conditions ('if you endure') are vague, so it risks being a toy rather than a game."
+ },
+ "control:Valley Fold": {
+  "title": "Valley Fold",
+  "prior_art": "none_found",
+  "closest_match": "Folded Wishes (board game, 2020, comes with origami paper for players to fold their own pieces)",
+  "closest_url": "https://www.tlamagames.com/en/board-games/folded-wishes/",
+  "explanation": "I found no game where you design units by placing mountain and valley folds on a crease grid, with the folded geometry setting tactical stats. Folded Wishes only lets players fold cosmetic pieces for a tile game. Only 1 search could be run because the shared web-search budget ran out, so this verdict is weakly supported. A follow-up check for origami or paper-army tactics games is recommended.",
+  "searches_run": 1,
+  "coherence": 3,
+  "coherence_note": "A distinctive hook, but real crease-pattern collapsing is hard to make intuitive, and mapping arbitrary folds to balanced stats is a serious design problem. It needs heavy abstraction."
+ },
+ "control:Morning Control": {
+  "title": "Morning Control",
+  "prior_art": "none_found",
+  "closest_match": "Ski Patrol (Pita, Steam Early Access, 2024)",
+  "closest_url": "https://rawg.io/games/ski-patrol",
+  "explanation": "Ski Patrol is an open-world skiing game that lists 'mitigating avalanche hazards' among its objectives. Its core is skiing and errands, and its store pages show no snow-pit reading, blast-or-close decisions or season-long snowpack memory. Only 1 search could be run because the shared web-search budget ran out, so a deeper check for avalanche or snow-science sims is recommended.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "A tight daily loop (investigate, decide, live with it) with good built-in pressure from the manager and guests. The persistent buried snowpack is a strong systemic hook, though the topic is niche."
+ },
+ "control:The Night Compositor": {
+  "title": "The Night Compositor",
+  "prior_art": "close",
+  "closest_match": "Letterpress Simulator (Befuddly, itch.io); also COMPOSITOR (CSAF, Game Boy) and Fit to Print (Flatout Games board game, 2023)",
+  "closest_url": "https://befuddly.itch.io/letterpress-simulator",
+  "explanation": "Letterpress Simulator is a released first-person drag-and-drop print-shop sim built around the tasks of printing an edition and reading type upside down and backwards. COMPOSITOR is a puzzle about getting loose sorts standing in the composing stick, and Fit to Print is a real-time puzzle about laying out a newspaper front page against a deadline. I found no game that combines hand-setting mirrored type, justification, newspaper layout and a nightly deadline with censorship and type shortages.",
+  "searches_run": 7,
+  "coherence": 4,
+  "coherence_note": "A clear Papers, Please-style job loop with a strong deadline. Letter-by-letter picking could get tedious, so pacing and abstraction of the typing step matter."
+ },
+ "v3-search:Dawn Caller": {
+  "title": "Dawn Caller",
+  "prior_art": "close",
+  "closest_match": "Suhoor Hero by odilektasli (itch.io / Google Play)",
+  "closest_url": "https://odilektasli.itch.io/suhoor-hero",
+  "explanation": "The central twist already exists as a released game. In Suhoor Hero you play a Ramadan drummer walking the streets to wake people for suhoor, and you play drum sequences correctly, though only to calm street dogs. The RamadanCraft Minecraft mod also has a drummer NPC that wakes the village. Neither has Dawn Caller's loop: planning a route through 30 nights so every named household is woken before dawn, plus personalised calls at each door and relationships with the quarter. Note: the shared web-search budget ran out partway through, so only 2 searches ran and Turkish 'Ramazan davulcusu' mobile games were not checked. More prior art is likely there.",
+  "searches_run": 2,
+  "coherence": 4,
+  "coherence_note": "A clear, warm premise: route planning under a dawn deadline plus rhythm calls at each door. The two halves need careful blending, and remembering names could become busywork."
+ },
+ "v3-search:Saturday Night Noisemaker": {
+  "title": "Saturday Night Noisemaker",
+  "prior_art": "none_found",
+  "closest_match": "none",
+  "closest_url": "",
+  "explanation": "Searches for a live-foley or silent-film sound-effects game found only real-world foley history and classroom exercises (for example the ds106 'Charlie Chaplin's Foley Artist' assignment), not a game. Pick-the-right-prop-and-hit-the-moment is a rhythm-game pattern (Rhythm Heaven-style cue reading), but no game with the silent-cinema foley twist turned up. Caveat: the shared search budget ran out after 2 searches, so itch.io jam games tagged 'foley' were not checked, and a jam entry could plausibly exist.",
+  "searches_run": 2,
+  "coherence": 4,
+  "coherence_note": "The core loop is strong and readable: watch a mirrored, blurry film and trigger the right noisemaker on cue. The mining shifts, prop crafting and strike management feel bolted on."
+ },
+ "v3-search:Three Miles in the Dark": {
+  "title": "Three Miles in the Dark",
+  "prior_art": "none_found",
+  "closest_match": "none",
+  "closest_url": "",
+  "explanation": "Searching for legging through canal tunnels found only historical sources (Wikipedia, canal museums, Dudley Tunnel Trust), with no game built on it. The general mechanic of two players alternating inputs to push a boat in sync exists as party and sports minigames (tandem canoe or rowing types), but that is only a shared genre mechanic. Caveat: the shared search budget ran out after 1 search, so this verdict rests on thin evidence.",
+  "searches_run": 1,
+  "coherence": 3,
+  "coherence_note": "Clear and buildable: a co-op stamina rhythm game in the dark. But one long tunnel of steady alternating steps risks monotony, and the meta layer (bargaining, inn, training partners) is generic."
+ },
+ "v3-search:Bellfast Tower": {
+  "title": "Bellfast Tower",
+  "prior_art": "close",
+  "closest_match": "Ringing Room (online change-ringing platform); also Abel/Mabel/Mobel simulators and 'Show Me The Ropes' (itch.io rhythm game)",
+  "closest_url": "https://cccbr.org.uk/2020/06/07/ringing-room-a-users-guide/",
+  "explanation": "The core co-op loop already exists: in Ringing Room each online participant controls one bell rope and the band rings methods together in real time. Abel/Mabel/Mobel let a single player ring one bell against computer ringers, and Show Me The Ropes on itch.io turns method ringing into a Guitar Hero-style rhythm game. These are training tools or simple rhythm trainers, though, not games with physical bell handling, a campaign of teaching beginners, tower restoration and a post-WWI story. So the narrative and progression wrapper is new, but the mechanic is not.",
+  "searches_run": 3,
+  "coherence": 4,
+  "coherence_note": "Well defined: one rope per player, keep time, swap places in methods without clashing. Change ringing is niche and steep to learn, but the beginner-band story is a natural tutorial."
+ },
+ "v3-search:The Ringers of Saxby Green": {
+  "title": "The Ringers of Saxby Green",
+  "prior_art": "close",
+  "closest_match": "Show Me The Ropes (itch.io, browser rhythm/educational bell-ringing game); also the Abel/Mabel/Mobel and Ringing Room change-ringing simulators",
+  "closest_url": "https://bladeofbilboa.itch.io/show-me-the-ropes",
+  "explanation": "Change ringing as a playable loop already exists. Show Me The Ropes is a rhythm game for learning and ringing methods, and the Abel/Mobel and Ringing Room simulators have you ring one bell in time while the computer or remote players ring the others. Abel also lets you call touches. None of them has a captain who calls swaps live, AI villagers who drift out of time, or the recruiting and village-politics management layer, so the core is taken but the framing is not.",
+  "searches_run": 5,
+  "coherence": 4,
+  "coherence_note": "The loop is clear and buildable: keep time, call swaps, spot the ringer who drifts. But it mixes call-changes with non-repeating method peals, and calling a 5,000-change, three-hour peal by hand would need heavy abstraction."
+ },
+ "v3-search:Forty Thousand Words": {
+  "title": "Forty Thousand Words",
+  "prior_art": "none_found",
+  "closest_match": "Dictionarium (Jackbox Party Pack 6), a party game where players write definitions for made-up words",
+  "closest_url": "https://www.jackboxgames.com/dictionarium/",
+  "explanation": "I found no game about compiling a historical dictionary: harvesting quotations, splitting words into senses, picking the illustrative quote, all under a money and deadline squeeze. The only definition-writing games are party bluffing games (Dictionarium, Fictionary) and a nonsense-dictionary sandbox on itch.io (The Impossible Dictionary). They share the act of defining words and nothing else.",
+  "searches_run": 3,
+  "coherence": 3,
+  "coherence_note": "The theme is strong, but the moment-to-moment verb is vague: how do you score a player-written definition? And 40,000 words forces abstraction into a few hand-made entries plus bulk management, which the pitch leaves unresolved."
+ },
+ "v3-search:The Prompter's Trapdoor": {
+  "title": "The Prompter's Trapdoor",
+  "prior_art": "none_found",
+  "closest_match": "Not For Broadcast (Steam), a real-time game where you save a live TV show from a control room",
+  "closest_url": "https://store.steampowered.com/app/1147550/Not_For_Broadcast/",
+  "explanation": "I found no game where you are a hidden prompter judging the timing and volume of whispered lines while actors forget, skip scenes or switch languages. Not For Broadcast shares the idea of rescuing a live show with well-timed actions, but its verbs are camera cuts, censoring and ads, not prompting. Only one search finished before the shared web-search budget ran out, so this verdict is less thoroughly checked than the others.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "A clear real-time attention and timing loop (follow the script, read faces, choose when and how loud to whisper) with a good recovery challenge when actors improvise. The touring and feud layer is light but works."
+ },
+ "v3-search:The Drum That Speaks": {
+  "title": "The Drum That Speaks",
+  "prior_art": "none_found",
+  "closest_match": "Path of Ayan (itch.io student prototype), a rhythm survival game where you play the Yoruba talking drum at events for money and reputation",
+  "closest_url": "https://topzone.itch.io/the-path-of-ayan",
+  "explanation": "Path of Ayan shares the instrument, the setting and a drum-at-events-for-reputation meta loop. It has no tonal-language decoding, no context-based resolution of homophones and no relaying messages between towns, which is this idea's central twist. I found no game that decodes tonal drum messages.",
+  "searches_run": 2,
+  "coherence": 4,
+  "coherence_note": "A strong deduction loop in the vein of Chants of Sennaar (tone patterns map to several words, and context picks the right one), paired with a performance step to relay the message. Clear and buildable, though it depends on careful, authentic Yoruba linguistic content."
+ },
+ "v3-search:Seating Europe": {
+  "title": "Seating Europe",
+  "prior_art": "close",
+  "closest_match": "Is This Seat Taken? (Poti Poti Studio / Wholesome Games, Steam/Switch/mobile, 2025); also itch.io jam games HomeTable, Wedding Planner (LD54), Antisocial Bubbles: Wedding Edition (GGJ25)",
+  "closest_url": "https://store.steampowered.com/app/3035120/",
+  "explanation": "The core loop, a logic puzzle where you seat guests so their likes, dislikes and pet peeves are satisfied (wedding receptions included), is exactly what Is This Seat Taken? does, and it is a hit on Steam. Several itch.io jam games also do guest seating. What sets this idea apart is the layer on top: who can overhear whom, consequences that play out over the evening (treaties or duels), the 1905 diplomatic setting and the bribed police informant. The central puzzle exists; the overhearing/diplomacy twist was not found.",
+  "searches_run": 4,
+  "coherence": 4,
+  "coherence_note": "A clear constraint puzzle with readable stakes. Overhearing radius and consequences that run between evenings give it depth beyond plain seating puzzles; the informant choice is a nice moral layer."
+ },
+ "v3-search:Coconuts and Thunder": {
+  "title": "Coconuts and Thunder",
+  "prior_art": "none_found",
+  "closest_match": "none",
+  "closest_url": "",
+  "explanation": "One web search for a live radio-drama foley game found only real-world foley and radio-play articles, no game. The per-turn search budget ran out after that, so the check is thin. Small jam games about foley artists likely exist on itch.io but could not be confirmed. No released game was found that combines live script-cue foley with prop crafting and couch co-op.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "A rhythm/cue-hitting loop where the 'notes' are physical props, with prop invention between shows and split-table co-op. It is buildable and naturally a party game; the improvisation and 'impossible sound' parts need tight rules."
+ },
+ "v3-search:Saddlebag Nurse": {
+  "title": "Saddlebag Nurse",
+  "prior_art": "none_found",
+  "closest_match": "none",
+  "closest_url": "",
+  "explanation": "The one search on the Frontier Nursing Service and horseback nurse-midwife games returned only history and documentaries (Angels on Horseback, KET), no game. The search budget ran out after that. Rural-doctor and delivery-route games exist in general, but none found pairs horseback route planning across a roadless district with hands-on births at the bedside.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "Two clear layers: plan rounds and travel on the map, then short bedside procedures. Horse care, trust and record-keeping risk system bloat, but the core loop holds together."
+ },
+ "v3-search:Sky Post of Paris": {
+  "title": "Sky Post of Paris",
+  "prior_art": "none_found",
+  "closest_match": "none",
+  "closest_url": "",
+  "explanation": "The one search on the 1870 siege balloon post and pigeon microfilm turned up only history articles (Smithsonian, Stanley Gibbons, NASM), no game. The search budget ran out after that. Steering a balloon only by changing altitude to catch winds is a known mechanic in balloon sims. No game was found built on the two-way pairing of unsteerable outbound balloons and inbound pigeon microfilm.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "Clear logistics and launch-decision loop: build balloons, read the wind, steer by altitude, get pigeon replies back. Copying messages by hand at the end is thin, and success depends on how much control the flight phase gives the player."
+ },
+ "v3-search:Landfall Captions": {
+  "title": "Landfall Captions",
+  "prior_art": "none_found",
+  "closest_match": "Steno Hero / Steno Arcade (PC, Open Steno Project)",
+  "closest_url": "https://crowdsupply.com/for-all-to-play/steno-hero",
+  "explanation": "I found no game where you play a live broadcast captioner. Steno Hero has the closest mechanic: a Guitar Hero-style game where you type song lyrics as you hear them. It has no story, broadcast or choices. Not For Broadcast is about live-TV decisions, but you switch cameras and do not type. Only 3 searches ran before the shared web-search budget ran out, so the check is incomplete.",
+  "searches_run": 3,
+  "coherence": 4,
+  "coherence_note": "Clear core loop: type what you hear, under time pressure, with real stakes. Letting the player choose what to keep when speech outruns typing fixes the problem that nobody can transcribe at broadcast speed."
+ },
+ "v3-search:Heave and Sing": {
+  "title": "Heave and Sing",
+  "prior_art": "exists",
+  "closest_match": "Ragnarock (Steam / Quest / PSVR2, WanadevStudio)",
+  "closest_url": "https://store.steampowered.com/app/1345820/Ragnarock/",
+  "explanation": "Ragnarock is a released VR rhythm game. You drum to set the beat for your Viking crew's rowing, and you race rival longships online, in local split-screen or against ghost ships. That matches this pitch almost word for word, with Vikings in place of a tea clipper. The itch.io game Shanties in Strange Waters is a rhythm game about keeping up with the crew's halyard shanty, which is this idea's exact shanty-hauling twist. Rhythm Heaven's Pirate Crew is another crew-rows-on-the-beat example. What is new here is only the layer around the music: choosing songs for each task, crew tiring when the tempo is too fast, and a long narrative voyage.",
+  "searches_run": 2,
+  "coherence": 4,
+  "coherence_note": "The rhythm-to-speed race is proven to work. The challenge is spreading it over a 99-day voyage and giving co-op players, each on their own line, enough to do."
+ },
+ "v3-search:Doorstep 1917": {
+  "title": "Doorstep 1917",
+  "prior_art": "close",
+  "closest_match": "Lake (PC/Xbox/PS, Gamious, 2021)",
+  "closest_url": "https://store.steampowered.com/app/1118240/Lake/",
+  "explanation": "Lake has the same core loop: deliver mail around a small town, get to know the residents through dialogue choices, and let relationships and choices shape a branching story. It lacks this idea's main twist: deciding how to break wartime death notices, plus cycling against the clock to deliver urgent telegrams. I found no game about a WWI telegram messenger, but only 1 search ran before the budget ran out. Small itch.io or jam games on this topic may exist and were not checked.",
+  "searches_run": 1,
+  "coherence": 4,
+  "coherence_note": "Strong emotional hook. The fast cycling routes and the slow scenes on doorsteps may pull against each other in pacing, but the two halves connect well."
+ },
+ "v3-search:The Airlock Kitchen": {
+  "title": "The Airlock Kitchen",
+  "prior_art": "none_found",
+  "closest_match": "DAVE THE DIVER (Steam/Switch, Mintrocket)",
+  "closest_url": "https://store.steampowered.com/app/1868140/DAVE_THE_DIVER/",
+  "explanation": "Dave the Diver combines diving and cooking: you dive by day and run a sushi restaurant by night. But you are the diver, not a cook feeding a sealed saturation-diving crew whose work suffers when they eat badly. Project Into the Void (coming soon on Steam) is a saturation-diving simulator but has no cooking. I found nothing that matches the airlock-feeding twist, but only 1 search ran before the budget ran out.",
+  "searches_run": 1,
+  "coherence": 3,
+  "coherence_note": "Original setting, but the feedback is indirect: you cook, then passively watch how the divers perform. Cooking for 40 sailors as well risks turning it into a generic cooking sim unless food visibly changes outcomes on the seabed."
+ }
+}

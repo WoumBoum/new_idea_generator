@@ -1,0 +1,386 @@
+[
+ {
+  "title": "Secondhand Truth",
+  "tags": [
+   "Strategy",
+   "Puzzle",
+   "Simulation",
+   "Medieval",
+   "Comedy",
+   "Stealth",
+   "Real-Time with Pause",
+   "Choices Matter",
+   "Multiple Endings",
+   "Replay Value",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Plant one whispered sentence in a medieval market town and watch it change as it passes from mouth to mouth. Steer the gossip through boasters, mishearers and zealots so the right version reaches the right ear by nightfall.",
+  "description": "A small medieval market town runs on routine: the baker opens at dawn, the washerwomen meet at the river, the guards drink at the tavern after the evening bell. You are a stranger with one tool, a whispered sentence. Each chapter sets a goal, such as freeing a wrongly jailed tanner or stopping a forced marriage, and a version of the truth that must reach a particular ear before nightfall. Choose who hears your words first, then watch the day unfold in pausable real time as the sentence travels. Every listener retells it in their own way. The boaster doubles every number, the half-deaf blacksmith swaps similar-sounding words, the priest adds a moral, and the skeptic strips out the juicy part. Changes stack, so a harmless remark about a missing goat can reach the magistrate as an accusation of witchcraft. Study schedules and temperaments, intercept the story with a second whisper to correct its course, and never speak to the same person twice, or suspicion will trace the tale back to you. Each chapter has several solutions, and the outcomes carry into the next.",
+  "pitch": "The unit you control is gossip itself: a sentence that mutates predictably through each townsperson's personality, turning a social network into a routing puzzle."
+ },
+ {
+  "title": "The Lip Reader",
+  "tags": [
+   "Investigation",
+   "Espionage",
+   "Puzzle",
+   "Cold War",
+   "Detective",
+   "Mystery",
+   "Story Rich",
+   "Choices Matter",
+   "Atmospheric",
+   "Historical",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "From a rented attic above a divided city, spy on conversations you can never hear. Decode lip movements frame by frame, rebuild what was said, and decide whose secrets end up in your report.",
+  "description": "It is the winter of a long cold war, and your agency has given you a telephoto camera, a pair of binoculars and an attic window above a busy square full of cafes, tram stops and embassy doors. You cannot hear a single word below, but you can read lips. Each case begins with surveillance: track targets, catch them mid-conversation, and record short reels of film. Back at your desk you scrub through the footage frame by frame and match mouth shapes to sounds. Many sounds look identical on the lips, so 'bomb', 'mop' and 'pop' share a shape, and only context, gestures and what you already know can tell them apart. Assemble the fragments into a transcript, flag the uncertain words, and file your report. Your superiors act on what you write, so a single misread can burn an innocent courier or let a defector slip away. As the cases connect, you start to notice that someone in the square is choosing their words very carefully, as if they know exactly where you are watching from.",
+  "pitch": "Lip-reading becomes the core deduction mechanic, where visually identical mouth shapes create real ambiguity that the player resolves through context and evidence."
+ },
+ {
+  "title": "The Quiet Meter",
+  "tags": [
+   "Detective",
+   "Investigation",
+   "Puzzle",
+   "Logic",
+   "Mystery",
+   "Crime",
+   "Modern",
+   "Minimalist",
+   "Narrative",
+   "Mouse Only",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Solve crimes in a twelve-storey apartment block using nothing but minute-by-minute electricity, water and gas readings. Learn every appliance's signature, rebuild each resident's night, and find the reading that should not exist.",
+  "description": "A building is a diary that nobody meant to write. As a forensic analyst for the city's utility company, you are called in when the police have run out of witnesses. Each case hands you a block of flats and a night's worth of meter data: electricity, water and gas, sampled every minute for every unit. At first it is just lines on a chart. Then you learn to read them. A sharp three-minute spike is a kettle. Hot water paired with a gas burner is a shower. A slow rhythmic wave is a washing machine on its spin cycle. Tag these signatures, place them on a shared timeline, and the residents come alive: who woke at three, who pretended to be away, which empty flat suddenly drew power for exactly forty minutes. Cross-reference units to catch people moving between them, test theories against the data, and submit a reconstruction that must account for every anomaly. Later buildings add solar panels, faulty wiring, shared boilers and suspects who know how to disguise their footprint.",
+  "pitch": "Detective work done entirely from household utility consumption curves, turning appliance signatures into the evidence and the timeline into the solution."
+ },
+ {
+  "title": "The Interpreter's Chair",
+  "tags": [
+   "Choices Matter",
+   "Diplomacy",
+   "Political Sim",
+   "Narrative",
+   "Dialogue Heavy",
+   "Multiple Endings",
+   "Story Rich",
+   "Thriller",
+   "Psychological",
+   "Replay Value",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Two nations are negotiating a ceasefire, and you are the only person in the room who understands both sides. Translate faithfully, or quietly bend every sentence toward the peace you believe in, without getting caught.",
+  "description": "A ceasefire summit has been arranged in a remote mountain hotel, and you are the sole interpreter between two delegations who share no common language. Every word passes through you. As each speaker talks, you hear the full meaning, including the threat hidden in a polite phrase and the concession a general did not mean to offer. Then you choose how to deliver it. Render it faithfully, soften an insult, sharpen a vague promise, drop a dangerous aside, or slip in a phrase of your own. The table reacts in real time: tempers rise and cool, trust grows or collapses, and positions on the map shift. Your manipulation is not invisible. Each side has aides who understand fragments of the other language, and a careless change can be noticed, recorded and used against you. Between sessions, corridors, dinners and late phone calls let both sides press you for private favours. Five days of talks lead to many endings, from lasting peace to renewed war to your own quiet disappearance.",
+  "pitch": "The player is the communication channel itself, editing every sentence of a negotiation while partially bilingual witnesses threaten to expose the edits."
+ },
+ {
+  "title": "Sold to the Back Row",
+  "tags": [
+   "Rhythm",
+   "Job Simulator",
+   "Simulation",
+   "Music",
+   "Fast-Paced",
+   "Score Attack",
+   "Comedy",
+   "Casual",
+   "Colorful",
+   "Local Multiplayer",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Multi-player",
+   "PvP",
+   "Shared/Split Screen PvP"
+  ],
+  "short_description": "Become a fast-talking auctioneer. Keep your bid chant locked to the beat while scanning a packed room for nods, winks and twitching paddles, and squeeze every last coin from the crowd before the hammer falls.",
+  "description": "Auctioneering is music with money attached, and you are about to learn the rhythm. Each lot opens with a starting price and a room full of bidders. Your chant is a rhythm track: hit the beats to keep the filler words rolling and the crowd hypnotised, and if you stumble the room loses interest. While your mouth runs, your eyes work. Bidders signal in tiny ways: a raised catalogue, a tap of the nose, a glance to a partner, a paddle lifted half an inch. Spot a bid, point at it on the beat, and the price climbs a step. Every bidder has a hidden budget and a temperament, so read their hesitation, coax them with a smaller increment, or bluff a bid from the back wall if you dare. Drop the hammer too early and you leave money on the table; wait too long and the lot goes unsold. Work your way from livestock barns and storage lockers to estate sales and glittering city galleries, then face rival auctioneers in a split-screen chant-off.",
+  "pitch": "A rhythm game fused with crowd-reading, where keeping the auction chant on beat and spotting subtle bids must happen at the same time."
+ },
+ {
+  "title": "Card Section",
+  "tags": [
+   "Puzzle",
+   "Management",
+   "Time Management",
+   "Sports",
+   "Level Editor",
+   "Real-Time",
+   "Colorful",
+   "Casual",
+   "Funny",
+   "Co-op",
+   "Online Co-Op",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Multi-player",
+   "Co-op",
+   "Online Co-op"
+  ],
+  "short_description": "Plan the giant pictures that thousands of fans make by holding up coloured cards, then conduct them live on match day. Late arrivals, swapped seats and distracted children will ruin your masterpiece unless you react fast.",
+  "description": "Halftime is in ninety seconds and twelve thousand people are about to become your pixels. In the planning phase you design card stunts for a stadium's seating: draw a mosaic on the seat grid, break it into frames for animated sequences, and print an instruction slip for every seat. You choose how complicated each slip should be, because a clever ten-step animation means nothing if fans cannot follow it. On match day the plan meets the public. Spectators arrive late, sit in the wrong row, drop their cards, hold them upside down, or wander off for snacks just before the big reveal. You conduct from the press box in real time: call each flip over the loudspeaker, spot gaps forming in your image, send volunteers running with spare cards, and improvise simpler fallbacks when a section falls apart. Images are scored for accuracy and crowd excitement, unlocking larger venues and trickier stands. Friends can join online, each conducting their own block of seats, and a design editor lets you share stunts with the community.",
+  "pitch": "An entire stadium crowd becomes an unreliable pixel display that you design for in advance and then conduct live as people fail to follow instructions."
+ },
+ {
+  "title": "Rounds and Changes",
+  "tags": [
+   "Rhythm",
+   "Online Co-Op",
+   "Co-op",
+   "Music",
+   "Puzzle",
+   "Simulation",
+   "Physics",
+   "Logic",
+   "Cozy",
+   "Multiplayer",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Multi-player",
+   "Co-op",
+   "Online Co-op"
+  ],
+  "short_description": "Ring tower bells the old way with friends: each player pulls one heavy swinging bell, swapping places in shifting mathematical patterns while keeping every stroke perfectly in time.",
+  "description": "High in a village church tower, eight ropes hang in a circle. Each one is attached to a bell weighing as much as a small car, and each is yours to control. This kind of ringing is not about melodies. The bells sound one after another in rows, and with every row the order changes according to a pattern called a method. Your job is to know where your bell belongs in each row and get it there. Pull harder to hold the bell up longer and strike later; check your pull to come in sooner. Overdo it and the bell swings past its balance point and the whole band falls apart. Ring alone with patient computer ringers, or join up to seven friends online, each on a rope, while one of you conducts, calling out changes that rearrange the pattern mid-flow. The campaign follows a neglected tower brought back to life: recruit locals, learn new methods, ring for weddings and festivals, and train for a marathon touch of thousands of unbroken changes.",
+  "pitch": "A co-op rhythm game built on the real tradition of change ringing, where the challenge is timing a heavy swinging bell while tracking your place in a moving permutation."
+ },
+ {
+  "title": "Unseen Stage",
+  "tags": [
+   "Puzzle Platformer",
+   "Puzzle",
+   "Platformer",
+   "2D",
+   "Side Scroller",
+   "Silent Protagonist",
+   "Hand-drawn",
+   "Comedy",
+   "Cute",
+   "Wholesome",
+   "Family Friendly",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A street mime whose imaginary walls, ladders and ropes become solid, but only while someone is watching. Gather an audience, hold their attention, and perform your way across a city that has forgotten how to pretend.",
+  "description": "In a grey city where nobody has time for street performers, a silent mime discovers that a convincing act becomes real. Trace a wall with your palms and it blocks the way. Climb an imaginary rope hand over hand and you rise. Lean on a counter that is not there and it holds your weight. There is one condition: the object exists only while an audience member is watching and believing. Every level is a puzzle about attention. Gather onlookers, keep them entertained, and lead them to places where their gaze covers the gaps you need to cross. Children believe almost anything, office workers glance away to check the time, and a stern critic needs a flawless performance before your ladder turns solid. Lose the crowd mid-climb and you fall. Perform gestures with precise inputs, chain them into routines, and use your invisible creations to trap guards, lift friends and cross rooftops. The wordless story, told in hand-drawn panels, follows the mime as the city slowly learns to play again.",
+  "pitch": "Pantomimed objects are solid only inside an audience's line of sight, so crowd attention becomes the platforming resource the player must earn and steer."
+ },
+ {
+  "title": "Root Exchange",
+  "tags": [
+   "Economy",
+   "Resource Management",
+   "Strategy",
+   "Simulation",
+   "Nature",
+   "Trading",
+   "Management",
+   "Underground",
+   "Real-Time with Pause",
+   "Science",
+   "Atmospheric",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Become the fungus beneath an old forest and run its hidden marketplace. Thread through the soil, link tree roots, broker sugar for minerals, and take your cut while keeping the whole forest alive through drought and rivals.",
+  "description": "Beneath every old forest lies a network of fungal threads linking the roots of trees, and you are that network. Trees make sugar in the sunlight but struggle to pull minerals and water from the soil; you mine minerals but cannot make sugar. Every connection you grow is a trading route. Extend threads through layers of earth, wrap the roots of oaks, pines and birches, and set exchange rates with each tree. Ferry surplus sugar from sunlit giants to shaded saplings, move water toward the thirsty in a dry spell, and skim a share from every transaction to fund further growth. The forest responds to your choices. Starve the young trees and the canopy thins within a decade; overcharge the old ones and they cut you off and court a rival fungus spreading from the next valley. Seasons shift demand, beetles and drought test your reserves, and loggers can sever whole districts overnight. When your network is strong, raise mushrooms above ground to send spores toward new forests with harsher conditions.",
+  "pitch": "The player is the underground fungal network that brokers nutrients between trees, an ecological trading economy seen entirely from the soil."
+ },
+ {
+  "title": "Long Water",
+  "tags": [
+   "God Game",
+   "Turn-Based Strategy",
+   "Strategy",
+   "Simulation",
+   "Nature",
+   "Procedural Generation",
+   "Atmospheric",
+   "Relaxing",
+   "Sandbox",
+   "Beautiful",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "You are a river flowing across ten thousand years. Carve valleys, choose where silt settles, flood and retreat, and shape the towns that rise on your banks while they build dams and walls to bend you to their will.",
+  "description": "Begin as meltwater at the edge of a retreating glacier and end, if you endure, as a broad delta spilling into the sea. Each turn spans a decade. Spend the strength of your current to cut into an outer bank, drop silt on an inner bend, abandon a loop to leave an oxbow lake, or gather spring rain into a flood that spreads fertile mud across the plain. Life answers your choices. Reeds, fish and herons follow clean shallows, and people follow the fish. Villages appear where your soil is richest, and they love you while you feed them. As they grow, they begin to argue with you: mills narrow your channel, embankments pin you in place, bridges ask you to stay still, and eventually a dam threatens to stop you altogether. You can bend around them, nourish them, or break them with a hundred-year flood. Every valley is procedurally shaped, and every playthrough leaves a different map of towns, wetlands and ruins along the path you chose.",
+  "pitch": "The player is a river across millennia, shaping its own course while the civilizations it feeds work to pin it in place."
+ },
+ {
+  "title": "Fair or Foul",
+  "tags": [
+   "Simulation",
+   "Science",
+   "Life Sim",
+   "Education",
+   "Atmospheric",
+   "Historical",
+   "Nature",
+   "Puzzle",
+   "Narrative",
+   "Choices Matter",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Become the weather watcher of a stormy nineteenth-century fishing village. Read clouds, pressure and seabirds each dawn, raise your forecast on the harbour mast, and live with what happens when the boats come home, or don't.",
+  "description": "The fishing boats will not leave the harbour until they see your flag. As the new weather watcher of a small village on a wild northern coast in the nineteenth century, your forecast decides whether families eat this week and whether some of them come back at all. Each dawn you climb to the station and observe. The sky is fully simulated, with fronts, pressure systems and cloud formations that behave as they do in reality, so a thickening veil of high cloud, a falling barometer and a wind backing to the south all mean something. Combine your instruments with the village's own signs: gulls staying ashore, an old sailor's aching knee, a halo around the moon. Then raise a fair, caution or storm signal on the harbour mast and watch the fleet decide. Your accuracy builds trust, and trust changes behaviour, since a doubted forecaster is ignored on the day it matters most. Over the seasons, upgrade instruments, keep a logbook of patterns, trade readings with distant stations by telegraph, and get to know the people whose lives ride on your judgement.",
+  "pitch": "A forecasting game where the player reads a physically simulated sky to make daily predictions whose credibility decides a village's fortunes."
+ },
+ {
+  "title": "Valley Fold",
+  "tags": [
+   "Turn-Based Tactics",
+   "Crafting",
+   "Strategy",
+   "Puzzle",
+   "Tactical",
+   "Roguelite",
+   "Grid-Based Movement",
+   "Turn-Based Combat",
+   "Stylized",
+   "Replay Value",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Fold your own army. Every crease you make on a square of paper decides how your units move, strike and survive, then they march into turn-based battles across a cluttered scholar's desk.",
+  "description": "On a scholar's desk at night, paper armies wage war across open books, ink pools and the ridges of a fallen ruler. You do not recruit soldiers; you fold them. Each unit starts as a blank square on a crease grid. Place mountain and valley folds, collapse the sheet, and the shape you create becomes the unit. Long sharp points give reach, extra flaps become legs and speed, stacked layers turn into armour, and broad wings let a piece glide from the rim of a teacup. Simple folds are reliable; ambitious ones are powerful but tricky to collapse correctly. Then take the fight to the grid in turn-based battles where terrain matters: ink soaks and weakens paper, a desk fan scatters light units, and a candle is as deadly as it sounds. Damaged units come back creased and torn, and you can refold them between fights, but every refold weakens the sheet. Collect new papers, from thin tissue to stiff card and metal foil, as you push through a roguelite campaign across a sprawling study.",
+  "pitch": "Unit design is literal paper folding: the geometry of the crease pattern you fold becomes the unit's stats in tactical combat."
+ },
+ {
+  "title": "The Last Tuning",
+  "tags": [
+   "Psychological Horror",
+   "Music",
+   "Puzzle",
+   "Horror",
+   "First-Person",
+   "Atmospheric",
+   "Mystery",
+   "Exploration",
+   "Story Rich",
+   "Dark",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "A piano tuner is hired to restore every instrument in a shuttered mansion. Tune by ear, string by string, as each sour note you correct quiets something in the house, and each one you leave wavering draws it closer.",
+  "description": "In the autumn of 1926 you are hired to tune every piano in a shuttered country house: the grand in the ballroom, the upright in the servants' hall, the toy piano in the nursery and dozens more. The family will not say why, and they will not stay the night. Tuning works the way it does in real life. Open the instrument, set your lever on a pin, and listen. Two strings slightly apart produce a wavering beat; turn the pin until the beat slows and vanishes, or until it pulses at the exact rate a tempered interval needs. Play with headphones and the house becomes an instrument too. Every piano you set right calms part of the presence that lives here and reveals a fragment of the composer who once did. Every wavering, sour note attracts it. You cannot fight it and you cannot run far, so you must decide how much noise to make, which rooms to finish first, and when to stop and simply listen. Letters, scores and old recordings slowly reveal what was left unfinished.",
+  "pitch": "A horror game whose central skill is authentic by-ear piano tuning, with acoustic beating serving as both the puzzle and the thing that summons danger."
+ },
+ {
+  "title": "Morning Control",
+  "tags": [
+   "Simulation",
+   "Snow",
+   "Job Simulator",
+   "Management",
+   "Skiing",
+   "Strategy",
+   "Science",
+   "Realistic",
+   "Atmospheric",
+   "Choices Matter",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Lead the avalanche crew at a mountain resort. Dig snow pits before dawn, read the buried layers, choose which slopes to blast or close, and open the mountain safely before the first chairlift turns.",
+  "description": "Every morning the mountain asks a question, and you have until the lifts open to answer it. As head of the avalanche team at a busy ski resort, you start in darkness with overnight reports: snowfall, wind direction and temperature swings that may have buried a weak layer under a fresh slab. Choose which slopes to investigate, ski out with your crew, and dig. Each snow pit is a cross-section of the season, and reading it is a puzzle of crystal shapes, hardness and test results that tell you whether a slope will hold. Then decide: throw hand charges, fire the avalanche cannon, ski-cut a slope yourself, or keep it roped off for the day. The resort manager wants the famous runs open by nine, the guests want fresh powder, and the mountain does not care about either. Through the day, sun and wind keep changing the picture, so you reopen, close and respond to rescues. Seasons build on one another, since every storm and every decision is buried in the snowpack you will dig through next month.",
+  "pitch": "Snow science as the core loop: reading a layered snowpack and triggering controlled slides, with the whole season's weather persisting as buried history."
+ },
+ {
+  "title": "Altitude Only",
+  "tags": [
+   "Racing",
+   "Flight",
+   "Simulation",
+   "Strategy",
+   "Resource Management",
+   "Competitive",
+   "PvP",
+   "Physics",
+   "Multiplayer",
+   "Atmospheric",
+   "Relaxing",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player",
+   "Multi-player",
+   "PvP",
+   "Online PvP"
+  ],
+  "short_description": "A long-distance balloon race where your only control is up or down. Read invisible rivers of wind stacked in the sky, spend your ballast wisely, and drift hundreds of miles to the target ahead of your rivals.",
+  "description": "Gas balloons have no engine, no rudder and no steering wheel. You can rise by dropping sand and sink by venting gas, and that is all. Yet the sky is layered, with each altitude carrying its own wind, and a good pilot steers by choosing which layer to ride. Before each race, study forecasts and launch small pilot balloons to see how winds turn with height. In the air, watch cloud drift, chimney smoke and other racers for clues, then commit: climb into a fast westerly, drop into a slow southerly to curve around a mountain range, or hold steady and wait for the evening shift. Every climb costs ballast and every descent costs gas, and both run out. Races cover hundreds of miles and play out over hours compressed into tense, quiet sessions, ending in a precise landing near a target. Online, everyone shares the same simulated sky, so watching another balloon swing away reveals a wind you cannot see, while simply copying a rival means you can never beat them.",
+  "pitch": "A racing game with a single vertical control, where steering means reading and choosing between invisible stacked layers of wind."
+ },
+ {
+  "title": "The Night Compositor",
+  "tags": [
+   "Typing",
+   "Time Management",
+   "Puzzle",
+   "Historical",
+   "Job Simulator",
+   "Simulation",
+   "Word Game",
+   "Spelling",
+   "Management",
+   "Narrative",
+   "Singleplayer",
+   "Indie"
+  ],
+  "player_modes": [
+   "Single-player"
+  ],
+  "short_description": "Work the night shift at a nineteenth-century newspaper, setting every word by hand in backwards metal type. Justify lines, fit columns around adverts, and lock the front page before the presses roll at dawn.",
+  "description": "It is midnight in a city newsroom in the 1890s, and tomorrow's paper does not exist yet. Stories arrive in scrawled handwriting, and you must turn them into metal. Pick letters from the type case, where every letter has its own compartment, and drop them into your composing stick, upside down and mirrored. Fill each line exactly, using thin and wide spaces to justify it, because a loose line will fall out on the press. Then lay the finished columns into the page frame, a fitting puzzle of headlines, advertisements and illustrations that must lock together without gaps. The clock never stops. Breaking news forces you to tear up a finished column, the editor wants a bigger headline, the censor sends a list of words to cut, and the type case runs short of capital letters halfway through an election story, so you have to rephrase on the fly. Each morning the printed paper shows your mistakes in public. Between shifts, hire apprentices, buy new typefaces, and follow the stories that slowly reveal what is happening in the city.",
+  "pitch": "Hand-setting mirrored metal type under a deadline, combining typing, word-fitting and spatial page layout into a single job loop."
+ }
+]

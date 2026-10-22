@@ -1,0 +1,50 @@
+{
+ "findings": [
+  "<b>Short answer:</b> used as a live judge of distance, the vector space helped the AI produce 16 game concepts more isolated than 99.9% of Steam, and the web search found no prior game for most of them. The literal recipe (pick an empty point, then turn it back into text) only worked once it searched the full space, and even then it merely tied a plain brainstorm.",
+  "<b>Empty points in a compressed map underperformed.</b> v1 searched a 64-dimension summary of the space, where the empty points are unusual mixes of broad traits like genre, art style and mood. Written out as concrete games they landed in crowded territory: median +0.6σ, well below the AI brainstorming with no map (+1.36σ).",
+  "<b>Searching the full space only drew level.</b> v2's empty points, the emptiest mix of two established games, reached +1.53σ, statistically tied with the brainstorm (p = 0.24). Blends of existing games also kept resembling existing games: the web search found a close or exact match for all 9 that were checked.",
+  "<b>The space as a compass won clearly.</b> In v3 the AI revised each idea while every draft was scored against all 195k games. All 16 finished in the top 5% under both models (median +3.64σ; p &lt; 0.000001 against the brainstorm). The top idea scores higher than every existing Steam game.",
+  "<b>The measurement holds up.</b> MiniLM never reached any agent, and it agrees with bge (r = 0.89). A real game rewritten from scratch scores −0.5σ, and its original is still among the 8 nearest games 71% of the time, so the score tracks the idea, not the wording.",
+  "<b>Isolated is not the same as unprecedented.</b> Adversarial web searches found no prior game for 10 of 16 v3 ideas, against 6 of 16 for the brainstorm. One v3 idea matched Ragnarock, and 11 of the 16 v3 checks hit the search limit after 1–2 searches, so those verdicts are provisional."
+ ],
+ "ideasLede": "All 76 ideas the pipeline wrote: 48 from v1 empty points, 12 from v2 blends and 16 from v3 search. σ is standard deviations more isolated than a typical Steam game; the most isolated existing game sits at +4.58σ. Bars show the share of Steam games an idea is more isolated than; MiniLM* is the held-out model. Every idea above +1σ got an adversarial prior-art search.",
+ "steps": [
+  [
+   "Scrape every game",
+   "Steam's store API (IStoreQueryService), paged by app ID: 195,015 games with store descriptions, user tags, player modes, release and review data. 61,995 are announced but unreleased; they count as existing ideas."
+  ],
+  [
+   "Describe each concept",
+   "A concept document per game: its top 12 descriptive tags, short description and the first 120 words of its store page. Titles, developers and prices are left out, so distance means a different idea rather than a different brand."
+  ],
+  [
+   "Embed with two models",
+   "bge-small-en-v1.5 (primary) and all-MiniLM-L6-v2, trained independently. MiniLM was kept from every agent and used only to re-score the final texts."
+  ],
+  [
+   "Measure isolation",
+   "Novelty = 1 − average cosine similarity to the 10 nearest games, converted to standard deviations above a typical game (σ). The same yardstick applies to real games and new ideas."
+  ],
+  [
+   "Find the empty points",
+   "v1: gradient ascent on emptiness in the top 64 principal components, held inside the populated region (24 frontier points past the edge, 24 holes between games). v2: the emptiest weighted mix of 2–3 established games, in the full space (24 found, 12 decoded)."
+  ],
+  [
+   "Turn points back into games",
+   "Metadata: a linear decoder trained on 175k games reads tags and player modes off any point (4 of its top 5 tags right on 19,495 held-out games). Text: an AI agent writes a store page, a local server embeds it and reports how close it landed and which games it collided with, and the agent revises. The median empty point took 16 scored drafts; one agent also probed tags programmatically and scored 1,419 variants for a single point. About 7,500 texts were embedded in all."
+  ],
+  [
+   "Compare and check",
+   "Every final text was re-embedded under both models and ranked. Baselines: the same AI brainstorming 16 ideas with no data, and 24 real games rewritten from scratch. Adversarial agents web-searched every idea above +1σ for prior art on any platform."
+  ]
+ ],
+ "caveats": [
+  "Isolation is measured against Steam only. Console, mobile, itch.io and tabletop games are covered by the web search, not by the embedding.",
+  "Embedding distance measures how differently an idea is described. That tracks how differently it plays, but it is not the same thing.",
+  "One AI model wrote every text. The empty points and scores steered it; the wording, the coherence and the fun are the model's.",
+  "v3 found one rich vein, pre-industrial niche trades played straight, and mined it. Its 16 ideas are less varied than the void-decoded ones.",
+  "Regions dominated by adult content were excluded from the void search. About 2% of games have only non-English descriptions, which an English embedding model places less reliably.",
+  "The web-search budget ran out during the checks. Verdicts marked as thin rest on one or two searches."
+ ],
+ "footer": "Code, data pipeline and raw outputs: <a href=\"https://github.com/WoumBoum/new_idea_generator/tree/ccr-75368cd6-n8t94d\" target=\"_blank\" rel=\"noopener\">WoumBoum/new_idea_generator</a> (branch ccr-75368cd6-n8t94d). Steam data scraped 21 Oct 2026."
+}
